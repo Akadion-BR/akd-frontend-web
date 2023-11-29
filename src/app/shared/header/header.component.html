@@ -1,0 +1,44 @@
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 header_container">
+        <div class="bloco_header logo" [routerLink]="['/']">
+            Akadion Solutions
+        </div>
+        <div class="bloco_header menu">
+            <ul class="menu_itens">
+                <li class="item_menu">
+                    <a href="#" class="item_menu_link">
+                        Planos e Preços
+                    </a>
+                </li>
+                <li class="item_menu">
+                    <a href="#" class="item_menu_link">
+                        Funcionalidades
+                    </a>
+                </li>
+                <li class="item_menu">
+                    <a href="#" class="item_menu_link">
+                        Como funciona
+                    </a>
+                </li>
+                <li class="item_menu">
+                    <a href="#" class="item_menu_link">
+                        Fale conosco
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="bloco_header acesso">
+            <button class="botao_menu botao_login">
+                Login
+            </button>
+            <button class="botao_menu botao_inscrever">
+                <a [routerLink]="['/signup']" class="link_botao link_botao_cadastro">
+                    TESTE GRÁTIS
+                </a>
+            </button>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 conteudo_container">
+        <router-outlet></router-outlet>
+    </div>
+</div>
