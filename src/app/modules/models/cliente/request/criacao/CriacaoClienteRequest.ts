@@ -1,6 +1,6 @@
-import { EnderecoRequest } from "../../endereco/request/EnderecoRequest";
-import { PlanoRequest } from "../../plano/request/PlanoRequest";
-import { TelefoneRequest } from "../../telefone/request/TelefoneRequest";
+import { EnderecoRequest } from "../../../endereco/request/EnderecoRequest";
+import { PlanoRequest } from "../../../plano/request/PlanoRequest";
+import { TelefoneRequest } from "../../../telefone/request/TelefoneRequest";
 
 export class CriacaoClienteRequest {
 

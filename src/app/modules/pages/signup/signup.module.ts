@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ViewComponent } from './view/view.component';
 import { SharedModule } from '../../shared/shared.module';
 import { AppModule } from 'src/app/app.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { DadosCadastraisComponent } from './view/dados-cadastrais/dados-cadastrais.component';
 import { DadosContatoComponent } from './view/dados-contato/dados-contato.component';
@@ -24,7 +25,9 @@ import { DadosPlanoComponent } from './view/dados-plano/dados-plano.component';
     CommonModule,
     AppModule,
     SharedModule, 
-    MatStepperModule
+    MatStepperModule,
+    FormsModule, 
+    ReactiveFormsModule
   ]
 })
 export class SignupModule { }
