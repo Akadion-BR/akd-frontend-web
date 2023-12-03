@@ -1,15 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ViewComponent } from './view/view.component';
+import { SharedModule } from '../../shared/shared.module';
+import { AppModule } from 'src/app/app.module';
+import { MatStepperModule } from '@angular/material/stepper';
+import { DadosCadastraisComponent } from './view/dados-cadastrais/dados-cadastrais.component';
+import { DadosContatoComponent } from './view/dados-contato/dados-contato.component';
+import { DadosPlanoComponent } from './view/dados-plano/dados-plano.component';
 
 
 
 @NgModule({
-  declarations: [
+  exports: [
     ViewComponent
   ],
+  declarations: [
+    ViewComponent,
+    DadosCadastraisComponent,
+    DadosContatoComponent,
+    DadosPlanoComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    AppModule,
+    SharedModule, 
+    MatStepperModule
   ]
 })
 export class SignupModule { }

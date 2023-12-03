@@ -1,0 +1,73 @@
+<form class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+    <!-- INPUT GROUP DDD -->
+    <app-custom-input class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" [id]="'inputPrefixo'" [titulo]="'DDD'"
+        [tabIndex]="1" [maxLength]="70" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
+        [disabledGroup]="false" [valido]="true" [mensagemErro]="'Campo obrigatório'" formControlName="prefixo"
+        #inputPrefixo></app-custom-input>
+
+    <!-- INPUT GROUP NUMERO TELEFONE -->
+    <app-custom-input class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9" [id]="'inputNumero'" [titulo]="'Telefone'"
+        [tabIndex]="1" [maxLength]="70" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
+        [disabledGroup]="false" [valido]="true" [mensagemErro]="'Campo obrigatório'" formControlName="numero"
+        #inputNumero></app-custom-input>
+
+    <!-- INPUT GROUP CEP -->
+    <app-custom-input class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'cep'" [titulo]="'Cep'"
+        [tabIndex]="15" [maxLength]="9" [touched]="false" [todosCaracteresMaiusculos]="false" [customIcon]="'null'"
+        formControlName="codigoPostal" [disabledGroup]="false" #inputCodigoPostal
+        [mensagemErro]="'Mínimo de 9 caracteres'" [valido]="true"></app-custom-input>
+
+    <!-- SELECT GROUP ESTADO -->
+    <!-- <app-custom-select class=" col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" [tabIndex]="16"
+        [titulo]="'Estado'" #inputEstado [options]="[]"></app-custom-select> -->
+
+    <!-- INPUT GROUP CEP -->
+    <app-custom-input class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'estado'" [titulo]="'Estado'"
+        [tabIndex]="15" [maxLength]="9" [touched]="false" [todosCaracteresMaiusculos]="false" [customIcon]="'null'"
+        formControlName="estado" [disabledGroup]="false" #inputCodigoPostal [mensagemErro]="'Mínimo de 9 caracteres'"
+        [valido]="true"></app-custom-input>
+
+    <!-- INPUT GROUP CIDADE -->
+    <app-custom-input class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'cidade'" [titulo]="'Cidade'"
+        [tabIndex]="17" [maxLength]="50" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
+        [disabledGroup]="false" [dataList]="[]" [valido]="true" [mensagemErro]="'Máximo de 50 caracteres'"
+        formControlName="cidade" #inputCodigoPostal></app-custom-input>
+
+    <!-- INPUT GROUP LOGRADOURO -->
+    <app-custom-input class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12" [id]="'logradouro'" [titulo]="'Logradouro'"
+        [tabIndex]="18" [maxLength]="50" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
+        [disabledGroup]="false" [valido]="true" formControlName="logradouro" #inputLogradouro></app-custom-input>
+
+    <!-- INPUT GROUP NUMERO -->
+    <app-custom-input class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12" [id]="'numeroEndereco'" [titulo]="'Número'"
+        [tabIndex]="19" [maxLength]="5" [touched]="false" [todosCaracteresMaiusculos]="false" [customIcon]="'null'"
+        [disabledGroup]="false" [valido]="true" [mensagemErro]="'Campo obrigatório'" formControlName="numero"
+        #inputNumero></app-custom-input>
+
+    <!-- INPUT GROUP BAIRRO -->
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'bairro'" [titulo]="'Bairro'"
+        [tabIndex]="20" [maxLength]="50" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
+        [disabledGroup]="false" [valido]="true" [mensagemErro]="'Máximo de 50 caracteres'" formControlName="bairro"
+        #inputBairro></app-custom-input>
+
+    <!-- INPUT GROUP COMPLEMENTO -->
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'complemento'" [titulo]="'Complemento'"
+        [tabIndex]="21" [maxLength]="80" [touched]="false" [customIcon]="'null'" [disabledGroup]="false" [valido]="true"
+        [mensagemErro]="'Esse campo deve possuir no máximo 80 caracteres'" formControlName="complemento"
+        #inputBairro></app-custom-input>
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
+        <button class="botao_menu botao_inscrever" matStepperPrevious>
+            <a class="link_botao link_botao_cadastro">
+                Voltar
+            </a>
+        </button>
+
+        <button class="botao_menu botao_inscrever" matStepperNext>
+            <a class="link_botao link_botao_cadastro">
+                Avançar
+            </a>
+        </button>
+    </div>
+</form>

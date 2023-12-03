@@ -1,7 +1,8 @@
+@import '../../../dist/variables.scss';
+
 .container {
     padding: 0;
     margin: 0;
-    height: 100%;
     background: rgb(22,21,22);
     background: linear-gradient(177deg, rgba(22,21,22,1) 25%, rgba(17,17,17,1) 50%, rgba(3,3,3,1) 75%);
 }
@@ -89,6 +90,5 @@
 }
 
 .conteudo_container {
-    height: calc(100% - 3.5rem);
     padding: 0 1.5rem;
 }

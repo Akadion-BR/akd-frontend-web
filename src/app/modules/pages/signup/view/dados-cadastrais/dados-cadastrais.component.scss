@@ -1,0 +1,51 @@
+@import '../../../../../../dist/variables.scss';
+
+h1,
+h2,
+h3,
+h4,
+p,
+div,
+app-custom-input,
+button,
+ul,
+li,
+i,
+h5,
+form {
+    margin: 0;
+    padding: 0;
+}
+
+.form_button_container {
+    padding: 0 0.5rem;
+    margin-top: -1rem;
+}
+
+.botao_inscrever {
+    border: 1px solid $primary-color;
+    border-radius: 3px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    background-color: $primary-color;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.botao_inscrever:focus {
+    outline: none;
+}
+
+.botao_inscrever:hover {
+    background-color: $primary-color-dark;
+}
+
+.link_botao_cadastro {
+    text-align: center;
+    color: $medium-black;
+    text-decoration: none;
+}

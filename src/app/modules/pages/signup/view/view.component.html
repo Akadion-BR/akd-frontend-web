@@ -1,1 +1,66 @@
-<p>Tela de cadastro acessada</p>
+<div class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="block col-xl-9 col-lg-6 col-md-6 col-sm-6 col-6">
+
+        <mat-horizontal-stepper linear #stepper>
+
+            <ng-template matStepperIcon="edit">
+                <i class="fa fa-check"></i>
+            </ng-template>
+
+            <ng-template matStepperIcon="number">
+                <i class="fa fa-fire"></i>
+            </ng-template>
+
+            <!-- PRIMEIRO PASSO: DADOS CADASTRAIS -->
+            <mat-step editable="true">
+                <ng-template matStepLabel>
+                    <span>Dados</span>
+                </ng-template>
+
+                <h2 class="titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Dados cadastrais
+                </h2>
+                <p class="texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Insira seus dados cadastrais para acessar a sua conta junto ao CPF cadastrado
+                </p>
+
+                <app-dados-cadastrais></app-dados-cadastrais>
+
+            </mat-step>
+
+            <!-- SEGUNDO PASSO: DADOS DE CONTATO -->
+            <mat-step editable="true">
+                <ng-template matStepLabel>
+                    <span>Contato</span>
+                </ng-template>
+                <h2 class="titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Dados de contato
+                </h2>
+                <p class="texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Insira seus dados de contato para podermos entrar em contato com você caso necessário
+                </p>
+
+                <app-dados-contato></app-dados-contato>
+
+            </mat-step>
+
+            <!-- TERCEIRO PASSO: DADOS DO PLANO -->
+            <mat-step editable="true">
+                <ng-template matStepLabel>
+                    <span>Plano</span>
+                </ng-template>
+                <h2 class="titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Escolha do plano de assinatura
+                </h2>
+                <p class="texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Escolha um plano de assinatura para começar
+                </p>
+
+                <app-dados-plano></app-dados-plano>
+
+            </mat-step>
+
+        </mat-horizontal-stepper>
+
+    </div>
+</div>
