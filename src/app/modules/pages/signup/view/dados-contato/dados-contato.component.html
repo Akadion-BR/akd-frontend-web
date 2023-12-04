@@ -2,58 +2,64 @@
 
     <!-- INPUT GROUP DDD -->
     <app-custom-input class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" [id]="'inputPrefixo'" [titulo]="'DDD'"
-        [tabIndex]="1" [maxLength]="70" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
-        [disabledGroup]="false" [valido]="true" [mensagemErro]="'Campo obrigatório'" formControlName="prefixo"
-        #inputPrefixo></app-custom-input>
+        [tabIndex]="1" [maxLength]="2" [touched]="dadosContato.controls['prefixo'].touched"
+        [todosCaracteresMaiusculos]="false" [disabledGroup]="dadosContato.controls['prefixo'].disabled"
+        [errors]="dadosContato.controls['prefixo'].errors"
+        [valido]="!(dadosContato.controls['prefixo'].touched && dadosContato.controls['prefixo'].invalid)"
+        [mensagemErro]="'Campo obrigatório'" formControlName="prefixo" #inputPrefixo></app-custom-input>
 
     <!-- INPUT GROUP NUMERO TELEFONE -->
-    <app-custom-input class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9" [id]="'inputNumero'" [titulo]="'Telefone'"
-        [tabIndex]="1" [maxLength]="70" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
-        [disabledGroup]="false" [valido]="true" [mensagemErro]="'Campo obrigatório'" formControlName="numero"
+    <app-custom-input class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9" [id]="'inputNumeroTelefone'"
+        [titulo]="'Telefone'" [tabIndex]="2" [maxLength]="9" [touched]="dadosContato.controls['numeroTelefone'].touched"
+        [todosCaracteresMaiusculos]="false" [customIcon]="'call'"
+        [disabledGroup]="dadosContato.controls['numeroTelefone'].disabled"
+        [valido]="!(dadosContato.controls['numeroTelefone'].touched && dadosContato.controls['numeroTelefone'].invalid)"
+        [errors]="dadosContato.controls['numeroTelefone'].errors" formControlName="numeroTelefone"
         #inputNumero></app-custom-input>
 
     <!-- INPUT GROUP CEP -->
-    <app-custom-input class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'cep'" [titulo]="'Cep'"
-        [tabIndex]="15" [maxLength]="9" [touched]="false" [todosCaracteresMaiusculos]="false" [customIcon]="'null'"
-        formControlName="codigoPostal" [disabledGroup]="false" #inputCodigoPostal
-        [mensagemErro]="'Mínimo de 9 caracteres'" [valido]="true"></app-custom-input>
+    <app-custom-input class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'cep'" [titulo]="'Cep'" [tabIndex]="3"
+        [maxLength]="9" [touched]="dadosContato.controls['codigoPostal'].touched" [todosCaracteresMaiusculos]="false"
+        [customIcon]="'home'" formControlName="codigoPostal"
+        [disabledGroup]="dadosContato.controls['codigoPostal'].disabled" #inputCodigoPostal
+        [errors]="dadosContato.controls['codigoPostal'].errors" formControlName="codigoPostal"
+        [valido]="!(dadosContato.controls['codigoPostal'].touched && dadosContato.controls['codigoPostal'].invalid)"></app-custom-input>
 
     <!-- SELECT GROUP ESTADO -->
-    <!-- <app-custom-select class=" col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" [tabIndex]="16"
-        [titulo]="'Estado'" #inputEstado [options]="[]"></app-custom-select> -->
+    <app-custom-select class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" formControlName="estado"
+        (change)="obtemTodosMunicipiosPorEstado()" [tabIndex]="4" [titulo]="'Estado'" #inputEstado
+        [disabledGroup]="dadosContato.controls['estado'].disabled" [options]="this.estadosOptions"
+        [errors]="dadosContato.controls['estado'].errors" [id]="'estado'"
+        [valido]="!(dadosContato.controls['estado'].touched && dadosContato.controls['estado'].invalid)">
+    </app-custom-select>
 
-    <!-- INPUT GROUP CEP -->
-    <app-custom-input class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'estado'" [titulo]="'Estado'"
-        [tabIndex]="15" [maxLength]="9" [touched]="false" [todosCaracteresMaiusculos]="false" [customIcon]="'null'"
-        formControlName="estado" [disabledGroup]="false" #inputCodigoPostal [mensagemErro]="'Mínimo de 9 caracteres'"
-        [valido]="true"></app-custom-input>
-
-    <!-- INPUT GROUP CIDADE -->
-    <app-custom-input class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'cidade'" [titulo]="'Cidade'"
-        [tabIndex]="17" [maxLength]="50" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
-        [disabledGroup]="false" [dataList]="[]" [valido]="true" [mensagemErro]="'Máximo de 50 caracteres'"
-        formControlName="cidade" #inputCodigoPostal></app-custom-input>
+    <!-- SELECT GROUP CIDADE -->
+    <app-custom-select class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" formControlName="cidade" [tabIndex]="5"
+        [titulo]="'Cidade'" #inputCidade [disabledGroup]="dadosContato.controls['cidade'].disabled"
+        [options]="this.municipiosOptions" [errors]="dadosContato.controls['cidade'].errors" [id]="'cidade'"
+        [valido]="!(dadosContato.controls['cidade'].touched && dadosContato.controls['cidade'].invalid)">
+    </app-custom-select>
 
     <!-- INPUT GROUP LOGRADOURO -->
     <app-custom-input class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12" [id]="'logradouro'" [titulo]="'Logradouro'"
-        [tabIndex]="18" [maxLength]="50" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
+        [tabIndex]="6" [maxLength]="100" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
         [disabledGroup]="false" [valido]="true" formControlName="logradouro" #inputLogradouro></app-custom-input>
 
     <!-- INPUT GROUP NUMERO -->
     <app-custom-input class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12" [id]="'numeroEndereco'" [titulo]="'Número'"
-        [tabIndex]="19" [maxLength]="5" [touched]="false" [todosCaracteresMaiusculos]="false" [customIcon]="'null'"
+        [tabIndex]="7" [maxLength]="5" [touched]="false" [todosCaracteresMaiusculos]="false" [customIcon]="'null'"
         [disabledGroup]="false" [valido]="true" [mensagemErro]="'Campo obrigatório'" formControlName="numero"
         #inputNumero></app-custom-input>
 
     <!-- INPUT GROUP BAIRRO -->
     <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'bairro'" [titulo]="'Bairro'"
-        [tabIndex]="20" [maxLength]="50" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
+        [tabIndex]="8" [maxLength]="80" [touched]="false" [todosCaracteresMaiusculos]="true" [customIcon]="'null'"
         [disabledGroup]="false" [valido]="true" [mensagemErro]="'Máximo de 50 caracteres'" formControlName="bairro"
         #inputBairro></app-custom-input>
 
     <!-- INPUT GROUP COMPLEMENTO -->
     <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'complemento'" [titulo]="'Complemento'"
-        [tabIndex]="21" [maxLength]="80" [touched]="false" [customIcon]="'null'" [disabledGroup]="false" [valido]="true"
+        [tabIndex]="9" [maxLength]="100" [touched]="false" [customIcon]="'null'" [disabledGroup]="false" [valido]="true"
         [mensagemErro]="'Esse campo deve possuir no máximo 80 caracteres'" formControlName="complemento"
         #inputBairro></app-custom-input>
 

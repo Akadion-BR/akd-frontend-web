@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
 import { fadeInOutAnimation } from 'src/app/shared/animations';
 
 @Component({
@@ -29,6 +29,8 @@ export class CustomInputComponent implements ControlValueAccessor {
   @Input() disabledGroup: boolean;
   @Input() iconeOculto: boolean = false;
   @Input() dataList: string[];
+  @Input() type: string = 'text';
+  @Input() errors: ValidationErrors | null;
 
   private innerValue: any;
 
@@ -84,6 +86,26 @@ export class CustomInputComponent implements ControlValueAccessor {
     else {
       if (this.valido) return 'check';
       else return 'error';
+    }
+  }
+
+  geraMensagemErro(): string {
+    if (this.errors?.['nameWrong'] != null) {
+      if (this.id == 'inputConfirmaSenha') return 'Senhas diferentes';
+      else if (this.id == 'dataNascimento') return 'Campo inválido';
+      else return 'Campo inválido';
+    }
+    else if (this.errors?.['required'] != null) {
+      return 'Campo obrigatório';
+    }
+    else if (this.errors?.['maxLength'] != null) {
+      return 'Tamanho máximo do campo excedido';
+    }
+    else if (this.errors?.['pattern'] != null) {
+      return 'Campo inválido';
+    }
+    else {
+      return 'Campo inválido';
     }
   }
 

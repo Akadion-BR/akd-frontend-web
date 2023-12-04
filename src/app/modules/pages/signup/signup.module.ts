@@ -5,6 +5,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AppModule } from 'src/app/app.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DadosCadastraisComponent } from './view/dados-cadastrais/dados-cadastrais.component';
 import { DadosContatoComponent } from './view/dados-contato/dados-contato.component';
 import { DadosPlanoComponent } from './view/dados-plano/dados-plano.component';
@@ -27,7 +28,8 @@ import { DadosPlanoComponent } from './view/dados-plano/dados-plano.component';
     SharedModule, 
     MatStepperModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    MatSnackBarModule
   ]
 })
 export class SignupModule { }

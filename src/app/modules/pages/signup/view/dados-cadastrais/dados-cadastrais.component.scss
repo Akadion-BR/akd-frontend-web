@@ -7,6 +7,7 @@ h4,
 p,
 div,
 app-custom-input,
+app-custom-date-input,
 button,
 ul,
 li,
@@ -19,7 +20,6 @@ form {
 
 .form_button_container {
     padding: 0 0.5rem;
-    margin-top: -1rem;
 }
 
 .botao_inscrever {
@@ -48,4 +48,8 @@ form {
     text-align: center;
     color: $medium-black;
     text-decoration: none;
+}
+
+::ng-deep .mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+    color: $primary-color !important;
 }
