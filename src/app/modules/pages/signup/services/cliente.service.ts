@@ -1,9 +1,10 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { API_CONFIG } from 'src/app/config/api-config';
 import { Cpf } from 'src/app/modules/models/globals/cpf';
+import { CriacaoClienteRequest } from 'src/app/modules/models/cliente/request/criacao/CriacaoClienteRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,14 @@ export class ClienteService {
       })
     )
   }
+
+  public novoCliente(clienteRequest: CriacaoClienteRequest): Observable<string> {
+    return this.http.post<string>(`${API_CONFIG.baseUrl}/api/site/v1/cliente-sistema`, clienteRequest, this.httpOptions).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error.error));
+      }),
+    )
+  }
+
 }

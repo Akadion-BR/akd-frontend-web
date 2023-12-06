@@ -1,11 +1,16 @@
 $font-poppins: 'Poppins', sans-serif;
 $font-roboto:  'Roboto Flex', sans-serif;
 
-$primary-color: #5351ff;
-$primary-color-dark: #4240bd;
-$primary-color-disabled: #4947d171;
+// $primary-color: #5351ff;
+// $primary-color-dark: #4240bd;
+// $primary-color-disabled: #4947d171;
 
-$strong-red: rgb(206, 35, 35);
+$primary-color: #e6007e;
+$primary-color-dark: #c9006e;
+$primary-color-disabled: #ac005e;
+
+$medium-red: rgb(216, 68, 68);
+$strong-red: #ce2323;
 
 $dark-white: #C3C8C8;
 $medium-white: #f3f3f3;
@@ -16,6 +21,7 @@ $dark-grey: #333;
 $medium-grey: #444444;
 $light-grey: #949494;
 
+$darker-black: #111213;
 $dark-black: #15161a;
 $medium-dark-black: rgba(21, 22, 26, 0.877);
 $medium-black: #212329;

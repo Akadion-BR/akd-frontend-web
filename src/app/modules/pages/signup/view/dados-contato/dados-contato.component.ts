@@ -1,13 +1,16 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
+import { Subscription, debounceTime } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { SelectOption } from 'src/app/modules/shared/inputs/models/select-option';
 import { EstadosResponse } from 'src/app/shared/brasil-api/models/estados-response';
 import { Router } from '@angular/router';
 import { BrasilApiService } from 'src/app/shared/brasil-api/services/brasil-api.service';
 import { Util } from 'src/app/modules/utils/Util';
 import { MunicipiosResponse } from 'src/app/shared/brasil-api/models/municipios-response';
+import { Mask } from 'src/app/modules/utils/Mask';
+import { ConsultaCepResponse } from 'src/app/shared/brasil-api/models/consulta-cep-response';
+import { CustomInputComponent } from 'src/app/modules/shared/inputs/custom-input/custom-input.component';
 
 @Component({
   selector: 'app-dados-contato',
@@ -31,20 +34,41 @@ export class DadosContatoComponent {
   inputPrefixoPattern: any = /^\d{2}/;
   cepPattern: any = /^((\d{5})-(\d{3}))$/;
   inputTelefonePattern: any = /^(?:((?:9\d|[2-9])\d{3})(\d{4}))$/;
-  protected dadosContato: FormGroup = this.createFormDadosContato();
+  numeroEnderecoPattern: any = /^(?:[1-9][0-9]{3}|[1-9][0-9]{2}|[1-9][0-9]|[1-9])$/;
 
   // Subscriptions
   obtemTodosEstadosBrasileirosSubscription$: Subscription;
   obtemTodosMunicipiosPorEstadoSubscription$: Subscription;
+  getEnderecoPeloCepSubscription$: Subscription;
+
+  // Tags HTML
+  @ViewChild('inputCidade') inputCidade: CustomInputComponent;
+  @ViewChild('inputPrefixo') inputPrefixo: CustomInputComponent;
+
+  protected dadosContato: FormGroup = this.createFormDadosContato();
+
+  @Output() emissorDeDadosContato = new EventEmitter<FormGroup>();
+
+  dadosContatoSubscribe$: Subscription = this.dadosContato.valueChanges.pipe(
+    debounceTime(500)
+  ).subscribe({
+    next: () => {
+      this.emissorDeDadosContato.emit(this.dadosContato);
+    }
+  })
 
   ngAfterViewInit(): void {
     this.ref.detectChanges();
+    this.emissorDeDadosContato.emit(this.dadosContato);
     this.obtemTodosEstadosBrasileiros();
+    this.inputPrefixo.acionaFoco();
   }
 
   ngOnDestroy(): void {
     if (this.obtemTodosEstadosBrasileirosSubscription$ != undefined) this.obtemTodosEstadosBrasileirosSubscription$.unsubscribe();
     if (this.obtemTodosMunicipiosPorEstadoSubscription$ != undefined) this.obtemTodosMunicipiosPorEstadoSubscription$.unsubscribe();
+    if (this.getEnderecoPeloCepSubscription$ != undefined) this.getEnderecoPeloCepSubscription$.unsubscribe();
+    if (this.dadosContatoSubscribe$ != undefined) this.dadosContatoSubscribe$.unsubscribe();
   }
 
   createFormDadosContato(): FormGroup {
@@ -75,6 +99,7 @@ export class DadosContatoComponent {
           disabled: false
         },
         [
+          Validators.required,
           Validators.maxLength(9),
           Validators.pattern(this.cepPattern)
         ]
@@ -94,6 +119,7 @@ export class DadosContatoComponent {
           disabled: true
         },
         [
+          Validators.required,
           Validators.maxLength(80)
         ]
       ),
@@ -103,14 +129,19 @@ export class DadosContatoComponent {
           disabled: false
         },
         [
+          Validators.required,
           Validators.maxLength(100)
         ]
       ),
-      numero: new FormControl(
+      numeroEndereco: new FormControl(
         {
           value: '',
           disabled: false
         },
+        [
+          Validators.pattern(this.numeroEnderecoPattern),
+          Validators.required
+        ]
       ),
       bairro: new FormControl(
         {
@@ -118,6 +149,7 @@ export class DadosContatoComponent {
           disabled: false
         },
         [
+          Validators.required,
           Validators.maxLength(80)
         ]
       ),
@@ -149,14 +181,12 @@ export class DadosContatoComponent {
           this.estadosResponse = response;
         },
         error: (error: any) => {
-          this.router.navigate(['/clientes'])
           this._snackBar.open(error, "Fechar", {
             duration: 3500
           });
         },
         complete: () => {
           this.geraOptionsEstado();
-          // this.emissorDeEstados.emit(this.estadosResponse);
           console.log("Estados carregados com sucesso");
         }
       });
@@ -167,7 +197,9 @@ export class DadosContatoComponent {
     if (Util.isNotEmptyString(this.getFormValue('estado'))) {
       this.obtemTodosMunicipiosPorEstadoSubscription$ =
         this.brasilApiService.obtemTodosMunicipiosPorEstado(this.getFormValue('estado')).subscribe({
-          next: resposta => this.municipiosResponse = resposta,
+          next: resposta => {
+            this.municipiosResponse = resposta
+          },
           error: error => {
             this._snackBar.open(error, 'Fechar', {
               duration: 3500
@@ -222,6 +254,54 @@ export class DadosContatoComponent {
     })
 
     this.municipiosOptions = options;
+  }
+
+  realizaTratamentoCodigoPostal(tecla: any) {
+
+    if (tecla?.inputType != 'deleteContentBackward' || tecla == null) {
+      this.setFormValue('codigoPostal', Mask.cepMask(this.getFormValue('codigoPostal')));
+    }
+
+    if (this.dadosContato.controls['codigoPostal'].valid && this.getFormValue('codigoPostal').length == 9) {
+      this.getEnderecoPeloCepSubscription$ =
+        this.brasilApiService.getEnderecoPeloCep(this.getFormValue('codigoPostal').replace('-', '')).subscribe({
+          next: resposta => this.setaEnderecoComInformacoesObtidasPeloCep(resposta),
+          error: error => {
+            this._snackBar.open(error, "Fechar", {
+              duration: 3500
+            })
+          },
+          complete: () => console.log('Busca de endereço por cep realizada com sucesso')
+        });
+    }
+  }
+
+  setaEnderecoComInformacoesObtidasPeloCep(consultaCepResponse: ConsultaCepResponse) {
+    this.dadosContato.setValue({
+      prefixo: this.getFormValue('prefixo'),
+      numeroTelefone: this.getFormValue('numeroTelefone'),
+      codigoPostal: this.getFormValue('codigoPostal'),
+      logradouro: consultaCepResponse.logradouro,
+      numeroEndereco: '',
+      bairro: consultaCepResponse.bairro,
+      estado: consultaCepResponse.estado,
+      cidade: consultaCepResponse.cidade,
+      complemento: ''
+    })
+
+    this.dadosContato.markAllAsTouched();
+    this.obtemTodosMunicipiosPorEstado();
+    this.inputCidade.acionaFoco();
+  }
+
+  verificaSePodeAvancar() {
+    if (this.dadosContato.invalid) {
+      this.dadosContato.markAllAsTouched();
+      this._snackBar.open("Revise o formulário e tente novamente", "Fechar", {
+        duration: 3500
+      })
+
+    }
   }
 
 }

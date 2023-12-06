@@ -8,6 +8,5 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background: rgb(22, 21, 22);
-    background: linear-gradient(177deg, rgba(22, 21, 22, 1) 25%, rgba(17, 17, 17, 1) 50%, rgba(3, 3, 3, 1) 75%);
+    background: $darker-black;
 }

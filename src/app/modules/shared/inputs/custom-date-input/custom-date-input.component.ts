@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
 import { fadeInOutAnimation } from 'src/app/shared/animations';
 
 @Component({
@@ -18,6 +18,7 @@ import { fadeInOutAnimation } from 'src/app/shared/animations';
 export class CustomDateInputComponent implements ControlValueAccessor {
 
   @Input() id: string = '';
+  @Input() informativoCampo: string = '';
   @Input() titulo: string = '';
   @Input() tabIndex: number;
   @Input() minDate: string;
@@ -26,6 +27,7 @@ export class CustomDateInputComponent implements ControlValueAccessor {
   @Input() valido: boolean;
   @Input() mensagemErro: string;
   @Input() disabledGroup: boolean;
+  @Input() errors: ValidationErrors | null;
 
   private innerValue: any;
 
@@ -60,6 +62,26 @@ export class CustomDateInputComponent implements ControlValueAccessor {
 
   writeValue(v: any) {
     this.value = v;
+  }
+
+  geraMensagemErro(): string {
+    console.log(this.errors);
+    if (this.errors?.['nameWrong'] != null) {
+      if (this.id == 'dataNascimento') return 'Campo inválido';
+      else return 'Campo inválido';
+    }
+    else if (this.errors?.['required'] != null) {
+      return 'Campo obrigatório';
+    }
+    else if (this.errors?.['maxLength'] != null) {
+      return 'Tamanho máximo do campo excedido';
+    }
+    else if (this.errors?.['pattern'] != null) {
+      return 'Campo inválido';
+    }
+    else {
+      return 'Campo inválido';
+    }
   }
 
 }

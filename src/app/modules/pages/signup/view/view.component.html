@@ -1,7 +1,12 @@
-<div class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    <div class="block col-xl-9 col-lg-6 col-md-6 col-sm-6 col-6">
+<header class="header col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <img class="header_logo_img" src="../../../../../assets/8.png" [class.header_logo_img_in]="mouseAcimaDoLogo"
+        (mouseover)="mouseAcimaDoLogo=true" (mouseleave)="mouseAcimaDoLogo=false" />
+</header>
 
-        <mat-horizontal-stepper linear #stepper>
+<div class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="block col-xl-9 col-lg-10 col-md-10 col-sm-12 col-12">
+
+        <mat-horizontal-stepper [linear]="true" #stepper>
 
             <ng-template matStepperIcon="edit">
                 <i class="fa fa-check"></i>
@@ -12,7 +17,7 @@
             </ng-template>
 
             <!-- PRIMEIRO PASSO: DADOS CADASTRAIS -->
-            <mat-step editable="true">
+            <mat-step [stepControl]="dadosCadastrais" editable="true">
                 <ng-template matStepLabel>
                     <span>Dados</span>
                 </ng-template>
@@ -24,12 +29,13 @@
                     Insira seus dados cadastrais para acessar a sua conta junto ao CPF cadastrado
                 </p>
 
-                <app-dados-cadastrais></app-dados-cadastrais>
+                <app-dados-cadastrais
+                    (emissorDeDadosCadastrais)="recebeFormGroupDadosCadastrais($event)"></app-dados-cadastrais>
 
             </mat-step>
 
             <!-- SEGUNDO PASSO: DADOS DE CONTATO -->
-            <mat-step editable="true">
+            <mat-step [stepControl]="dadosContato" editable="true">
                 <ng-template matStepLabel>
                     <span>Contato</span>
                 </ng-template>
@@ -40,12 +46,12 @@
                     Insira seus dados de contato para podermos entrar em contato com você caso necessário
                 </p>
 
-                <app-dados-contato></app-dados-contato>
+                <app-dados-contato (emissorDeDadosContato)="recebeFormGroupDadosContato($event)"></app-dados-contato>
 
             </mat-step>
 
             <!-- TERCEIRO PASSO: DADOS DO PLANO -->
-            <mat-step editable="true">
+            <mat-step [stepControl]="dadosPlano" editable="true">
                 <ng-template matStepLabel>
                     <span>Plano</span>
                 </ng-template>
@@ -56,7 +62,8 @@
                     Escolha um plano de assinatura para começar
                 </p>
 
-                <app-dados-plano></app-dados-plano>
+                <app-dados-plano (emissorDeSolicitacaoDeEnvioDeFormulario)="enviaFormularioCriacao()"
+                    (emissorDeDadosPlano)="recebeFormGroupDadosPlano($event)"></app-dados-plano>
 
             </mat-step>
 

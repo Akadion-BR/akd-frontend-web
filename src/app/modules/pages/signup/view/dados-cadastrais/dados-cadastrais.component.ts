@@ -1,12 +1,13 @@
 
-import { Subscription } from 'rxjs';
+import { Subscription, debounceTime } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Mask } from 'src/app/modules/utils/Mask';
 import { Util } from 'src/app/modules/utils/Util';
 import { ClienteService } from '../../services/cliente.service';
 import { Cpf } from 'src/app/modules/models/globals/cpf';
+import { CustomInputComponent } from 'src/app/modules/shared/inputs/custom-input/custom-input.component';
 
 @Component({
   selector: 'app-dados-cadastrais',
@@ -18,15 +19,32 @@ export class DadosCadastraisComponent {
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private clienteService: ClienteService) { }
+    private clienteService: ClienteService,
+    private ref: ChangeDetectorRef) { }
 
   // Subscriptions
   validaDuplicidadeCpfSubscription$: Subscription;
-
+  
   protected dadosCadastrais: FormGroup = this.createFormDadosCadastrais();
+
+  @Output() emissorDeDadosCadastrais = new EventEmitter<FormGroup>();
+
+  dadosCadastraisSubscribe$: Subscription = this.dadosCadastrais.valueChanges.pipe(
+    debounceTime(500)
+  ).subscribe({
+    next: () => {
+      this.emissorDeDadosCadastrais.emit(this.dadosCadastrais);
+    }
+  })
+
+  ngAfterViewInit(): void {
+    this.ref.detectChanges();
+    this.emissorDeDadosCadastrais.emit(this.dadosCadastrais);
+  }
 
   ngOnDestroy(): void {
     if (this.validaDuplicidadeCpfSubscription$ != undefined) this.validaDuplicidadeCpfSubscription$.unsubscribe();
+    if (this.dadosCadastraisSubscribe$ != undefined) this.dadosCadastraisSubscribe$.unsubscribe();
   }
 
   createFormDadosCadastrais(): FormGroup {
@@ -46,9 +64,12 @@ export class DadosCadastraisComponent {
         Validators.maxLength(14)
       ]
       ],
-      dataNascimento: ['', [
-        this.dataNascimentoCustomValidator()
-      ]],
+      dataNascimento: ['',
+        [
+          Validators.required,
+          this.dataNascimentoCustomValidator()
+        ]
+      ],
       senha: ['', [
         Validators.required,
         Validators.maxLength(25),
@@ -102,9 +123,8 @@ export class DadosCadastraisComponent {
 
   validaDataNascimento() {
 
-    if (this.getValueAtributoDadosCadastrais('dataNascimento') == '') {
+    if (Util.isEmptyString(this.getValueAtributoDadosCadastrais('dataNascimento')))
       return;
-    }
 
     let dataNascimentoSplitada = this.getValueAtributoDadosCadastrais('dataNascimento').split("-");
     if (dataNascimentoSplitada.length == 3) {
@@ -122,7 +142,7 @@ export class DadosCadastraisComponent {
 
     return (formGroup: AbstractControl): ValidationErrors | null => {
 
-      if (this.getValueAtributoDadosCadastrais('dataNascimento') == null)
+      if (Util.isEmptyString(this.getValueAtributoDadosCadastrais('dataNascimento')))
         return null;
 
       let today: Date = new Date();
@@ -162,6 +182,16 @@ export class DadosCadastraisComponent {
       }
 
       return null;
+    }
+  }
+
+  verificaSePodeAvancar() {
+    if (this.dadosCadastrais.invalid) {
+      this.dadosCadastrais.markAllAsTouched();
+      this.snackBar.open("Revise o formulário e tente novamente", "Fechar", {
+        duration: 3500
+      })
+
     }
   }
 

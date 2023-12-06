@@ -18,6 +18,7 @@ import { fadeInOutAnimation } from 'src/app/shared/animations';
 export class CustomInputComponent implements ControlValueAccessor {
 
   @Input() id: string = '';
+  @Input() informativoCampo: string = '';
   @Input() valido: boolean;
   @Input() titulo: string = '';
   @Input() tabIndex: number;

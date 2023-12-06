@@ -18,6 +18,7 @@ import { fadeInOutAnimation } from 'src/app/shared/animations';
 })
 export class CustomSelectComponent implements ControlValueAccessor {
   @Input() id: string = '';
+  @Input() informativoCampo: string = '';
   @Input() titulo: string;
   @Input() tabIndex: number;
   @Input() disabledGroup: boolean;

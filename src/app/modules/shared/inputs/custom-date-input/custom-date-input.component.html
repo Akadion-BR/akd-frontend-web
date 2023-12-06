@@ -1,6 +1,7 @@
 <div class="row input_group">
     <div class="row label_container">
-        <label [ngClass]="{'label_invalida': !valido, 'label_desabilitada': disabledGroup}"
+        <label [matTooltip]="informativoCampo" [matTooltipPosition]="'right'"
+            [ngClass]="{'label_invalida': !valido, 'label_desabilitada': disabledGroup}"
             [ngClass]="{'label_desabilitada': disabledGroup}" class="label" [attr.for]="id">
             {{ titulo }}
         </label>
@@ -15,6 +16,5 @@
             [ngClass]="{'icone_desabilitado': disabledGroup, 'icone_ok': !disabledGroup}" class="icone"></mat-icon>
     </div>
 
-    <app-custom-error [@fadeInOut] *ngIf="!valido" [mensagemErro]="mensagemErro"></app-custom-error>
-
+    <app-custom-error [@fadeInOut] *ngIf="!valido" [mensagemErro]="geraMensagemErro()"></app-custom-error>
 </div>

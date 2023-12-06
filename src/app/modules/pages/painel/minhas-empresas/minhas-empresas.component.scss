@@ -1,0 +1,84 @@
+@import '../../../../../dist/variables.scss';
+
+h1,
+h2,
+h3,
+h4,
+p,
+div,
+header,
+footer,
+app-custom-input,
+painel-footer,
+painel-sidebar,
+painel-header,
+button,
+ul,
+li,
+i,
+h5,
+form,
+img {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    height: 100%;
+    color: $dark-white;
+}
+
+.block_container {
+    border-radius: 3px;
+}
+
+.block_container_pesquisa {
+    height: 8rem;
+    margin-bottom: 1rem;
+}
+
+.block_container_listagem {
+    height: calc(100% - 9rem);
+}
+
+.block {
+    height: 100%;
+    background-color: $light-black;
+    border-radius: 3px;
+    padding: 1.5rem 2rem;
+}
+
+.cabecalho_block_listagem {
+    display: flex;
+    justify-content: space-between;
+}
+
+.titulo_bloco {
+    font-weight: 500;
+    color: $dark-white;
+    font-size: 1rem;
+}
+
+.container_utilitarios_tabela {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.botao_cria_empresa {
+    display: flex;
+    align-items: center;
+    border: 1px solid $primary-color;
+    background-color: $primary-color;
+    color: $light-black;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0rem 0.5rem;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.botao_cria_empresa:focus {
+    outline: none;
+}

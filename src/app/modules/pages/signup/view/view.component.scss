@@ -6,13 +6,16 @@ h3,
 h4,
 p,
 div,
+header, 
+footer,
 app-custom-input,
 button,
 ul,
 li,
 i,
 h5,
-form {
+form,
+img {
     margin: 0;
     padding: 0;
 }
@@ -100,6 +103,23 @@ span {
 
 /* FIM MAT STEPPER */
 
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid $dark-grey;
+    padding: 0.5rem 0;
+}
+
+.header_logo_img {
+    width: 3rem;
+    animation: rotation 0.5s linear;
+}
+
+.header_logo_img_in {
+    animation: rotation 1s linear;
+}
+
 .container {
     padding: 2rem 0;
     display: flex;
@@ -118,6 +138,12 @@ span {
     font-weight: 500;
     font-size: 1rem;
     padding: 0 0.5rem;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 .texto {
@@ -126,6 +152,12 @@ span {
     margin-top: 0.5rem;
     margin-bottom: 1rem;
     padding: 0 0.5rem;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 @keyframes pulse {
@@ -142,4 +174,14 @@ span {
         transform: scale(0.95);
     }
 
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }

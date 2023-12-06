@@ -1,0 +1,75 @@
+@import '../../../../../../dist/variables.scss';
+
+h1,
+h2,
+h3,
+h4,
+p,
+div,
+header, 
+footer,
+app-custom-input,
+button,
+ul,
+li,
+i,
+h5,
+form,
+img {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    color: $dark-white;
+    display: flex;
+    justify-content: space-between;
+    background-color: $light-black;
+    border-bottom: 1px solid $dark-grey;
+    width: 100%;
+    height: 10%;
+    padding: 0.5rem 2rem;
+}
+
+.logo_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.img_logo {
+    width: 2.5rem;
+}
+
+.menu_container {
+    display: flex;
+    align-items: center;
+}
+
+.lista_itens_menu {
+    display: flex;
+    list-style: none;
+}
+
+.item_menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0.5rem;
+}
+
+::ng-deep .menu_icon {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100% !important;
+    width: 100% !important;
+    font-size: 1.5rem !important;
+    color: $primary-color !important;
+    cursor: pointer;
+}
+
+::ng-deep .menu_icon:hover {
+    color: $primary-color-dark !important;
+}

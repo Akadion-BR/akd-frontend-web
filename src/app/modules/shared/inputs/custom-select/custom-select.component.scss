@@ -18,3 +18,8 @@ select:focus {
     border: 1px solid $primary-color !important;
     outline: none;
 }
+
+.input_invalida:focus {
+    border: 1px solid $strong-red !important;
+    outline: none;
+}

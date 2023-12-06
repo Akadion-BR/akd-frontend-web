@@ -34,10 +34,17 @@ form {
     width: 100%;
     justify-content: center;
     margin-top: 1rem;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 .botao_inscrever:focus {
     outline: none;
+    background-color: $primary-color;
 }
 
 .botao_inscrever:hover {
@@ -79,12 +86,12 @@ form {
     padding: 0.5rem 1rem;
 }
 
-.subbloco_plano_ativo {
-    border: 1px solid $primary-color;
-}
-
 .subbloco_plano:hover {
     background-color: $medium-dark-black;
+}
+
+.subbloco_plano_ativo {
+    border: 1px solid $primary-color;
 }
 
 .titulo_plano {
@@ -118,9 +125,14 @@ form {
     list-style-type: none;
 }
 
-.imagem_vantagem_plano {
+.fa-check-square {
     margin-right: 0.5rem;
-    color: $primary-color;
+    color: $primary-color;    
+}
+
+.fa-minus-square {
+    margin-right: 0.5rem;
+    color: $light-grey;
 }
 
 .lista_vantagens_plano {

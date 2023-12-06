@@ -1,6 +1,7 @@
 <div class="row input_group">
     <div class="row label_container">
-        <label class="label" [ngClass]="{'label_desabilitada': disabledGroup}"
+        <label [matTooltip]="informativoCampo" [matTooltipPosition]="'right'" class="label"
+            [ngClass]="{'label_desabilitada': disabledGroup}"
             [ngClass]="{'label_invalida': !valido, 'label_desabilitada': disabledGroup}">
             {{ titulo }}
         </label>

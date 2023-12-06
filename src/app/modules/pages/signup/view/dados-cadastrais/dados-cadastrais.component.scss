@@ -6,6 +6,7 @@ h3,
 h4,
 p,
 div,
+footer,
 app-custom-input,
 app-custom-date-input,
 button,
@@ -34,6 +35,12 @@ form {
     width: 100%;
     justify-content: center;
     margin-top: 1rem;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 .botao_inscrever:focus {
@@ -44,10 +51,27 @@ form {
     background-color: $primary-color-dark;
 }
 
+.botao_inscrever:focus {
+    background-color: $primary-color-dark;
+}
+
 .link_botao_cadastro {
     text-align: center;
     color: $medium-black;
     text-decoration: none;
+}
+
+.botao_inscrever_desabilitado {
+    background-color: $medium-grey;
+    border: 1px solid $medium-grey;
+    color: $medium-black;
+    cursor: default;
+}
+
+.botao_inscrever_desabilitado:hover {
+    background-color: $medium-grey;
+    border: 1px solid $medium-grey;
+    color: $medium-black;
 }
 
 ::ng-deep .mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
