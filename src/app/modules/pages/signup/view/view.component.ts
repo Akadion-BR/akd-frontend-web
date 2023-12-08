@@ -105,7 +105,7 @@ export class ViewComponent {
           })
         },
         complete: () => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/painel/empresas']);
           this._snackBar.open("Cadastro realizado com sucesso", "Fechar", {
             duration: 3500
           });

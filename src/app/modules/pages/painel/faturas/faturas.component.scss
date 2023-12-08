@@ -4,7 +4,10 @@ h1,
 h2,
 h3,
 h4,
+h5,
+h6,
 p,
+hr,
 div,
 header,
 footer,
@@ -31,15 +34,19 @@ img {
 
 .block_container {
     border-radius: 3px;
-}
-
-.block_container_pesquisa {
-    height: 12rem;
     margin-bottom: 1rem;
+    padding: 0 0.5rem;
 }
 
-.block_container_listagem {
-    height: calc(100% - 13rem);
+.block_informativo_container {
+    height: 9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.block_tabela_container {
+    height: calc(100% - 10rem);
 }
 
 .block {
@@ -49,19 +56,91 @@ img {
     padding: 1.5rem 2rem;
 }
 
-.block_pesquisa {
-    padding: 1.5rem;
+.block_informativo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem 1rem;
 }
+
+.block_informativo_titulo {
+    font-size: 1rem;
+    font-weight: 500;
+    color: $primary-color;
+    text-align: center;
+    font-family: $font-poppins;
+}
+
+hr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.4rem;
+    border-color: $darker-grey;
+}
+
+.container_responsavel_contrato,
+.container_valor_plano,
+.container_plano_atual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    text-align: center;
+    font-size: 0.8rem;
+    font-family: $font-poppins;
+    color: $light-white;
+}
+
+.titulo_plano_atual,
+.texto_plano_atual,
+.titulo_valor_plano,
+.texto_valor_plano,
+.titulo_responsavel_contrato,
+.texto_responsavel_contrato {
+    margin: 0 0.1rem;
+}
+
+.titulo_responsavel_contrato,
+.texto_responsavel_contrato,
+.texto_status_plano,
+.texto_valor_plano,
+.titulo_valor_plano {
+    font-size: 0.7rem;
+    color: $light-grey;
+    margin-top: -0.3rem;
+}
+
+.botao_informativo {
+    border: none;
+    border-radius: 3px;
+    color: $medium-black;
+    cursor: pointer;
+    padding: 0.2rem;
+    background-color: $primary-color;
+    font-family: $font-poppins;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: -0.2rem;
+}
+
+.botao_informativo:hover {
+    transition: 0.3s;
+    background-color: $primary-color-dark;
+}
+
+.botao_informativo:focus {
+    outline: none;
+}
+
+/* TABELA */
 
 .block_listagem {
     height: auto;
     max-height: 100%;
     overflow-y: auto;
-}
-
-.cabecalho_block {
-    display: flex;
-    justify-content: space-between;
 }
 
 .titulo_bloco {
@@ -70,83 +149,15 @@ img {
     font-size: 1rem;
 }
 
-.titulo_bloco_pesquisa {
-    padding-left: 0.5rem;
-}
-
-.form {
-    margin-top: 0.5rem;
-}
-
-.botao_pesquisa_container {
-    display: flex;
-    margin-top: 1rem;
-    align-items: center;
-    justify-content: right;
-    padding-right: 0.5rem;
-}
-
-.botao_pesquisa {
-    margin-left: 0.5rem;
-    display: flex;
-    align-items: center;
-    border: 1px solid $primary-color;
-    background-color: transparent;
-    color: $primary-color;
-    font-size: 0.7rem;
-    font-weight: 400;
-    padding: 0.2rem 1rem;
-    border-radius: 2px;
-    cursor: pointer;
-}
-
-.botao_pesquisa:hover {
-    transition: 0.8s;
-    color: $medium-black;
-    background-color: $primary-color;
-}
-
-.botao_pesquisa:focus {
-    outline: none;
-}
-
-
-
-
-.container_utilitarios_tabela {
+.cabecalho_block {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 0.5rem;
 }
 
 .block_opcoes_tabela {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     margin-top: 1rem;
-}
-
-.botao_cria_empresa {
-    display: flex;
-    align-items: center;
-    border: 1px solid $primary-color;
-    background-color: transparent;
-    color: $primary-color;
-    font-size: 0.7rem;
-    font-weight: 400;
-    padding: 0.2rem 1rem;
-    border-radius: 2px;
-    cursor: pointer;
-}
-
-.botao_cria_empresa:hover {
-    transition: 0.8s;
-    color: $medium-black;
-    background-color: $primary-color;
-}
-
-.botao_cria_empresa:focus {
-    outline: none;
 }
 
 .lista_paginacao {
@@ -176,6 +187,10 @@ img {
     background-color: $primary-color;
 }
 
+.texto_paginacao_ativo {
+    color: $medium-black;
+}
+
 .item_paginacao_desabilitado {
     border: 1px solid $dark-grey;
     color: $dark-grey;
@@ -184,6 +199,10 @@ img {
 .texto_paginacao {
     font-family: $font-poppins;
     font-size: 0.8rem;
+}
+
+.texto_paginacao_desabilitado {
+    color: $dark-grey;
 }
 
 table {
@@ -262,8 +281,6 @@ td {
     color: $strong-red !important;
     transition: 0.2s;
 }
-
-
 
 /* width */
 ::-webkit-scrollbar {
