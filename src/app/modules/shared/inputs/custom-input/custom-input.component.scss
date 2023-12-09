@@ -1,0 +1,12 @@
+@import '../../../../../dist/variables.scss';
+@import '../styles/custom-inputs.scss';
+
+input[type=text],
+input[type=password] {
+    height: 100%;
+}
+
+.input_invalida:focus {
+    border: 1px solid $strong-red !important;
+    outline: none;
+}

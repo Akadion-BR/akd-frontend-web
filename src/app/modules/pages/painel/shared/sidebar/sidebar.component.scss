@@ -1,0 +1,80 @@
+@import '../../../../../../dist/variables.scss';
+
+h1,
+h2,
+h3,
+h4,
+p,
+div,
+header, 
+footer,
+aside,
+app-custom-input,
+painel-footer,
+painel-sidebar,
+painel-header,
+button,
+ul,
+li,
+i,
+h5,
+form,
+img {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 15rem;
+    height: 100%;
+    color: $dark-white;
+    background-color: $light-black;
+    border-right: 1px solid $dark-grey;
+    padding: 1rem 0;
+}
+
+.titulo {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0 1rem;
+}
+
+.lista_menu {
+    margin-top: 2rem;
+    list-style: none;
+}
+
+.item_menu {
+    color: $medium-grey;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: flex-end;
+    border-right: 1px solid $medium-grey;
+    border-width: 3px;    
+    cursor: pointer;
+    padding: 0.3rem 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.item_menu:hover {
+    transition: 0.2s;
+    color: $light-grey;
+    border-right: 1px solid $light-grey;
+    border-width: 3px;
+    background-color: $medium-black;    
+}
+
+.item_menu:focus {
+    outline: none;
+}
+
+.item_menu_ativo, .item_menu_ativo:hover {
+    font-weight: 500;
+    color: $primary-color;
+    border-right: 1px solid $primary-color;
+    border-width: 3px;
+}
+
+.item_menu_texto {
+    margin-left: 0.5rem;
+}

@@ -1,0 +1,52 @@
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block_container">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block">
+
+        <mat-horizontal-stepper [linear]="true" #stepper>
+
+            <ng-template matStepperIcon="edit">
+                <i class="fa fa-check"></i>
+            </ng-template>
+
+            <ng-template matStepperIcon="number">
+                <i class="fa fa-fire"></i>
+            </ng-template>
+
+            <!-- PRIMEIRO PASSO: DADOS CADASTRAIS -->
+            <mat-step [stepControl]="dadosCadastrais" editable="true">
+                <ng-template matStepLabel>
+                    <span>Dados</span>
+                </ng-template>
+
+                <h2 class="titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Dados cadastrais
+                </h2>
+                <p class="texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Insira seus dados cadastrais para acessar a sua conta junto ao CPF cadastrado
+                </p>
+
+                <altera-dados-cadastrais
+                    (emissorDeDadosCadastrais)="recebeFormGroupDadosCadastrais($event)"></altera-dados-cadastrais>
+
+            </mat-step>
+
+            <!-- SEGUNDO PASSO: DADOS DE CONTATO -->
+            <mat-step [stepControl]="dadosContato" editable="true">
+                <ng-template matStepLabel>
+                    <span>Contato</span>
+                </ng-template>
+                <h2 class="titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Dados de contato
+                </h2>
+                <p class="texto col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    Insira seus dados de contato para podermos entrar em contato com você caso necessário
+                </p>
+
+                <altera-dados-contato
+                    (emissorDeDadosContato)="recebeFormGroupDadosContato($event)"></altera-dados-contato>
+
+            </mat-step>
+
+        </mat-horizontal-stepper>
+
+    </div>
+</div>

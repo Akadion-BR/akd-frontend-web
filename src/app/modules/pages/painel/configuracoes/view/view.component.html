@@ -1,0 +1,36 @@
+<div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container" [@fadeInOut]>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 block_container">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block"
+            [routerLink]="['/painel/configuracoes/alterar-plano']" #alterarPlano="routerLinkActive" routerLinkActive
+            [ngClass]="{'block_active': alterarPlano.isActive }">
+            <h1>
+                ALTERAR PLANO
+            </h1>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 block_container">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block"
+            [routerLink]="['/painel/configuracoes/alterar-dados']" #alterarDados="routerLinkActive" routerLinkActive
+            [ngClass]="{'block_active': alterarDados.isActive }">
+            <h1>
+                ALTERAR DADOS CADASTRAIS
+            </h1>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 block_container">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block"
+            [routerLink]="['/painel/configuracoes/alterar-forma-pagamento']" #alterarFormaPagamento="routerLinkActive"
+            routerLinkActive [ngClass]="{'block_active': alterarFormaPagamento.isActive }">
+            <h1>
+                ALTERAR FORMA DE PAGAMENTO
+            </h1>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-12 col-md-4 col-sm-4 col-4 block_container_content">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block_content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>

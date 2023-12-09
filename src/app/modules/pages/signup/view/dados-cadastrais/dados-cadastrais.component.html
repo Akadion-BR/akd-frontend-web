@@ -1,0 +1,74 @@
+<form [formGroup]="dadosCadastrais" class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+    <!-- INPUT GROUP NOME -->
+    <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputNome'"
+        [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 70 caracteres'" [titulo]="'Nome completo'"
+        [tabIndex]="1" [maxLength]="70" [touched]="dadosCadastrais.controls['nome'].touched"
+        [todosCaracteresMaiusculos]="true" [disabledGroup]="dadosCadastrais.controls['nome'].disabled"
+        [errors]="dadosCadastrais.controls['nome'].errors" [customIcon]="'face'"
+        [valido]="!(dadosCadastrais.controls['nome'].touched && dadosCadastrais.controls['nome'].invalid)"
+        formControlName="nome" #inputNome></app-custom-input>
+
+    <!-- INPUT GROUP E-MAIL -->
+    <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputEmail'" [titulo]="'E-mail'"
+        [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 70 caracteres'" [tabIndex]="2"
+        [maxLength]="70" [touched]="dadosCadastrais.controls['email'].touched" [todosCaracteresMaiusculos]="false"
+        [customIcon]="'alternate_email'" [disabledGroup]="dadosCadastrais.controls['email'].disabled"
+        [errors]="dadosCadastrais.controls['email'].errors"
+        [valido]="!(dadosCadastrais.controls['email'].touched && dadosCadastrais.controls['email'].invalid)"
+        formControlName="email" #inputEmail></app-custom-input>
+
+    <!-- INPUT GROUP CPF -->
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'inputCpf'" [titulo]="'CPF'"
+        [informativoCampo]="'Este campo é obrigatório e deve seguir um padrão válido de CPF (xxx.xxx.xxx-xx)'"
+        [tabIndex]="3" [maxLength]="14" [touched]="dadosCadastrais.controls['cpf'].touched"
+        [todosCaracteresMaiusculos]="false" [customIcon]="'badge'" (input)="realizaTratamentoCpfCnpj($event)"
+        [disabledGroup]="dadosCadastrais.controls['cpf'].disabled" [errors]="dadosCadastrais.controls['cpf'].errors"
+        [valido]="!(dadosCadastrais.controls['cpf'].touched && dadosCadastrais.controls['cpf'].invalid)"
+        formControlName="cpf" #inputCpf></app-custom-input>
+
+    <!-- INPUT GROUP DATA DE NASCIMENTO -->
+    <app-custom-date-input class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [minDate]="'1900-01-01'"
+        [informativoCampo]="'Este campo é obrigatório e deve conter uma data de nascimento válida'"
+        [maxDate]="'2023-01-01'" [disabledGroup]="dadosCadastrais.controls['dataNascimento'].disabled"
+        [id]="'dataNascimento'" [titulo]="'Data de nascimento'" formControlName="dataNascimento"
+        [errors]="dadosCadastrais.controls['dataNascimento'].errors"
+        [valido]="!(dadosCadastrais.controls['dataNascimento'].touched && dadosCadastrais.controls['dataNascimento'].invalid)"
+        [vazio]="getValueAtributoDadosCadastrais('dataNascimento') == '' || getValueAtributoDadosCadastrais('dataNascimento') == null"
+        (focusout)="validaDataNascimento()" [tabIndex]="4" #inputDataNascimento></app-custom-date-input>
+
+    <!-- INPUT GROUP SENHA -->
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'inputSenha'"
+        [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 25 caracteres'" [titulo]="'Senha'"
+        [tabIndex]="5" [maxLength]="25" [touched]="dadosCadastrais.controls['senha'].touched"
+        [todosCaracteresMaiusculos]="false" [customIcon]="'lock'" [errors]="dadosCadastrais.controls['senha'].errors"
+        [disabledGroup]="dadosCadastrais.controls['senha'].disabled"
+        [valido]="!(dadosCadastrais.controls['senha'].touched && dadosCadastrais.controls['senha'].invalid)"
+        formControlName="senha" [type]="'password'" #inputSenha></app-custom-input>
+
+    <!-- INPUT GROUP RE-SENHA -->
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'inputConfirmaSenha'"
+        [informativoCampo]="'Este campo é obrigatório e deve ser idêntico ao campo senha'" [titulo]="'Confirmar Senha'"
+        [tabIndex]="6" [maxLength]="25" [errors]="dadosCadastrais.controls['confirmaSenha'].errors"
+        [touched]="dadosCadastrais.controls['confirmaSenha'].touched" [todosCaracteresMaiusculos]="false"
+        [customIcon]="'lock'" [disabledGroup]="dadosCadastrais.controls['confirmaSenha'].disabled"
+        [valido]="!(dadosCadastrais.controls['confirmaSenha'].touched && dadosCadastrais.controls['confirmaSenha'].invalid)"
+        formControlName="confirmaSenha" [type]="'password'" #inputConfirmaSenha></app-custom-input>
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
+        <button [routerLink]="['/']" class="botao_menu botao_inscrever" [tabIndex]="7">
+            <a class="link_botao link_botao_cadastro">
+                Voltar
+            </a>
+        </button>
+
+        <button [disabled]="!dadosCadastrais.valid" [ngClass]="{'botao_inscrever_desabilitado': !dadosCadastrais.valid}"
+            class="botao_menu botao_inscrever" (click)="verificaSePodeAvancar()" [tabIndex]="8" mat-button
+            matStepperNext>
+            <a class="link_botao link_botao_cadastro">
+                Avançar
+            </a>
+        </button>
+    </div>
+
+</form>

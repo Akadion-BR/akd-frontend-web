@@ -1,0 +1,97 @@
+<form [formGroup]="dadosContato" class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+    <!-- INPUT GROUP DDD -->
+    <app-custom-input class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3" [id]="'inputPrefixo'"
+        [informativoCampo]="'Este campo é obrigatório e deve conter 2 caracteres numéricos. Ex: 11'" [titulo]="'DDD'"
+        [tabIndex]="1" [maxLength]="2" [touched]="dadosContato.controls['prefixo'].touched"
+        [todosCaracteresMaiusculos]="false" [disabledGroup]="dadosContato.controls['prefixo'].disabled"
+        [errors]="dadosContato.controls['prefixo'].errors" [customIcon]="'phone_android'"
+        [valido]="!(dadosContato.controls['prefixo'].touched && dadosContato.controls['prefixo'].invalid)"
+        [mensagemErro]="'Campo obrigatório'" formControlName="prefixo" #inputPrefixo></app-custom-input>
+
+    <!-- INPUT GROUP NUMERO TELEFONE -->
+    <app-custom-input class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9" [id]="'inputNumeroTelefone'"
+        [informativoCampo]="'Este campo é obrigatório e deve conter um número de telefone fixo ou móvel válido. Ex: 992888389'"
+        [titulo]="'Telefone'" [tabIndex]="2" [maxLength]="9" [touched]="dadosContato.controls['numeroTelefone'].touched"
+        [todosCaracteresMaiusculos]="false" [customIcon]="'call'"
+        [disabledGroup]="dadosContato.controls['numeroTelefone'].disabled"
+        [valido]="!(dadosContato.controls['numeroTelefone'].touched && dadosContato.controls['numeroTelefone'].invalid)"
+        [errors]="dadosContato.controls['numeroTelefone'].errors" formControlName="numeroTelefone"
+        #inputNumero></app-custom-input>
+
+    <!-- INPUT GROUP CEP -->
+    <app-custom-input class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'cep'" [titulo]="'Cep'" [tabIndex]="3"
+        [informativoCampo]="'Este campo é obrigatório e deve conter um cep válido. Ex: 02442-090'" [maxLength]="9"
+        [touched]="dadosContato.controls['codigoPostal'].touched" [todosCaracteresMaiusculos]="false"
+        [customIcon]="'map'" formControlName="codigoPostal" (input)="realizaTratamentoCodigoPostal($event)"
+        [disabledGroup]="dadosContato.controls['codigoPostal'].disabled" #inputCodigoPostal
+        [errors]="dadosContato.controls['codigoPostal'].errors" formControlName="codigoPostal"
+        [valido]="!(dadosContato.controls['codigoPostal'].touched && dadosContato.controls['codigoPostal'].invalid)"></app-custom-input>
+
+    <!-- SELECT GROUP ESTADO -->
+    <app-custom-select class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" formControlName="estado"
+        [informativoCampo]="'Este campo é obrigatório'" (change)="obtemTodosMunicipiosPorEstado()" [tabIndex]="4"
+        [titulo]="'Estado'" #inputEstado [disabledGroup]="dadosContato.controls['estado'].disabled"
+        [options]="this.estadosOptions" [errors]="dadosContato.controls['estado'].errors" [id]="'estado'"
+        [valido]="!(dadosContato.controls['estado'].touched && dadosContato.controls['estado'].invalid)">
+    </app-custom-select>
+
+    <!-- SELECT GROUP CIDADE -->
+    <app-custom-select class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12" formControlName="cidade" [tabIndex]="5"
+        [informativoCampo]="'Este campo é obrigatório'" [titulo]="'Cidade'" #inputCidade
+        [disabledGroup]="dadosContato.controls['cidade'].disabled" [options]="this.municipiosOptions"
+        [errors]="dadosContato.controls['cidade'].errors" [id]="'cidade'"
+        [valido]="!(dadosContato.controls['cidade'].touched && dadosContato.controls['cidade'].invalid)">
+    </app-custom-select>
+
+    <!-- INPUT GROUP LOGRADOURO -->
+    <app-custom-input class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12" [id]="'logradouro'" [titulo]="'Logradouro'"
+        [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 100 caracteres'" [tabIndex]="6"
+        [maxLength]="100" [touched]="dadosContato.controls['logradouro'].touched" [todosCaracteresMaiusculos]="true"
+        [customIcon]="'home'" [disabledGroup]="dadosContato.controls['logradouro'].disabled"
+        [errors]="dadosContato.controls['logradouro'].errors"
+        [valido]="!(dadosContato.controls['logradouro'].touched && dadosContato.controls['logradouro'].invalid)"
+        formControlName="logradouro" #inputLogradouro></app-custom-input>
+
+    <!-- INPUT GROUP NUMERO -->
+    <app-custom-input class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12" [id]="'numeroEndereco'" [titulo]="'Número'"
+        [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 4 caracteres'" [tabIndex]="7"
+        [maxLength]="4" [touched]="dadosContato.controls['numeroEndereco'].touched" [todosCaracteresMaiusculos]="false"
+        [customIcon]="'pin'" [disabledGroup]="dadosContato.controls['numeroEndereco'].disabled"
+        [valido]="!(dadosContato.controls['numeroEndereco'].touched && dadosContato.controls['numeroEndereco'].invalid)"
+        [errors]="dadosContato.controls['numeroEndereco'].errors" formControlName="numeroEndereco"
+        #inputNumeroEndereco></app-custom-input>
+
+    <!-- INPUT GROUP BAIRRO -->
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'bairro'" [titulo]="'Bairro'"
+        [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 80 caracteres'" [tabIndex]="8"
+        [maxLength]="80" [touched]="dadosContato.controls['bairro'].touched" [todosCaracteresMaiusculos]="true"
+        [customIcon]="'signpost'" [disabledGroup]="dadosContato.controls['bairro'].disabled"
+        [valido]="!(dadosContato.controls['bairro'].touched && dadosContato.controls['bairro'].invalid)"
+        [errors]="dadosContato.controls['bairro'].errors" formControlName="bairro" #inputBairro></app-custom-input>
+
+    <!-- INPUT GROUP COMPLEMENTO -->
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'complemento'" [titulo]="'Complemento'"
+        [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 100 caracteres'" [tabIndex]="9"
+        [maxLength]="100" [touched]="dadosContato.controls['complemento'].touched" [customIcon]="'more_horiz'"
+        [disabledGroup]="dadosContato.controls['complemento'].disabled"
+        [valido]="!(dadosContato.controls['complemento'].touched && dadosContato.controls['complemento'].invalid)"
+        [errors]="dadosContato.controls['complemento'].errors" formControlName="complemento"
+        #inputBairro></app-custom-input>
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
+        <button tabindex="10" class="botao_menu botao_inscrever" matStepperPrevious>
+            <a class="link_botao link_botao_cadastro">
+                Voltar
+            </a>
+        </button>
+
+        <button tabindex="11" [disabled]="!dadosContato.valid"
+            [ngClass]="{'botao_inscrever_desabilitado': !dadosContato.valid}" (click)="verificaSePodeAvancar()"
+            class="botao_menu botao_inscrever" matStepperNext>
+            <a class="link_botao link_botao_cadastro">
+                Avançar
+            </a>
+        </button>
+    </div>
+</form>

@@ -6,22 +6,22 @@
         <div class="bloco_header menu">
             <ul class="menu_itens">
                 <li class="item_menu">
-                    <a href="#" class="item_menu_link">
+                    <a [routerLink]="['/planos']" class="item_menu_link">
                         Planos e Preços
                     </a>
                 </li>
                 <li class="item_menu">
-                    <a href="#" class="item_menu_link">
+                    <a [routerLink]="['/funcionalidades']" class="item_menu_link">
                         Funcionalidades
                     </a>
                 </li>
                 <li class="item_menu">
-                    <a href="#" class="item_menu_link">
+                    <a [routerLink]="['/info']" class="item_menu_link">
                         Como funciona
                     </a>
                 </li>
                 <li class="item_menu">
-                    <a href="#" class="item_menu_link">
+                    <a [routerLink]="['/contato']" class="item_menu_link">
                         Fale conosco
                     </a>
                 </li>
@@ -31,8 +31,8 @@
             <button class="botao_menu botao_login">
                 Login
             </button>
-            <button class="botao_menu botao_inscrever">
-                <a [routerLink]="['/signup']" class="link_botao link_botao_cadastro">
+            <button [routerLink]="['/signup']" class="botao_menu botao_inscrever">
+                <a class="link_botao link_botao_cadastro">
                     TESTE GRÁTIS
                 </a>
             </button>

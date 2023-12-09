@@ -1,0 +1,30 @@
+<aside class="container">
+
+    <h4 class="titulo col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        Minhas Empresas
+    </h4>
+
+    <ul class="lista_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [routerLink]="['/painel/empresas']"
+            #empresas="routerLinkActive" routerLinkActive [ngClass]="{'item_menu_ativo': empresas.isActive }">
+            <mat-icon class="item_menu_icone">store</mat-icon>
+            <p class="item_menu_texto">Empresas</p>
+        </li>
+        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [routerLink]="['/painel/faturas']"
+            #faturas="routerLinkActive" routerLinkActive [ngClass]="{'item_menu_ativo': faturas.isActive }">
+            <mat-icon class="item_menu_icone">credit_card</mat-icon>
+            <p class="item_menu_texto">Faturas</p>
+        </li>
+        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [routerLink]="['/painel/relatorios']"
+            #relatorios="routerLinkActive" routerLinkActive [ngClass]="{'item_menu_ativo': relatorios.isActive }">
+            <mat-icon class="item_menu_icone">multiline_chart</mat-icon>
+            <p class="item_menu_texto">Relatórios</p>
+        </li>
+        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+            [routerLink]="['/painel/configuracoes']" #configuracoes="routerLinkActive" routerLinkActive
+            [ngClass]="{'item_menu_ativo': configuracoes.isActive }">
+            <mat-icon class="item_menu_icone">settings</mat-icon>
+            <p class="item_menu_texto">Configurações</p>
+        </li>
+    </ul>
+</aside>

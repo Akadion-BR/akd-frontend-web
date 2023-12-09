@@ -1,0 +1,182 @@
+<div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container_planos">
+
+    <!-- PLANO BASIC -->
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 bloco_plano">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 subbloco_plano" (click)="mudaPlano('BASIC')"
+            [ngClass]="{'subbloco_plano_ativo': verificaSeTipoDePlanoCorrespondeAoBloco('BASIC')}">
+            <h3 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_plano">
+                Plano Basic
+            </h3>
+            <p class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 descricao_plano">
+                Plano para micro empresas que buscam um gerenciamento completo de seus recursos
+            </p>
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 preco_plano">
+                <h3 class="preco_plano_valor">
+                    R$ 250
+                </h3>
+                <h4 class="periodicidade_plano">
+                    por mês
+                </h4>
+            </div>
+            <ul class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 lista_vantagens_plano">
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Limite de 1 empresa cadastrada</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Limite de 30 notas fiscais emitidas por mês</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Até 3 colaboradores cadastrados por empresa</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Todos os módulos liberados</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-minus-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Envio de e-mails pós-vendas</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-minus-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Recurso de relatório em PDF</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-minus-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">E-mail marketing</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-minus-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Suporte VIP</h5>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PLANO STANDART -->
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 bloco_plano">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 subbloco_plano" (click)="mudaPlano('STANDART')"
+            [ngClass]="{'subbloco_plano_ativo': verificaSeTipoDePlanoCorrespondeAoBloco('STANDART')}">
+            <h3 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_plano">
+                Plano Standart
+            </h3>
+            <p class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 descricao_plano">
+                Plano para micro empresas que buscam um gerenciamento completo de seus recursos
+            </p>
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 preco_plano">
+                <h3 class="preco_plano_valor">
+                    R$ 400
+                </h3>
+                <h4 class="periodicidade_plano">
+                    por mês
+                </h4>
+            </div>
+            <ul class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 lista_vantagens_plano">
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Limite de 3 empresas ou filiais cadastradas</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Limite de 120 notas fiscais emitidas por mês</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Cadastro de colaboradores ilimitado</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Todos os módulos liberados</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Envio de e-mails pós-vendas</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Recurso de relatório em PDF</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-minus-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">E-mail marketing</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-minus-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Suporte VIP</h5>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PLANO PRO -->
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 bloco_plano">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 subbloco_plano" (click)="mudaPlano('PRO')"
+            [ngClass]="{'subbloco_plano_ativo': verificaSeTipoDePlanoCorrespondeAoBloco('PRO')}">
+            <h3 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_plano">
+                Plano Pro
+            </h3>
+            <p class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 descricao_plano">
+                Plano para micro empresas que buscam um gerenciamento completo de seus recursos
+            </p>
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 preco_plano">
+                <h3 class="preco_plano_valor">
+                    R$ 650
+                </h3>
+                <h4 class="periodicidade_plano">
+                    por mês
+                </h4>
+            </div>
+            <ul class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 lista_vantagens_plano">
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Limite de 5 empresas ou filiais cadastradas</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Emissão de notas fiscais ilimitada</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Cadastro de colaboradores ilimitado</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Todos os módulos liberados</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Envio de e-mails pós-vendas</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Recurso de relatório em PDF</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">E-mail marketing</h5>
+                </li>
+                <li class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 item_lista_vantagens_plano">
+                    <i class="fa fa-check-square imagem_vantagem_plano"></i>
+                    <h5 class="texto_vantagem_plano">Suporte VIP</h5>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
+    <button class="botao_menu botao_inscrever" matStepperPrevious>
+        <a class="link_botao link_botao_cadastro">
+            Voltar
+        </a>
+    </button>
+
+    <button (click)="solicitarEnvioDeFormulario()" class="botao_menu botao_inscrever">
+        <a class="link_botao link_botao_cadastro">
+            Criar conta
+        </a>
+    </button>
+</div>
