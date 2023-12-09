@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MinhasEmpresasComponent } from './minhas-empresas/minhas-empresas.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -13,11 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FaturasComponent } from './faturas/faturas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
 import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
+import { EmpresasModule } from './empresas/empresas.module';
 
 
 @NgModule({
   declarations: [
-    MinhasEmpresasComponent,
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
@@ -33,7 +32,8 @@ import { ConfiguracoesComponent } from './configuracoes/configuracoes.component'
     MatIconModule,
     MatBadgeModule, 
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    EmpresasModule
   ]
 })
 export class PainelModule { }

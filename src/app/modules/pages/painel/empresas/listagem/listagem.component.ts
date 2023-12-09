@@ -5,11 +5,11 @@ import { fadeInOutAnimation } from 'src/app/shared/animations';
 
 @Component({
   selector: 'listar-minhas-empresas',
-  templateUrl: './minhas-empresas.component.html',
-  styleUrls: ['./minhas-empresas.component.scss'],
+  templateUrl: './listagem.component.html',
+  styleUrls: ['./listagem.component.scss'],
   animations: [fadeInOutAnimation]
 })
-export class MinhasEmpresasComponent {
+export class ListagemComponent {
 
   constructor(
     private formBuilder: FormBuilder,
