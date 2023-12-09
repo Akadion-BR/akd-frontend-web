@@ -11,8 +11,6 @@ import { DadosCadastraisComponent } from './view/dados-cadastrais/dados-cadastra
 import { DadosContatoComponent } from './view/dados-contato/dados-contato.component';
 import { DadosPlanoComponent } from './view/dados-plano/dados-plano.component';
 
-
-
 @NgModule({
   exports: [
     ViewComponent

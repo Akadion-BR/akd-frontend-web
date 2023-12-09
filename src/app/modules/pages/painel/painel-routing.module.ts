@@ -1,9 +1,10 @@
+import { RelatorioRoutingModule } from './relatorios/relatorio-routing.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RelatoriosComponent } from './relatorios/relatorios.component';
 import { ListagemComponent as ListagemEmpresas } from './empresas/listagem/listagem.component';
 import { ListagemComponent as ListagemFaturas } from './faturas/listagem/listagem.component';
-import { ViewComponent } from './configuracoes/view/view.component';
+import { ViewComponent as ConfiguracoesViewComponent} from './configuracoes/view/view.component';
+import { ViewComponent as RelatoriosViewComponent } from './relatorios/view/view.component';
 
 const routes: Routes = [
   {
@@ -18,11 +19,12 @@ const routes: Routes = [
   },
   {
     path: 'relatorios',
-    component: RelatoriosComponent
+    component: RelatoriosViewComponent,
+    loadChildren: () => import('./relatorios/relatorio-routing.module').then(m => m.RelatorioRoutingModule)
   },
   {
     path: 'configuracoes',
-    component: ViewComponent,
+    component: ConfiguracoesViewComponent,
     loadChildren: () => import('./configuracoes/configuracoes-routing.module').then(m => m.ConfiguracoesRoutingModule)
   },
   {

@@ -9,10 +9,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RelatoriosComponent } from './relatorios/relatorios.component';
 import { EmpresasModule } from './empresas/empresas.module';
 import { FaturasModule } from './faturas/faturas.module';
 import { ConfiguracoesModule } from './configuracoes/configuracoes.module';
+import { RelatoriosModule } from './relatorios/relatorios.module';
 
 
 @NgModule({
@@ -21,19 +21,19 @@ import { ConfiguracoesModule } from './configuracoes/configuracoes.module';
     SidebarComponent,
     FooterComponent,
     ViewComponent,
-    RelatoriosComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
     MatIconModule,
-    MatBadgeModule, 
-    FormsModule, 
-    ReactiveFormsModule, 
-    EmpresasModule, 
-    FaturasModule, 
-    ConfiguracoesModule
+    MatBadgeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    EmpresasModule,
+    FaturasModule,
+    ConfiguracoesModule,
+    RelatoriosModule
   ]
 })
 export class PainelModule { }
