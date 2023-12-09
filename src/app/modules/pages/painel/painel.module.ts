@@ -9,10 +9,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FaturasComponent } from './faturas/faturas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
 import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
 import { EmpresasModule } from './empresas/empresas.module';
+import { FaturasModule } from './faturas/faturas.module';
 
 
 @NgModule({
@@ -21,7 +21,6 @@ import { EmpresasModule } from './empresas/empresas.module';
     SidebarComponent,
     FooterComponent,
     ViewComponent,
-    FaturasComponent,
     RelatoriosComponent,
     ConfiguracoesComponent
   ],
@@ -33,7 +32,8 @@ import { EmpresasModule } from './empresas/empresas.module';
     MatBadgeModule, 
     FormsModule, 
     ReactiveFormsModule, 
-    EmpresasModule
+    EmpresasModule, 
+    FaturasModule
   ]
 })
 export class PainelModule { }

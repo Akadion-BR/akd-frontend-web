@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FaturasComponent } from './faturas/faturas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
 import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
-import { ListagemComponent } from './empresas/listagem/listagem.component';
+import { ListagemComponent as ListagemEmpresas } from './empresas/listagem/listagem.component';
+import { ListagemComponent as ListagemFaturas } from './faturas/listagem/listagem.component';
 
 const routes: Routes = [
   {
     path: 'empresas',
-    component: ListagemComponent,
+    component: ListagemEmpresas,
     loadChildren: () => import('./empresas/empresas-routing.module').then(m => m.EmpresasRoutingModule)
   },
   {
     path: 'faturas',
-    component: FaturasComponent
+    component: ListagemFaturas,
+    loadChildren: () => import('./faturas/faturas-routing.module').then(m => m.FaturasRoutingModule)
   },
   {
     path: 'relatorios',
