@@ -4,7 +4,7 @@ import { SelectOption } from 'src/app/modules/shared/inputs/models/select-option
 import { fadeInOutAnimation } from 'src/app/shared/animations';
 
 @Component({
-  selector: 'listar-minhas-empresas',
+  selector: 'listagem-empresas',
   templateUrl: './listagem.component.html',
   styleUrls: ['./listagem.component.scss'],
   animations: [fadeInOutAnimation]

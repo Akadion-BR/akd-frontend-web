@@ -10,9 +10,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
-import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
 import { EmpresasModule } from './empresas/empresas.module';
 import { FaturasModule } from './faturas/faturas.module';
+import { ConfiguracoesModule } from './configuracoes/configuracoes.module';
 
 
 @NgModule({
@@ -22,7 +22,6 @@ import { FaturasModule } from './faturas/faturas.module';
     FooterComponent,
     ViewComponent,
     RelatoriosComponent,
-    ConfiguracoesComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +32,8 @@ import { FaturasModule } from './faturas/faturas.module';
     FormsModule, 
     ReactiveFormsModule, 
     EmpresasModule, 
-    FaturasModule
+    FaturasModule, 
+    ConfiguracoesModule
   ]
 })
 export class PainelModule { }
