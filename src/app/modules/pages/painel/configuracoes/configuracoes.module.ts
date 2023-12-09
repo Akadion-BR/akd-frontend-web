@@ -9,13 +9,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AlterarDadosComponent } from './alterar-dados/alterar-dados.component';
 import { DadosCadastraisComponent } from './alterar-dados/dados-cadastrais/dados-cadastrais.component';
 import { DadosContatoComponent } from './alterar-dados/dados-contato/dados-contato.component';
+import { AlterarPlanoComponent } from './alterar-plano/alterar-plano.component';
+import { AlterarFormaPagamentoComponent } from './alterar-forma-pagamento/alterar-forma-pagamento.component';
 
 @NgModule({
   declarations: [
     ViewComponent,
     DadosCadastraisComponent,
     DadosContatoComponent,
-    AlterarDadosComponent
+    AlterarDadosComponent,
+    AlterarPlanoComponent,
+    AlterarFormaPagamentoComponent
   ],
   imports: [
     CommonModule,

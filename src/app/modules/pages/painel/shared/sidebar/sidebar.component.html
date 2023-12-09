@@ -15,15 +15,14 @@
             <mat-icon class="item_menu_icone">credit_card</mat-icon>
             <p class="item_menu_texto">Faturas</p>
         </li>
-        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [routerLink]="['/painel/relatorios']" 
-        #relatorios="routerLinkActive"
-            routerLinkActive [ngClass]="{'item_menu_ativo': relatorios.isActive }">
+        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [routerLink]="['/painel/relatorios']"
+            #relatorios="routerLinkActive" routerLinkActive [ngClass]="{'item_menu_ativo': relatorios.isActive }">
             <mat-icon class="item_menu_icone">multiline_chart</mat-icon>
             <p class="item_menu_texto">Relatórios</p>
         </li>
-        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [routerLink]="['/painel/configuracoes']" 
-        #configuracoes="routerLinkActive"
-            routerLinkActive [ngClass]="{'item_menu_ativo': configuracoes.isActive }">
+        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+            [routerLink]="['/painel/configuracoes']" #configuracoes="routerLinkActive" routerLinkActive
+            [ngClass]="{'item_menu_ativo': configuracoes.isActive }">
             <mat-icon class="item_menu_icone">settings</mat-icon>
             <p class="item_menu_texto">Configurações</p>
         </li>

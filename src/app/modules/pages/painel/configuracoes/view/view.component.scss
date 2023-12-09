@@ -1,0 +1,109 @@
+@import '../../../../../../dist/variables.scss';
+
+h1,
+h2,
+h3,
+h4,
+p,
+div,
+header,
+footer,
+app-custom-input,
+app-custom-select,
+painel-footer,
+painel-sidebar,
+painel-header,
+button,
+ul,
+li,
+i,
+h5,
+form,
+img {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $dark-white;
+    height: 100%;
+}
+
+.block_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+    height: 5rem;
+}
+
+.block_container_content {
+    padding: 0 0.5rem;
+    height: calc(100% - 6rem);
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    padding: 1.5rem;
+    height: 100%;
+    cursor: pointer;
+    border: none;
+    background-color: $medium-black;
+}
+
+.block > h1 {
+    color: $medium-grey;
+    font-size: 0.8rem;
+    text-align: center;
+    font-weight: 500;
+    font-family: $font-poppins;
+}
+
+.block:hover {
+    animation: pulse 1.5s infinite;
+}
+
+.block:focus { 
+    outline: none;
+}
+
+.block_active {
+    border: 1px solid $primary-color;
+    background-color: $transparent-primary-color;
+}
+
+.block_active > h1 {
+    color: $light-grey;
+}
+
+.block_content {
+    height: 100%;
+    background-color: $light-black;
+    border-radius: 3px;
+    padding: 0;
+    border: none;
+}
+
+@keyframes pulse {
+
+    0% {
+        transform: scale(0.98);
+    }
+
+    70% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0.98);
+    }
+
+}
