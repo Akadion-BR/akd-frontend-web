@@ -34,7 +34,6 @@ form {
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-top: 1rem;
     -webkit-user-select: none;
     /* Safari */
     -ms-user-select: none;
@@ -45,13 +44,10 @@ form {
 
 .botao_inscrever:focus {
     outline: none;
-}
-
-.botao_inscrever:hover {
     background-color: $primary-color-dark;
 }
 
-.botao_inscrever:focus {
+.botao_inscrever:hover {
     background-color: $primary-color-dark;
 }
 

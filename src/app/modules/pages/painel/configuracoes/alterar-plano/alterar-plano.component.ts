@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AlterarPlanoComponent {
 
+  public planoSelecionado: string = 'BASIC';
+
+  verificaSeTipoDePlanoCorrespondeAoBloco(bloco: string) {
+    if (bloco == this.planoSelecionado) return true;
+    else return false;
+  }
+
+  mudaPlano(novoPlano: string) {
+    this.planoSelecionado = novoPlano;
+  }
+
 }
