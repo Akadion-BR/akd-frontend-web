@@ -19,7 +19,7 @@
                     #inputPesquisa></app-custom-input>
 
                 <app-custom-select class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" formControlName="status"
-                    [tabIndex]="5" [informativoCampo]="'Este campo é obrigatório'" [titulo]="'Status'" #inputStatus
+                    [tabIndex]="2" [informativoCampo]="'Este campo é obrigatório'" [titulo]="'Status'" #inputStatus
                     [disabledGroup]="dadosPesquisa.controls['status'].disabled" [options]="geraOptionsStatus()"
                     [errors]="dadosPesquisa.controls['status'].errors" [id]="'status'"
                     [valido]="!(dadosPesquisa.controls['status'].touched && dadosPesquisa.controls['status'].invalid)">
@@ -27,11 +27,11 @@
 
 
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 botao_pesquisa_container">
-                    <button class="botao_pesquisa">
+                    <button [tabIndex]="3" class="botao_pesquisa" (click)="limpaFormulariosEmpresa()" type="button">
                         LIMPAR FILTROS
                     </button>
 
-                    <button class="botao_pesquisa">
+                    <button [tabIndex]="4" class="botao_pesquisa" (click)="realizaPesquisaEmpresas()" type="submit">
                         PESQUISAR
                     </button>
                 </div>
@@ -53,7 +53,7 @@
                 <button class="botao_cria_empresa">
                     ADICIONAR EMPRESA
                 </button>
-                <ul class="lista_paginacao">
+                <!-- <ul class="lista_paginacao">
                     <li class="item_paginacao item_paginacao_desabilitado">
                         <p class="texto_paginacao">
                             < </p>
@@ -64,6 +64,37 @@
                         </p>
                     </li>
                     <li class="item_paginacao item_paginacao_desabilitado">
+                        <p class="texto_paginacao">
+                            >
+                        </p>
+                    </li>
+                </ul> -->
+                <ul *ngIf="empresaPageResponse != undefined" class="lista_paginacao">
+                    <li (click)="voltarPagina()"
+                        [ngClass]="{'item_paginacao_desabilitado': empresaPageResponse.pageNumber == 0}"
+                        class="item_paginacao">
+                        <p class="texto_paginacao">
+                            < </p>
+                    </li>
+                    <ng-container
+                        *ngFor="let numero of geraNumerosParaNavegarNaPaginacao(empresaPageResponse.totalPages); let i = index">
+                        <li *ngIf="(empresaPageResponse.pageNumber - i) <= 3 && (empresaPageResponse.pageNumber - i) >= 0
+                            || (i - empresaPageResponse.pageNumber) <= 3 && (i - empresaPageResponse.pageNumber) >= 0
+                            || empresaPageResponse.pageNumber == 0 && (i - empresaPageResponse.pageNumber) <= 6 && (i - empresaPageResponse.pageNumber) >= 0
+                            || empresaPageResponse.pageNumber == 1 && (i - empresaPageResponse.pageNumber) <= 5 && (i - empresaPageResponse.pageNumber) >= 0
+                            || empresaPageResponse.pageNumber == 2 && (i - empresaPageResponse.pageNumber) <= 4 && (i - empresaPageResponse.pageNumber) >= 0
+                            || (empresaPageResponse.pageNumber == (empresaPageResponse.totalPages-1)) && (empresaPageResponse.pageNumber - i) <= 6
+                            || (empresaPageResponse.pageNumber == (empresaPageResponse.totalPages-2)) && (empresaPageResponse.pageNumber - i) <= 5
+                            || (empresaPageResponse.pageNumber == (empresaPageResponse.totalPages-3)) && (empresaPageResponse.pageNumber - i) <= 4"
+                            (click)="selecionarPagina(i)"
+                            [ngClass]="{'item_paginacao_ativo': empresaPageResponse.pageNumber == i}"
+                            class="item_paginacao">
+                            <p class="texto_paginacao">{{ i+1 }}</p>
+                        </li>
+                    </ng-container>
+                    <li (click)="avancarPagina()"
+                        [ngClass]="{'item_paginacao_desabilitado': empresaPageResponse.pageNumber == empresaPageResponse.totalPages-1}"
+                        class="item_paginacao">
                         <p class="texto_paginacao">
                             >
                         </p>
@@ -105,28 +136,28 @@
                 </thead>
 
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let empresa of empresaPageResponse?.content">
                         <td class="align-middle">
                             <span>
-                                G H A C Lagrotas Som e Acessórios
+                                {{ empresa.razaoSocial }}
                             </span>
                         </td>
 
                         <td class="align-middle">
                             <span>
-                                Lagrota's Som
+                                {{ empresa.nomeFantasia }}
                             </span>
                         </td>
 
                         <td class="align-middle">
                             <span>
-                                30.409.483/0001-94
+                                {{ empresa.cnpj }}
                             </span>
                         </td>
 
                         <td class="align-middle">
                             <span>
-                                Ativo
+                                {{ empresa.ativa }}
                             </span>
                         </td>
 

@@ -59,7 +59,7 @@ img {
     background-color: $medium-black;
 }
 
-.block > h1 {
+.block>h1 {
     color: $medium-grey;
     font-size: 0.8rem;
     text-align: center;
@@ -71,7 +71,7 @@ img {
     animation: pulse 1.5s infinite;
 }
 
-.block:focus { 
+.block:focus {
     outline: none;
 }
 
@@ -80,7 +80,7 @@ img {
     background-color: $transparent-primary-color;
 }
 
-.block_active > h1 {
+.block_active>h1 {
     color: $light-grey;
 }
 
