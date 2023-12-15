@@ -1,0 +1,66 @@
+@import '../../../../../../dist/variables.scss';
+
+h1,
+h2,
+h3,
+h4,
+p,
+div,
+header,
+footer,
+button,
+app-custom-input,
+ul,
+li,
+i,
+h5,
+form,
+img {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    height: 100%;
+    color: $dark-white;
+}
+
+.block_container {
+    border-radius: 3px;
+    height: 100%;
+}
+
+.block {
+    height: 20rem;
+    background-color: $light-black;
+    border-radius: 3px;
+    padding: 1rem;
+}
+
+.titulo_nova_empresa {
+    font-size: 1.3rem;
+    font-weight: 500;
+    font-family: $font-poppins;
+    color: $medium-white;
+    margin-bottom: 0.5rem;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.voltar {
+    font-size: 0.9rem;
+    color: $primary-color;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    font-family: $font-poppins;
+}
+
+.voltar:hover {
+    transition: 0.3s;
+    color: $primary-color-dark;
+}

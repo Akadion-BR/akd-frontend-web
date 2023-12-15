@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError, map, retry, catchError } from 'rxjs';
 import { API_CONFIG } from 'src/app/config/api-config';
 import { EmpresaPageResponse } from 'src/app/modules/models/empresa/response/EmpresaPageResponse';
+import { Cnpj } from 'src/app/modules/models/globals/cnpj';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,16 @@ export class EmpresasService {
         return throwError(() => new HttpErrorResponse(error.error));
       }),
       retry({ count: 20, delay: 10000 })
+    )
+  }
+
+  public validaDuplicidadeCnpj(cnpj: Cnpj) {
+    return this.http.post(`${API_CONFIG.baseUrl}/api/site/v1/empresa/verifica-cnpj`, cnpj, this.httpOptions).pipe(
+      catchError((erro: HttpErrorResponse) => {
+        if (erro.status != 403 && erro.status != 0) return throwError(() => new Error((erro.error.error).toString().replace("Error:", "")));
+        else if (erro.status == 403) return throwError(() => new Error('Ops! Ocorreu um erro de autenticação'));
+        else return throwError(() => new Error(erro.message));
+      })
     )
   }
 

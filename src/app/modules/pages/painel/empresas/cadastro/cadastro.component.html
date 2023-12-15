@@ -1,1 +1,93 @@
-<p>cadastro works!</p>
+<div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container" [@fadeInOut]>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block_container">
+        <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_nova_empresa">
+            Nova empresa
+        </h1>
+        <h4 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 voltar">
+            < Voltar </h4>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block">
+                    <form [formGroup]="dadosEmpresa" class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <!-- INPUT GROUP RAZAO SOCIAL -->
+                        <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputRazaoSocial'"
+                            [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 70 caracteres'"
+                            [titulo]="'Razão Social'" [tabIndex]="1" [maxLength]="70"
+                            [touched]="dadosEmpresa.controls['razaoSocial'].touched" [todosCaracteresMaiusculos]="true"
+                            [disabledGroup]="dadosEmpresa.controls['razaoSocial'].disabled"
+                            [errors]="dadosEmpresa.controls['razaoSocial'].errors" [customIcon]="'abc'"
+                            [valido]="!(dadosEmpresa.controls['razaoSocial'].touched && dadosEmpresa.controls['razaoSocial'].invalid)"
+                            formControlName="razaoSocial" #inputRazaoSocial></app-custom-input>
+
+                        <!-- INPUT GROUP CNPJ -->
+                        <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'inputCnpj'"
+                            [titulo]="'CNPJ'"
+                            [informativoCampo]="'Este campo é obrigatório e deve seguir um padrão válido de CNPJ (xx.xxx.xxx/xxxx-xx)'"
+                            [tabIndex]="2" [maxLength]="18" [touched]="dadosEmpresa.controls['cnpj'].touched"
+                            [todosCaracteresMaiusculos]="false" [customIcon]="'badge'"
+                            (input)="realizaTratamentoCnpj($event)"
+                            [disabledGroup]="dadosEmpresa.controls['cnpj'].disabled"
+                            [errors]="dadosEmpresa.controls['cnpj'].errors"
+                            [valido]="!(dadosEmpresa.controls['cnpj'].touched && dadosEmpresa.controls['cnpj'].invalid)"
+                            formControlName="cnpj" #inputCnpj></app-custom-input>
+
+                        <!-- INPUT ENDPOINT -->
+                        <app-custom-input class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" [id]="'inputEndpoint'"
+                            [titulo]="'Endpoint'"
+                            [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 30 caracteres'"
+                            [tabIndex]="3" [maxLength]="30" [touched]="dadosEmpresa.controls['endpoint'].touched"
+                            [todosCaracteresMaiusculos]="false" [customIcon]="'abc'"
+                            (input)="realizaTratamentoEndpoint()"
+                            [disabledGroup]="dadosEmpresa.controls['endpoint'].disabled"
+                            [errors]="dadosEmpresa.controls['endpoint'].errors"
+                            [valido]="!(dadosEmpresa.controls['endpoint'].touched && dadosEmpresa.controls['endpoint'].invalid)"
+                            formControlName="endpoint" #inputEndpoint></app-custom-input>
+
+                        <!-- INPUT GROUP E-MAIL -->
+                        <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputEmail'"
+                            [titulo]="'E-mail'"
+                            [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 70 caracteres'"
+                            [tabIndex]="4" [maxLength]="70" [touched]="dadosEmpresa.controls['email'].touched"
+                            [todosCaracteresMaiusculos]="false" [customIcon]="'alternate_email'"
+                            [disabledGroup]="dadosEmpresa.controls['email'].disabled"
+                            [errors]="dadosEmpresa.controls['email'].errors"
+                            [valido]="!(dadosEmpresa.controls['email'].touched && dadosEmpresa.controls['email'].invalid)"
+                            formControlName="email" #inputEmail></app-custom-input>
+
+                        <!-- INPUT GROUP NOME FANTASIA -->
+                        <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"
+                            [id]="'inputNomeFantasia'"
+                            [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 70 caracteres'"
+                            [titulo]="'Nome Fantasia'" [tabIndex]="5" [maxLength]="70"
+                            [touched]="dadosEmpresa.controls['nomeFantasia'].touched"
+                            [todosCaracteresMaiusculos]="false"
+                            [disabledGroup]="dadosEmpresa.controls['nomeFantasia'].disabled"
+                            [errors]="dadosEmpresa.controls['nomeFantasia'].errors" [customIcon]="'abc'"
+                            [valido]="!(dadosEmpresa.controls['nomeFantasia'].touched && dadosEmpresa.controls['nomeFantasia'].invalid)"
+                            formControlName="nomeFantasia" #inputNomeFantasia></app-custom-input>
+
+                        <!-- INPUT GROUP INSCRIÇÃO ESTADUAL -->
+                        <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"
+                            [id]="'inputInscricaoEstadual'"
+                            [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 12 caracteres'"
+                            [titulo]="'Inscrição Estadual'" [tabIndex]="6" [maxLength]="12"
+                            [touched]="dadosEmpresa.controls['inscricaoEstadual'].touched"
+                            [todosCaracteresMaiusculos]="false" (input)="realizaTratamentoInscricaoEstadual()"
+                            [disabledGroup]="dadosEmpresa.controls['inscricaoEstadual'].disabled"
+                            [errors]="dadosEmpresa.controls['inscricaoEstadual'].errors" [customIcon]="'pin'"
+                            [valido]="!(dadosEmpresa.controls['inscricaoEstadual'].touched && dadosEmpresa.controls['inscricaoEstadual'].invalid)"
+                            formControlName="inscricaoEstadual" #inputInscricaoEstadual></app-custom-input>
+
+                        <!-- INPUT GROUP INSCRIÇÃO MUNICIPAL -->
+                        <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"
+                            [id]="'inputInscricaoMunicipal'"
+                            [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 12 caracteres'"
+                            [titulo]="'Inscrição Municipal'" [tabIndex]="7" [maxLength]="12"
+                            [touched]="dadosEmpresa.controls['inscricaoMunicipal'].touched"
+                            [todosCaracteresMaiusculos]="false" (input)="realizaTratamentoInscricaoMunicipal()"
+                            [disabledGroup]="dadosEmpresa.controls['inscricaoMunicipal'].disabled"
+                            [errors]="dadosEmpresa.controls['inscricaoMunicipal'].errors" [customIcon]="'pin'"
+                            [valido]="!(dadosEmpresa.controls['inscricaoMunicipal'].touched && dadosEmpresa.controls['inscricaoMunicipal'].invalid)"
+                            formControlName="inscricaoMunicipal" #inputInscricaoMunicipal></app-custom-input>
+                    </form>
+                </div>
+    </div>
+</div>

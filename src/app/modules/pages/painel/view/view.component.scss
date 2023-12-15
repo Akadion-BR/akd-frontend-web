@@ -1,22 +1,5 @@
-h1,
-h2,
-h3,
-h4,
-p,
-div,
-header, 
-footer,
-app-custom-input,
-painel-footer,
-painel-sidebar,
-painel-header,
-button,
-ul,
-li,
-i,
-h5,
-form,
-img {
+
+* {
     margin: 0;
     padding: 0;
 }
@@ -39,9 +22,7 @@ img {
     padding: 2rem;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow-y: auto;
 }
 
 ::ng-deep listagem-empresas {

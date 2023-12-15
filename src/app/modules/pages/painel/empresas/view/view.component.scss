@@ -3,9 +3,9 @@
     padding: 0;
 }
 
-::ng-deep listagem-empresas {
+::ng-deep listagem-empresas, ::ng-deep cadastro-empresa {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
