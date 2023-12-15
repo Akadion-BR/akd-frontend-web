@@ -46,17 +46,63 @@ img {
     height: 100%;
     background-color: $light-black;
     border-radius: 3px;
-    padding: 1.5rem 2rem;
+    padding: 1rem 1.5rem 0.5rem 1.5rem;
 }
 
 .block_pesquisa {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem 1.5rem 1rem;
 }
 
 .block_listagem {
-    height: auto;
-    max-height: 100%;
     overflow-y: auto;
+    height: auto;
+}
+
+.block_listagem_vazia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 2rem;
+}
+
+.titulo_listagem_vazia {
+    text-align: center;
+    font-family: $font-poppins;
+    margin: 0.5rem 0;
+    color: $dark-white;
+    font-weight: 500;
+}
+
+.imagem_listagem_vazia {
+    width: 7rem;
+    height: 7rem;
+}
+
+.botao_listagem_vazia {
+    border: 1px solid $primary-color;
+    background-color: transparent;
+    color: $primary-color;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+    cursor: pointer;
+}
+
+.botao_listagem_vazia:focus {
+    outline: none;
+    border: 1px solid $primary-color-dark;
+    color: $primary-color-dark;
+}
+
+.botao_listagem_vazia:hover {
+    transition: 0.8s;
+    color: $medium-black;
+    background-color: $primary-color;
 }
 
 .cabecalho_block {
@@ -122,7 +168,7 @@ img {
 .block_opcoes_tabela {
     display: flex;
     justify-content: space-between;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
 
 .botao_cria_empresa {
@@ -132,7 +178,7 @@ img {
     background-color: transparent;
     color: $primary-color;
     font-size: 0.7rem;
-    font-weight: 400;
+    font-weight: 500;
     padding: 0.2rem 1rem;
     border-radius: 2px;
     cursor: pointer;
@@ -196,7 +242,7 @@ thead {
 
 th,
 td {
-    padding: 0.7rem 0.6rem;
+    padding: 0.6rem;
 }
 
 th {
@@ -212,6 +258,33 @@ td {
 .icone_tabela {
     color: $primary-color;
     cursor: pointer;
+}
+
+span {
+    font-family: $font-poppins;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.empresa_ativa {
+    padding: 0.2rem 1rem;
+    border: 1px solid $success;
+    color: $success;
+}
+
+.empresa_inativa {
+    padding: 0.2rem 1rem;
+    border: 1px solid $error;
+    color: $error;
+}
+
+.dropdown-menu {
+    padding: 0.5rem 0;
 }
 
 .dropdown-menu,

@@ -34,7 +34,7 @@ img {
     width: 100%;
 }
 
-::ng-deep listagem-empresas, ::ng-deep listagem-faturas, ::ng-deep configuracoes-view {
+::ng-deep listagem-empresas, ::ng-deep listagem-faturas, ::ng-deep configuracoes-view, ::ng-deep empresas-view {
     margin: 0;
     padding: 2rem;
     width: 100%;
@@ -45,5 +45,5 @@ img {
 }
 
 ::ng-deep listagem-empresas {
-    padding: 2rem 2.5rem;
+    padding: 0;
 }

@@ -27,7 +27,8 @@ export class ListagemComponent {
   ngOnInit() {
     this.ref.detectChanges();
     this.implementaQueryParamPaginacao();
-    this.realizaSetupCamposDeFormularioComQueryParamsDeBusca()
+    this.realizaSetupCamposDeFormularioComQueryParamsDeBusca();
+    this.invocaRequisicaoObtencaoEmpresasPaginadas();
   }
 
   getEmpresas$: Subscription;
@@ -37,9 +38,7 @@ export class ListagemComponent {
 
   protected dadosPesquisa: FormGroup = this.createFormDadosPesquisa();
 
-  ngAfterViewInit(): void {
-    this.invocaRequisicaoObtencaoEmpresasPaginadas();
-  }
+  private ENDPOINT_EMPRESAS: string = '/painel/empresas';
 
   ngOnDestroy(): void {
     if (this.getEmpresas$ != undefined) this.getEmpresas$.unsubscribe();
@@ -86,10 +85,9 @@ export class ListagemComponent {
       }
       else {
         this.router.navigate(
-          ['/painel/empresas'],
+          [],
           {
             queryParams: { page: this.pageSettings.pageNumber },
-            queryParamsHandling: 'merge'
           }
         );
       }
@@ -125,8 +123,9 @@ export class ListagemComponent {
       if (params.has('ativas')) {
         let ativasQueryParam: any = params.get('ativas');
         if (Util.isNotEmptyString(ativasQueryParam)) {
-          if (ativasQueryParam == 'true') this.dadosPesquisa.controls['status'].setValue(true);
-          else if (ativasQueryParam == 'false') this.dadosPesquisa.controls['status'].setValue(false);
+          console.log(ativasQueryParam);
+          if (ativasQueryParam == 'true') this.dadosPesquisa.controls['status'].setValue('true');
+          else if (ativasQueryParam == 'false') this.dadosPesquisa.controls['status'].setValue('false');
           else this.dadosPesquisa.controls['status'].setValue(null);
         }
       }
@@ -134,14 +133,18 @@ export class ListagemComponent {
   }
 
   protected limpaFormulariosEmpresa() {
+
+    this.pageSettings.pageNumber = 0;
+
     this.router.navigate(
-      ['/painel/empresas'],
+      [],
       {
         queryParams: {
           busca: null,
-          ativas: null
+          ativas: null,
+          page: this.pageSettings.pageNumber
         },
-        queryParamsHandling: 'preserve'
+
       }
     );
 
@@ -161,14 +164,17 @@ export class ListagemComponent {
         ? this.dadosPesquisa.controls['status'].value
         : null;
 
+    this.pageSettings.pageNumber = 0;
+
     this.router.navigate(
-      ['/painel/empresas'],
+      [],
       {
         queryParams: {
           busca: buscaEmpresasParam,
-          ativas: buscaEmpresasAtivasParam
+          ativas: buscaEmpresasAtivasParam,
+          page: this.pageSettings.pageNumber
         },
-        queryParamsHandling: 'merge'
+
       }
     );
 
@@ -205,7 +211,6 @@ export class ListagemComponent {
       [],
       {
         queryParams: { 'page': this.empresaPageResponse.pageNumber },
-        queryParamsHandling: 'merge',
       }
     ).then(() => {
       this.invocaRequisicaoObtencaoEmpresasPaginadas();
