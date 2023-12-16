@@ -1,23 +1,5 @@
 @import '../../../../../../../dist/variables.scss';
-
-h1,
-h2,
-h3,
-h4,
-p,
-div,
-footer,
-app-custom-input,
-app-custom-date-input,
-button,
-ul,
-li,
-i,
-h5,
-form {
-    margin: 0;
-    padding: 0;
-}
+@import '../../../../../../../dist/reset.scss';
 
 .form_button_container {
     padding: 0 0.5rem;

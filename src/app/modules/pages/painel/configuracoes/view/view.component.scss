@@ -1,25 +1,9 @@
 @import '../../../../../../dist/variables.scss';
+@import '../../../../../../dist/reset.scss';
 
-h1,
-h2,
-h3,
-h4,
-p,
-div,
-header,
-footer,
-app-custom-input,
-app-custom-select,
 painel-footer,
 painel-sidebar,
-painel-header,
-button,
-ul,
-li,
-i,
-h5,
-form,
-img {
+painel-header {
     margin: 0;
     padding: 0;
 }

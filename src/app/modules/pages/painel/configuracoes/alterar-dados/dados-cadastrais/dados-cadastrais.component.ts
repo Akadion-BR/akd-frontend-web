@@ -188,7 +188,6 @@ export class DadosCadastraisComponent {
       this.snackBar.open("Revise o formulário e tente novamente", "Fechar", {
         duration: 3500
       })
-
     }
   }
 }

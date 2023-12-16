@@ -1,25 +1,9 @@
 @import '../../../../../../dist/variables.scss';
+@import '../../../../../../dist/reset.scss';
 
-h1,
-h2,
-h3,
-h4,
-p,
-div,
-header, 
-footer,
-aside,
-app-custom-input,
 painel-footer,
 painel-sidebar,
-painel-header,
-button,
-ul,
-li,
-i,
-h5,
-form,
-img {
+painel-header {
     margin: 0;
     padding: 0;
 }
@@ -50,7 +34,7 @@ img {
     display: flex;
     align-items: flex-end;
     border-right: 1px solid $medium-grey;
-    border-width: 3px;    
+    border-width: 3px;
     cursor: pointer;
     padding: 0.3rem 1rem;
     margin-bottom: 0.2rem;
@@ -61,14 +45,15 @@ img {
     color: $light-grey;
     border-right: 1px solid $light-grey;
     border-width: 3px;
-    background-color: $medium-black;    
+    background-color: $medium-black;
 }
 
 .item_menu:focus {
     outline: none;
 }
 
-.item_menu_ativo, .item_menu_ativo:hover {
+.item_menu_ativo,
+.item_menu_ativo:hover {
     font-weight: 500;
     color: $primary-color;
     border-right: 1px solid $primary-color;

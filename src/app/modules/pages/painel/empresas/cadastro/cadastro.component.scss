@@ -1,24 +1,6 @@
 @import '../../../../../../dist/variables.scss';
-
-h1,
-h2,
-h3,
-h4,
-p,
-div,
-header,
-footer,
-button,
-app-custom-input,
-ul,
-li,
-i,
-h5,
-form,
-img {
-    margin: 0;
-    padding: 0;
-}
+@import '../../../../../../dist/reset.scss';
+@import '../../../../../../dist/custom-stepper.scss';
 
 .container {
     height: 100%;
@@ -31,7 +13,7 @@ img {
 }
 
 .block {
-    height: 20rem;
+    height: auto;
     background-color: $light-black;
     border-radius: 3px;
     padding: 1rem;
@@ -52,7 +34,7 @@ img {
 }
 
 .voltar {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: $primary-color;
     font-weight: 500;
     cursor: pointer;
@@ -63,4 +45,57 @@ img {
 .voltar:hover {
     transition: 0.3s;
     color: $primary-color-dark;
+}
+
+.titulo_bloco_formulario {
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    font-family: $font-poppins;
+    color: $dark-white;
+}
+
+.form_button_container {
+    padding: 0 0.5rem;
+}
+
+.botao_inscrever {
+    border: 1px solid $primary-color;
+    border-radius: 3px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    background-color: $primary-color;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.botao_inscrever:focus {
+    outline: none;
+    background-color: $primary-color;
+}
+
+.botao_inscrever:hover {
+    background-color: $primary-color-dark;
+}
+
+.botao_inscrever_desabilitado {
+    background-color: $medium-grey;
+    border: 1px solid $medium-grey;
+    color: $medium-black;
+    cursor: default;
+}
+
+.botao_inscrever_desabilitado:hover {
+    background-color: $medium-grey;
+    border: 1px solid $medium-grey;
+    color: $medium-black;
 }
