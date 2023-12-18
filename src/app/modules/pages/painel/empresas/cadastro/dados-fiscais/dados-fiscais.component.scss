@@ -1,0 +1,123 @@
+@import '../../../../../../../dist/variables.scss';
+@import '../../../../../../../dist/reset.scss';
+
+.titulo_bloco_formulario {
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
+    font-family: $font-poppins;
+    color: $medium-white;
+    margin-top: 0.5rem;
+    font-weight: 400;
+}
+
+hr {
+    margin-bottom: 0.5rem;
+}
+
+.form_button_container {
+    padding: 0 0.5rem;
+}
+
+.botao_inscrever {
+    border: 1px solid $primary-color;
+    border-radius: 3px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    background-color: $primary-color;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.botao_inscrever:focus {
+    outline: none;
+    background-color: $primary-color;
+}
+
+.botao_inscrever:hover {
+    background-color: $primary-color-dark;
+}
+
+.botao_inscrever_desabilitado {
+    background-color: $medium-grey;
+    border: 1px solid $medium-grey;
+    color: $medium-black;
+    cursor: default;
+}
+
+.botao_inscrever_desabilitado:hover {
+    background-color: $medium-grey;
+    border: 1px solid $medium-grey;
+    color: $medium-black;
+}
+
+.slider_container {
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox {
+    display: none;
+}
+
+.switch {
+    position: relative;
+    background-color: #777;
+    width: 2.3rem;
+    height: 1rem;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+}
+
+.slider {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    width: 1.2rem;
+    height: 1.2rem;
+    transition: all .1s ease-in-out;
+}
+
+.slider_title {
+    color: $dark-white;
+    font-size: 0.9rem;
+    font-weight: 400;
+    font-family: $font-roboto;
+    margin-left: 0.5rem;
+}
+
+.checked~.switch {
+    background-color: blueviolet;
+}
+
+.checked~.switch .slider {
+    transform: translateX(1.1rem);
+}
+
+.titulo_bloco_formulario {
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
+    font-family: $font-poppins;
+    color: $medium-white;
+    margin-top: 0.5rem;
+    font-weight: 400;
+}
+
+hr {
+    margin-bottom: 0.5rem;
+}

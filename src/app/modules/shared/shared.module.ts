@@ -10,25 +10,28 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { CustomDateInputComponent } from './inputs/custom-date-input/custom-date-input.component';
 import { CustomSelectComponent } from './inputs/custom-select/custom-select.component';
+import { CustomSliderComponent } from './inputs/custom-slider/custom-slider.component';
 
 @NgModule({
   declarations: [
     CustomInputComponent,
     CustomErrorComponent,
     CustomDateInputComponent,
-    CustomSelectComponent
+    CustomSelectComponent,
+    CustomSliderComponent
   ],
   imports: [
     CommonModule,
     MatIconModule,
-    FormsModule, 
+    FormsModule,
     MatTooltipModule
   ],
   exports: [
     CustomInputComponent,
     CustomErrorComponent,
     CustomDateInputComponent,
-    CustomSelectComponent
+    CustomSelectComponent,
+    CustomSliderComponent
   ]
 })
 export class SharedModule { }

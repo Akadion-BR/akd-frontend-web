@@ -1,0 +1,9 @@
+<div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 slider_container" (click)="teste()">
+    <input type="checkbox" [id]="id" class="checkbox" [ngClass]="{'checked': checked}" [(ngModel)]="value" />
+    <label [for]="id" [tabIndex]="tabIndex" class="switch">
+        <span class="slider"></span>
+    </label>
+    <h4 class="slider_title">
+        {{titulo}}
+    </h4>
+</div>
