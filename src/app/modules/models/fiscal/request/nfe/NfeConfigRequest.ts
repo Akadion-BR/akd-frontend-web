@@ -1,14 +1,20 @@
 export class NfeConfigRequest {
 
     proximoNumeroProducao: number;
-    proximoNumeroHomologacao: number;
     serieProducao: number;
-    serieHomologacao: number;
+    exibirReciboNaDanfe: boolean;
+    imprimirColunasDoIpi: boolean;
+    mostraDadosDoIssqn: boolean;
+    imprimirImpostosAdicionaisNaDanfe: boolean;
+    sempreMostrarVolumesNaDanfe: boolean;
 
     constructor(item: any) {
         this.proximoNumeroProducao = item?.proximoNumeroProducao;
-        this.proximoNumeroHomologacao = item?.proximoNumeroHomologacao;
         this.serieProducao = item?.serieProducao;
-        this.serieHomologacao = item?.serieHomologacao;
+        this.exibirReciboNaDanfe = item?.exibirReciboNaDanfe;
+        this.imprimirColunasDoIpi = item?.imprimirColunasDoIpi;
+        this.mostraDadosDoIssqn = item?.mostraDadosDoIssqn;
+        this.imprimirImpostosAdicionaisNaDanfe = item?.imprimirImpostosAdicionaisNaDanfe;
+        this.sempreMostrarVolumesNaDanfe = item?.sempreMostrarVolumesNaDanfe;
     }
 }

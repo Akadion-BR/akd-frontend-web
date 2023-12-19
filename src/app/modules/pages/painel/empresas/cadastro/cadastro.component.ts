@@ -39,8 +39,71 @@ export class CadastroComponent {
     this.dadosFiscais = event;
   }
 
-  private constroiObjetoEmpresaRequest() {
+  protected getValueAtributoDadosEmpresa(atributo: string): any {
+    return this.dadosEmpresa.controls[atributo].value;
+  }
 
+  protected getValueAtributoDadosFiscais(atributo: string): any {
+    return this.dadosFiscais.controls[atributo].value;
+  }
+
+  private constroiObjetoEmpresaRequest() {
+    this.empresaRequest = {
+      razaoSocial: this.getValueAtributoDadosEmpresa('razaoSocial'),
+      cnpj: this.getValueAtributoDadosEmpresa(''),
+      endpoint: this.getValueAtributoDadosEmpresa(''),
+      email: this.getValueAtributoDadosEmpresa(''),
+      nomeFantasia: this.getValueAtributoDadosEmpresa(''),
+      inscricaoEstadual: this.getValueAtributoDadosEmpresa(''),
+      inscricaoMunicipal: this.getValueAtributoDadosEmpresa(''),
+      segmentoEmpresa: this.getValueAtributoDadosEmpresa(''),
+      configFiscal: {
+        discriminaImpostos: this.getValueAtributoDadosFiscais(''),
+        habilitaNfe: this.getValueAtributoDadosFiscais(''),
+        habilitaNfce: this.getValueAtributoDadosFiscais(''),
+        habilitaNfse: this.getValueAtributoDadosFiscais(''),
+        habilitaEnvioEmailDestinatario: this.getValueAtributoDadosFiscais(''),
+        cnpjContabilidade: this.getValueAtributoDadosFiscais(''),
+        senhaCertificadoDigital: this.getValueAtributoDadosFiscais(''),
+        certificadoDigital: this.getValueAtributoDadosFiscais(''),
+        regimeTributario: this.getValueAtributoDadosFiscais(''),
+        nfeConfig: {
+          proximoNumeroProducao: this.getValueAtributoDadosFiscais(''),
+          serieProducao: this.getValueAtributoDadosFiscais(''),
+          exibirReciboNaDanfe: this.getValueAtributoDadosFiscais(''),
+          imprimirColunasDoIpi: this.getValueAtributoDadosFiscais(''),
+          mostraDadosDoIssqn: this.getValueAtributoDadosFiscais(''),
+          imprimirImpostosAdicionaisNaDanfe: this.getValueAtributoDadosFiscais(''),
+          sempreMostrarVolumesNaDanfe: this.getValueAtributoDadosFiscais(''),
+        },
+        nfceConfig: {
+          proximoNumeroProducao: this.getValueAtributoDadosFiscais(''),
+          serieProducao: this.getValueAtributoDadosFiscais(''),
+          cscProducao: this.getValueAtributoDadosFiscais(''),
+          idTokenProducao: this.getValueAtributoDadosFiscais(''),
+        },
+        nfseConfig: {
+          proximoNumeroProducao: this.getValueAtributoDadosFiscais(''),
+          serieProducao: this.getValueAtributoDadosFiscais(''),
+        },
+      },
+      telefone: {
+        tipoTelefone: this.getValueAtributoDadosEmpresa('numeroTelefone').length == 9
+          ? 'MOVEL'
+          : 'FIXO',
+        prefixo: this.getValueAtributoDadosEmpresa('prefixo'),
+        numero: this.getValueAtributoDadosEmpresa('numeroTelefone'),
+      },
+      endereco: {
+        codigoPostal: this.getValueAtributoDadosEmpresa('codigoPostal'),
+        estado: this.getValueAtributoDadosEmpresa('estado'),
+        cidade: this.getValueAtributoDadosEmpresa('cidade'),
+        logradouro: this.getValueAtributoDadosEmpresa('logradouro'),
+        numero: this.getValueAtributoDadosEmpresa('numeroEndereco'),
+        bairro: this.getValueAtributoDadosEmpresa('bairro'),
+        complemento: this.getValueAtributoDadosEmpresa('complemento')
+      }
+    }
   }
 
   public enviaFormularioCriacao() {
