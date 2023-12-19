@@ -22,6 +22,7 @@ export class CustomSliderComponent {
   @Input() titulo: string = '';
   @Input() tabIndex: number;
   @Input() checked: boolean;
+  @Input() disabledGroup: boolean;
 
   private innerValue: any;
 

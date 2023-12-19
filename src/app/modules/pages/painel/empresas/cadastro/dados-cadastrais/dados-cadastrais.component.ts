@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
+import { Subscription, debounceTime } from 'rxjs';
 import { Cnpj } from 'src/app/modules/models/globals/cnpj';
 import { SelectOption } from 'src/app/modules/shared/inputs/models/select-option';
 import { Mask } from 'src/app/modules/utils/Mask';
@@ -12,6 +12,7 @@ import { MunicipiosResponse } from 'src/app/shared/brasil-api/models/municipios-
 import { BrasilApiService } from 'src/app/shared/brasil-api/services/brasil-api.service';
 import { EmpresasService } from '../../services/empresas.service';
 import { slideUpDownAnimation } from 'src/app/shared/animations';
+import { CustomSelectComponent } from 'src/app/modules/shared/inputs/custom-select/custom-select.component';
 
 @Component({
   selector: 'dados-cadastrais-empresa',
@@ -33,12 +34,24 @@ export class DadosCadastraisComponent {
   obtemTodosMunicipiosPorEstadoSubscription$: Subscription;
   getEnderecoPeloCepSubscription$: Subscription;
 
-  protected dadosEmpresa: FormGroup = this.inicializaFormulario();
+  dadosEmpresa: FormGroup = this.inicializaFormulario();
 
   estadosOptions: SelectOption[];
   estadosResponse: EstadosResponse[];
   municipiosResponse: MunicipiosResponse[];
   municipiosOptions: SelectOption[];
+
+  @Output() emissorDeDadosEmpresa = new EventEmitter<FormGroup>();
+
+  @ViewChild('inputCidade') inputCidade: CustomSelectComponent;
+
+  dadosEmpresaSubscribe$: Subscription = this.dadosEmpresa.valueChanges.pipe(
+    debounceTime(500)
+  ).subscribe({
+    next: () => {
+      this.emissorDeDadosEmpresa.emit(this.dadosEmpresa);
+    }
+  })
 
   ngAfterViewInit(): void {
     this.ref.detectChanges();
@@ -50,6 +63,7 @@ export class DadosCadastraisComponent {
     if (this.obtemTodosEstadosBrasileirosSubscription$ != undefined) this.obtemTodosEstadosBrasileirosSubscription$.unsubscribe();
     if (this.obtemTodosMunicipiosPorEstadoSubscription$ != undefined) this.obtemTodosMunicipiosPorEstadoSubscription$.unsubscribe();
     if (this.getEnderecoPeloCepSubscription$ != undefined) this.getEnderecoPeloCepSubscription$.unsubscribe();
+    if (this.dadosEmpresaSubscribe$ != undefined) this.dadosEmpresaSubscribe$.unsubscribe();
   }
 
   inicializaFormulario(): FormGroup {
@@ -74,6 +88,13 @@ export class DadosCadastraisComponent {
           Validators.maxLength(30)
         ]
       ],
+      email: ['',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.maxLength(70)
+        ]
+      ],
       nomeFantasia: ['',
         [
           Validators.required,
@@ -93,12 +114,6 @@ export class DadosCadastraisComponent {
           Validators.pattern(/^\d{12}$/),
           Validators.maxLength(12)
         ]
-      ],
-      email: ['', [
-        Validators.required,
-        Validators.email,
-        Validators.maxLength(70)
-      ]
       ],
       prefixo: [
         {
@@ -222,10 +237,7 @@ export class DadosCadastraisComponent {
 
   protected geraOptionsMunicipio() {
     let options: SelectOption[] = [
-      {
-        text: '',
-        value: ''
-      },
+
     ]
 
     this.municipiosResponse.forEach(municipio => {
@@ -255,7 +267,7 @@ export class DadosCadastraisComponent {
           error: (error: any) => {
             this.setFormValue('cnpj', '');
             this.dadosEmpresa.controls['cnpj'].reset();
-            this._snackBar.open(error, "Fechar", {
+            this._snackBar.open(error.toString().replace("Error:", ""), "Fechar", {
               duration: 3500
             });
           },
@@ -316,7 +328,6 @@ export class DadosCadastraisComponent {
     this.setFormValue('cidade', consultaCepResponse.cidade);
     this.dadosEmpresa.controls['cidade'].markAsTouched();
 
-    this.dadosEmpresa.markAllAsTouched();
     this.obtemTodosMunicipiosPorEstado();
   }
 
@@ -355,6 +366,7 @@ export class DadosCadastraisComponent {
           complete: () => {
             this.geraOptionsMunicipio();
             this.dadosEmpresa.controls['cidade'].enable();
+            this.inputCidade.acionaFoco();
             console.log('Obtenção de municípios por estado realizada com sucesso');
           }
         })

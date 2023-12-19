@@ -12,6 +12,10 @@
     display: none;
 }
 
+.checkbox:focus {
+    outline: none;
+}
+
 .switch {
     position: relative;
     background-color: #777;
@@ -25,6 +29,10 @@
     cursor: pointer;
 }
 
+.switch:focus {
+    outline: none;
+}
+
 .slider {
     position: absolute;
     background-color: white;
@@ -34,12 +42,27 @@
     transition: all .1s ease-in-out;
 }
 
+.slider_desabilitado {
+    background-color: $dark-grey;
+    border: 1px solid $dark-white;
+}
+
 .slider_title {
     color: $dark-white;
     font-size: 0.9rem;
     font-weight: 400;
     font-family: $font-roboto;
     margin-left: 0.5rem;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.label_desabilitada {
+    color: $dark-grey;
 }
 
 .checked~.switch {

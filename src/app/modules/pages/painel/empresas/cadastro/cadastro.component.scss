@@ -44,16 +44,16 @@ dados-cadastrais-empresa {
     /* Standard syntax */
 }
 
-.voltar {
+.voltar_clicavel {
     font-size: 0.8rem;
-    color: $primary-color;
+    color: $primary-color !important;
     font-weight: 500;
     cursor: pointer;
     letter-spacing: 0.5px;
     font-family: $font-poppins;
 }
 
-.voltar:hover {
+.voltar_clicavel:hover {
     transition: 0.3s;
-    color: $primary-color-dark;
+    color: $primary-color-dark !important;
 }

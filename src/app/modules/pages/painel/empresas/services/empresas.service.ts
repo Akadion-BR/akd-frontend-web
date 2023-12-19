@@ -5,7 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, throwError, map, retry, catchError } from 'rxjs';
 import { API_CONFIG } from 'src/app/config/api-config';
+import { EmpresaRequest } from 'src/app/modules/models/empresa/request/EmpresaRequest';
 import { EmpresaPageResponse } from 'src/app/modules/models/empresa/response/EmpresaPageResponse';
+import { EmpresaResponse } from 'src/app/modules/models/empresa/response/EmpresaResponse';
 import { Cnpj } from 'src/app/modules/models/globals/cnpj';
 
 @Injectable({
@@ -27,6 +29,17 @@ export class EmpresasService {
     body: null
   }
 
+  public novaEmpresa(empresaRequest: EmpresaRequest): Observable<EmpresaResponse> {
+    this.httpOptions.params = new HttpParams();
+    this.httpOptions.body = null;
+    return this.http.post<EmpresaResponse>(`${API_CONFIG.baseUrl}/api/site/v1/empresa`, empresaRequest, this.httpOptions).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log(error);
+        return throwError(() => new HttpErrorResponse(error.error));
+      }),
+    )
+  }
+
   public getEmpresas(valorBusca: string, empresasAtivas: string, pageSettings: PageSettings | null): Observable<EmpresaPageResponse> {
     this.httpOptions.params = new HttpParams();
     this.httpOptions.body = null;
@@ -44,9 +57,10 @@ export class EmpresasService {
   }
 
   public validaDuplicidadeCnpj(cnpj: Cnpj) {
-    return this.http.post(`${API_CONFIG.baseUrl}/api/site/v1/empresa/verifica-cnpj`, cnpj, this.httpOptions).pipe(
+    return this.http.post(`${API_CONFIG.baseUrl}/empresa/verifica-cnpj`, cnpj, this.httpOptions).pipe(
       catchError((erro: HttpErrorResponse) => {
-        if (erro.status != 403 && erro.status != 0) return throwError(() => new Error((erro.error.error).toString().replace("Error:", "")));
+        console.log(erro);
+        if (erro.status != 403 && erro.status != 0) return throwError(() => new Error((erro.error.error).toString()));
         else if (erro.status == 403) return throwError(() => new Error('Ops! Ocorreu um erro de autenticação'));
         else return throwError(() => new Error(erro.message));
       })

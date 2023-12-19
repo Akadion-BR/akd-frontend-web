@@ -1,9 +1,11 @@
 <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 slider_container" (click)="teste()">
-    <input type="checkbox" [id]="id" class="checkbox" [ngClass]="{'checked': checked}" [(ngModel)]="value" />
+    <input type="checkbox" [id]="id" class="checkbox" [ngClass]="{'checked': checked}" [(ngModel)]="value"
+        [disabled]="disabledGroup" />
     <label [for]="id" [tabIndex]="tabIndex" class="switch">
-        <span class="slider"></span>
+        <span class="slider" [ngClass]="{'slider_desabilitado': disabledGroup}"></span>
     </label>
-    <h4 class="slider_title">
+    <h4 class="slider_title" [ngClass]="{'label_desabilitada': disabledGroup}" [matTooltip]="informativoCampo"
+        [matTooltipPosition]="'right'">
         {{titulo}}
     </h4>
 </div>

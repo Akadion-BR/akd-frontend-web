@@ -8,9 +8,7 @@ export class ConfigFiscalEmpresaResponse {
     habilitaNfce: boolean;
     habilitaNfse: boolean;
     habilitaEnvioEmailDestinatario: boolean;
-    exibeReciboNaDanfe: boolean;
     cnpjContabilidade: string;
-    orientacaoDanfe: string;
     regimeTributario: string;
     nfeConfig: NfeConfigResponse;
     nfceConfig: NfceConfigResponse;
@@ -22,9 +20,7 @@ export class ConfigFiscalEmpresaResponse {
         this.habilitaNfce = item?.habilitaNfce;
         this.habilitaNfse = item?.habilitaNfse;
         this.habilitaEnvioEmailDestinatario = item?.habilitaEnvioEmailDestinatario;
-        this.exibeReciboNaDanfe = item?.exibeReciboNaDanfe;
         this.cnpjContabilidade = item?.cnpjContabilidade;
-        this.orientacaoDanfe = item?.orientacaoDanfe;
         this.regimeTributario = item?.regimeTributario;
         this.nfeConfig = item?.nfeConfig;
         this.nfceConfig = item?.nfceConfig;

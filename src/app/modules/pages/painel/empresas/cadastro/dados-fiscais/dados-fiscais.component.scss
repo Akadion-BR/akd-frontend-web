@@ -60,55 +60,6 @@ hr {
     color: $medium-black;
 }
 
-.slider_container {
-    display: flex;
-    align-items: center;
-    padding: 0 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.checkbox {
-    display: none;
-}
-
-.switch {
-    position: relative;
-    background-color: #777;
-    width: 2.3rem;
-    height: 1rem;
-    border-radius: 40px;
-    display: flex;
-    align-items: center;
-    padding: 0;
-    transition: all .5s ease-in-out;
-    cursor: pointer;
-}
-
-.slider {
-    position: absolute;
-    background-color: white;
-    border-radius: 50%;
-    width: 1.2rem;
-    height: 1.2rem;
-    transition: all .1s ease-in-out;
-}
-
-.slider_title {
-    color: $dark-white;
-    font-size: 0.9rem;
-    font-weight: 400;
-    font-family: $font-roboto;
-    margin-left: 0.5rem;
-}
-
-.checked~.switch {
-    background-color: blueviolet;
-}
-
-.checked~.switch .slider {
-    transform: translateX(1.1rem);
-}
-
 .titulo_bloco_formulario {
     padding: 0 0.5rem;
     font-size: 0.9rem;
@@ -120,4 +71,62 @@ hr {
 
 hr {
     margin-bottom: 0.5rem;
+}
+
+.status_certificado {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: $dark-white;
+    font-family: $font-poppins;
+}
+
+.status_certificado p {
+    margin: 0 0.3rem;
+    color: $warn;
+}
+
+.status_certificado_presente {
+    color: $online-green !important;
+}
+
+.limpar_file {
+    font-weight: 500;
+    font-size: 0.7rem;
+    margin-bottom: 0.1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: $primary-color;
+}
+
+.anexa_arquivo_container {
+    padding: 0 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.anexa_arquivo_botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    background-color: transparent;
+    font-family: $font-poppins;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.anexa_arquivo_botao p {
+    overflow: hidden;
+}
+
+.icone_ok {
+    margin-left: 0.5rem;
+}
+
+.anexa_arquivo_botao:focus {
+    outline: none;
 }
