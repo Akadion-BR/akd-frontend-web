@@ -24,9 +24,9 @@
     <!-- INPUT GROUP CNPJ CONTABILIDADE -->
     <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputcnpjContabilidade'"
         [informativoCampo]="'Este campo é obrigatório e deve seguir um padrão válido de CNPJ (xx.xxx.xxx/xxxx-xx)'"
-        [titulo]="'Cnpj Contabilidade'" [tabIndex]="21" [maxLength]="7"
-        [touched]="dadosFiscais.controls['cnpjContabilidade'].touched" [todosCaracteresMaiusculos]="true"
-        [disabledGroup]="dadosFiscais.controls['cnpjContabilidade'].disabled"
+        [titulo]="'Cnpj Contabilidade'" [tabIndex]="21" [maxLength]="18"
+        [touched]="dadosFiscais.controls['cnpjContabilidade'].touched" [todosCaracteresMaiusculos]="false"
+        [disabledGroup]="dadosFiscais.controls['cnpjContabilidade'].disabled" (input)="realizaTratamentoCnpj($event)"
         [errors]="dadosFiscais.controls['cnpjContabilidade'].errors" [customIcon]="'badge'"
         [valido]="!(dadosFiscais.controls['cnpjContabilidade'].touched && dadosFiscais.controls['cnpjContabilidade'].invalid)"
         formControlName="cnpjContabilidade" #inputCnpjContabilidade></app-custom-input>
@@ -51,7 +51,7 @@
         <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'check_nfe'"
             [informativoCampo]="'Informa se empresa será habilitada para emissão de NFe – Nota Fiscal Eletrônica modelo 55'"
             [titulo]="'NFe Habilitada'" [tabIndex]="24" [checked]="dadosFiscais.controls['habilitaNfe'].value"
-            [disabledGroup]="dadosFiscais.controls['habilitaNfe'].disabled"
+            [disabledGroup]="dadosFiscais.controls['habilitaNfe'].disabled" (change)="alteraStatusNfe()"
             formControlName="habilitaNfe"></app-custom-slider>
 
         <div *ngIf="dadosFiscais.controls['habilitaNfe'].value" [@slideUpDown]
@@ -145,7 +145,7 @@
         <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'check_nfce'"
             [informativoCampo]="'Informa se empresa será habilitada para emissão de NFCe – Nota Fiscal ao Consumidor Eletrônica modelo 65'"
             [titulo]="'NFCe Habilitada'" [tabIndex]="33" [checked]="dadosFiscais.controls['habilitaNfce'].value"
-            [disabledGroup]="dadosFiscais.controls['habilitaNfce'].disabled"
+            [disabledGroup]="dadosFiscais.controls['habilitaNfce'].disabled" (change)="alteraStatusNfce()"
             formControlName="habilitaNfce"></app-custom-slider>
 
         <div *ngIf="dadosFiscais.controls['habilitaNfce'].value" [@slideUpDown]
@@ -183,11 +183,11 @@
             <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputIdTokenNfce'"
                 [informativoCampo]="'Id do CSC para emissão de NFCe. Sem este campo não será possível emitir NFCe. Veja com o SEFAZ do seu estado como gerar este número.'"
                 [titulo]="'Id Token'" [tabIndex]="35" [maxLength]="15"
-                [touched]="dadosFiscais.controls['IdTokenNfce'].touched" [todosCaracteresMaiusculos]="false"
-                [disabledGroup]="dadosFiscais.controls['IdTokenNfce'].disabled"
-                [errors]="dadosFiscais.controls['IdTokenNfce'].errors" [customIcon]="'corporate_fare'"
-                [valido]="!(dadosFiscais.controls['IdTokenNfce'].touched && dadosFiscais.controls['IdTokenNfce'].invalid)"
-                formControlName="IdTokenNfce" #inputIdTokenNfce></app-custom-input>
+                [touched]="dadosFiscais.controls['idTokenNfce'].touched" [todosCaracteresMaiusculos]="false"
+                [disabledGroup]="dadosFiscais.controls['idTokenNfce'].disabled"
+                [errors]="dadosFiscais.controls['idTokenNfce'].errors" [customIcon]="'corporate_fare'"
+                [valido]="!(dadosFiscais.controls['idTokenNfce'].touched && dadosFiscais.controls['idTokenNfce'].invalid)"
+                formControlName="idTokenNfce" #inputIdTokenNfce></app-custom-input>
         </div>
     </div>
 
@@ -202,7 +202,7 @@
         <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'check_nfse'"
             [informativoCampo]="'Informa se empresa será habilitada para emissão de NFSe – Nota Fiscal de Serviço Eletrônica'"
             [titulo]="'NFSe Habilitada'" [tabIndex]="36" [checked]="dadosFiscais.controls['habilitaNfse'].value"
-            [disabledGroup]="dadosFiscais.controls['habilitaNfse'].disabled"
+            [disabledGroup]="dadosFiscais.controls['habilitaNfse'].disabled" (change)="alteraStatusNfse()"
             formControlName="habilitaNfse"></app-custom-slider>
 
         <div *ngIf="dadosFiscais.controls['habilitaNfse'].value" [@slideUpDown]
@@ -249,7 +249,7 @@
                 </h4>
                 <button type="button" class="limpar_file" [@fadeInOut]
                     *ngIf="getFormValue('certificadoDigital') != null && arquivoCertificadoDigital != null"
-                    (click)="limpaInputContrato()">(Limpar)</button>
+                    (click)="limpaInputCertificadoDigital()">(Limpar)</button>
             </div>
             <button class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 anexa_arquivo_botao"
                 (click)="input_certificado.click()">
@@ -265,15 +265,15 @@
             <input tabindex="39"
                 [ngClass]="{'input_invalida': dadosFiscais.controls['certificadoDigital'].touched && dadosFiscais.controls['certificadoDigital'].invalid}"
                 formControlName="certificadoDigital" type="file" #input_certificado hidden
-                (change)="setaContrato($event)" />
+                (change)="setaCertificadoDigital($event)" />
         </div>
 
         <!-- INPUT GROUP SENHA CERTIFICADO DIGITAL -->
         <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputSenhaCertificado'"
-            [informativoCampo]="'Este campo é obrigatório'" [titulo]="'Senha'" [tabIndex]="40"
+            [informativoCampo]="'Este campo é obrigatório'" [titulo]="'Senha'" [tabIndex]="30"
             [touched]="dadosFiscais.controls['senhaCertificado'].touched" [todosCaracteresMaiusculos]="false"
             [disabledGroup]="dadosFiscais.controls['senhaCertificado'].disabled"
-            [errors]="dadosFiscais.controls['senhaCertificado'].errors" [customIcon]="'corporate_fare'"
+            [errors]="dadosFiscais.controls['senhaCertificado'].errors" [customIcon]="'lock'"
             [valido]="!(dadosFiscais.controls['senhaCertificado'].touched && dadosFiscais.controls['senhaCertificado'].invalid)"
             formControlName="senhaCertificado" #inputSenhaCertificado></app-custom-input>
 

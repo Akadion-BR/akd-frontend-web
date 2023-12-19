@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription, debounceTime } from 'rxjs';
 import { SelectOption } from 'src/app/modules/shared/inputs/models/select-option';
+import { Mask } from 'src/app/modules/utils/Mask';
 import { Util } from 'src/app/modules/utils/Util';
 import { fadeInOutAnimation, slideUpDownAnimation } from 'src/app/shared/animations';
 
@@ -182,7 +183,7 @@ export class DadosFiscaisComponent {
           Validators.required
         ]
       ],
-      IdTokenNfce: [
+      idTokenNfce: [
         {
           value: null,
           disabled: true
@@ -194,7 +195,7 @@ export class DadosFiscaisComponent {
       habilitaNfse: [
         {
           value: false,
-          disabled: false
+          disabled: false,
         },
         [
           Validators.required,
@@ -220,14 +221,8 @@ export class DadosFiscaisComponent {
           Validators.pattern(/[^a-zA-Z ]/g)
         ]
       ],
-      certificadoDigital: [null,
-        [
-        ]
-      ],
-      senhaCertificado: ['',
-        [
-        ]
-      ]
+      certificadoDigital: [null],
+      senhaCertificado: ['']
     });
   }
 
@@ -238,6 +233,12 @@ export class DadosFiscaisComponent {
 
   protected setFormValue(atributo: string, valor: any) {
     this.dadosFiscais.controls[atributo].setValue(valor);
+  }
+
+  realizaTratamentoCnpj(tecla: any) {
+    if (tecla?.inputType != 'deleteContentBackward' || tecla == null) {
+      this.setFormValue('cnpjContabilidade', Mask.cnpjMask(this.getFormValue('cnpjContabilidade')));
+    }
   }
 
   // Geradores de Select options
@@ -275,34 +276,86 @@ export class DadosFiscaisComponent {
     return options;
   }
 
-  protected limpaInputContrato() {
-    this.dadosFiscais.controls['certificadoDigital'].setValue(null);
-    this.arquivoCertificadoDigital = null;
+  // Alteração de status de NFE, NFCE e NFSE
+  protected alteraStatusNfe() {
+    let statusNfe: boolean = this.getFormValue('habilitaNfe');
+    if (statusNfe) {
+      this.dadosFiscais.controls['exibirReciboNaDanfeNfe'].enable();
+      this.dadosFiscais.controls['imprimirColunasDoIpi'].enable();
+      this.dadosFiscais.controls['mostraDadosDoIssqn'].enable();
+      this.dadosFiscais.controls['imprimirImpostosAdicionaisNaDanfe'].enable();
+      this.dadosFiscais.controls['sempreMostrarVolumesNaDanfe'].enable();
+      this.dadosFiscais.controls['orientacaoDanfeNfe'].enable();
+      this.dadosFiscais.controls['numeroSerieNfe'].enable();
+      this.dadosFiscais.controls['proximoNumeroNfe'].enable();
+    }
+    else {
+      this.dadosFiscais.controls['exibirReciboNaDanfeNfe'].disable();
+      this.dadosFiscais.controls['imprimirColunasDoIpi'].disable();
+      this.dadosFiscais.controls['mostraDadosDoIssqn'].disable();
+      this.dadosFiscais.controls['imprimirImpostosAdicionaisNaDanfe'].disable();
+      this.dadosFiscais.controls['sempreMostrarVolumesNaDanfe'].disable();
+      this.dadosFiscais.controls['orientacaoDanfeNfe'].disable();
+      this.dadosFiscais.controls['numeroSerieNfe'].disable();
+      this.dadosFiscais.controls['proximoNumeroNfe'].disable();
+    }
   }
 
-  protected setaContrato(event: any) {
-    if (event.target.files[0] == undefined) this.arquivoCertificadoDigital = null;
+  protected alteraStatusNfce() {
+    let statusNfce: boolean = this.getFormValue('habilitaNfce');
+    if (statusNfce) {
+      this.dadosFiscais.controls['numeroSerieNfce'].enable();
+      this.dadosFiscais.controls['proximoNumeroNfce'].enable();
+      this.dadosFiscais.controls['cscNfce'].enable();
+      this.dadosFiscais.controls['idTokenNfce'].enable();
+    }
+    else {
+      this.dadosFiscais.controls['numeroSerieNfce'].disable();
+      this.dadosFiscais.controls['proximoNumeroNfce'].disable();
+      this.dadosFiscais.controls['cscNfce'].disable();
+      this.dadosFiscais.controls['idTokenNfce'].disable();
+    }
+  }
+
+  protected alteraStatusNfse() {
+    let statusNfse: boolean = this.getFormValue('habilitaNfse');
+    if (statusNfse) {
+      this.dadosFiscais.controls['numeroSerieNfse'].enable();
+      this.dadosFiscais.controls['proximoNumeroNfse'].enable();
+    }
+    else {
+      this.dadosFiscais.controls['numeroSerieNfse'].disable();
+      this.dadosFiscais.controls['proximoNumeroNfse'].disable();
+    }
+  }
+
+  protected limpaInputCertificadoDigital() {
+    this.dadosFiscais.controls['certificadoDigital'].setValue(null);
+    this.arquivoCertificadoDigital = null;
+    this.dadosFiscais.controls['senhaCertificado'].reset();
+    this.dadosFiscais.controls['senhaCertificado'].clearValidators();
+    this.dadosFiscais.controls['senhaCertificado'].updateValueAndValidity();
+  }
+
+  protected setaCertificadoDigital(event: any) {
+    if (event.target.files[0] == undefined) {
+      this.limpaInputCertificadoDigital();
+    }
     else {
       const max_size = 1048576;
-      const allowed_types = ['.pfx', '.p7b', '.crt', '.cert'];
-
       if (event.target.files[0].size > max_size) {
         this._snackBar.open("O tamanho do arquivo não pode ser maior do que 1MB", "Fechar", {
           duration: 5000
         })
-        this.limpaInputContrato();
+        this.limpaInputCertificadoDigital();
         return;
       }
-      // else if (!(allowed_types.includes(event.target.files[0].type))) {
-      //   this._snackBar.open("Tipo de arquivo inválido. Escolha uma imagem, um pdf ou um arquivo word", "Fechar", {
-      //     duration: 5000
-      //   })
-      //   this.limpaInputContrato();
-      //   return;
-      // }
       else {
         this.arquivoCertificadoDigital = event.target.files[0];
+        this.dadosFiscais.controls["senhaCertificado"].addValidators([Validators.required]);
       }
+      this.dadosFiscais.controls['senhaCertificado'].markAsTouched();
+      this.dadosFiscais.controls['senhaCertificado'].updateValueAndValidity();
 
     }
   }
