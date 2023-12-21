@@ -1,0 +1,50 @@
+<div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container" [@fadeInOut]>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block_container">
+        <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_nova_empresa">
+            Nova empresa
+        </h1>
+        <h4 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 voltar">
+            <a class="voltar_clicavel" routerLink="..">
+                Voltar
+            </a>
+        </h4>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block">
+
+            <mat-horizontal-stepper [linear]="false" #stepper>
+
+                <ng-template matStepperIcon="edit">
+                    <i class="fa fa-check"></i>
+                </ng-template>
+
+                <ng-template matStepperIcon="number">
+                    <i class="fa fa-fire"></i>
+                </ng-template>
+
+                <!-- PRIMEIRO PASSO: DADOS CADASTRAIS -->
+                <mat-step [stepControl]="dadosEmpresaComponent.dadosEmpresa" editable="true">
+                    <ng-template matStepLabel>
+                        <span>Dados cadastrais</span>
+                    </ng-template>
+
+                    <dados-cadastrais-empresa #dadosEmpresaComponent
+                        (emissorDeDadosEmpresa)="recebeFormGroupDadosEmpresa($event)"></dados-cadastrais-empresa>
+
+                </mat-step>
+
+                <!-- PRIMEIRO PASSO: DADOS FISCAIS -->
+                <mat-step [stepControl]="dadosFiscaisComponent.dadosFiscais" editable="true">
+
+                    <ng-template matStepLabel>
+                        <span>Dados fiscais</span>
+                    </ng-template>
+
+                    <dados-fiscais-empresa #dadosFiscaisComponent
+                        (emissorDeSolicitacaoDeEnvioDeFormulario)="enviaFormularioCriacao()"
+                        (emissorDeDadosFiscais)="recebeFormGroupDadosFiscais($event)"></dados-fiscais-empresa>
+
+                </mat-step>
+
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</div>

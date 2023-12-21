@@ -1,0 +1,295 @@
+<form [formGroup]="dadosFiscais" class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <h2 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_bloco_formulario">
+        Dados Fiscais
+        <hr>
+    </h2>
+
+    <!-- SLIDER - DISCRIMINA IMPOSTOS -->
+    <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'check_discriminaImpostos'"
+        [informativoCampo]="'Habilita ou não o cálculo automático de impostos totais aproximados de acordo com a Lei da Transparência. Não é utilizado para NFSe'"
+        [titulo]="'Discrimina impostos (NFe, NFCe)'" [tabIndex]="18"
+        [disabledGroup]="dadosFiscais.controls['discriminaImpostos'].disabled"
+        [checked]="dadosFiscais.controls['discriminaImpostos'].value"
+        formControlName="discriminaImpostos"></app-custom-slider>
+
+    <!-- SLIDER - HABILITA ENVIO DE E-MAILS AO DESTINATÁRIO -->
+    <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+        [id]="'check_habilitaEnvioEmailsDestinatario'"
+        [informativoCampo]="'Habilita ou não envio de e-mail ao destinatário/tomador do serviço após emissão do documento fiscal'"
+        [titulo]="'Envio de e-mails ao destinatário'" [tabIndex]="19"
+        [disabledGroup]="dadosFiscais.controls['habilitaEnvioEmailsDestinatario'].disabled"
+        [checked]="dadosFiscais.controls['habilitaEnvioEmailsDestinatario'].value"
+        formControlName="habilitaEnvioEmailsDestinatario" style="margin-bottom: 0.5rem"></app-custom-slider>
+
+    <!-- INPUT GROUP CNPJ CONTABILIDADE -->
+    <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputcnpjContabilidade'"
+        [informativoCampo]="'Este campo deve seguir um padrão válido de CNPJ (xx.xxx.xxx/xxxx-xx)'"
+        [titulo]="'Cnpj Contabilidade'" [tabIndex]="21" [maxLength]="18"
+        [touched]="dadosFiscais.controls['cnpjContabilidade'].touched" [todosCaracteresMaiusculos]="false"
+        [disabledGroup]="dadosFiscais.controls['cnpjContabilidade'].disabled" (input)="realizaTratamentoCnpj($event)"
+        [errors]="dadosFiscais.controls['cnpjContabilidade'].errors" [customIcon]="'badge'"
+        [valido]="!(dadosFiscais.controls['cnpjContabilidade'].touched && dadosFiscais.controls['cnpjContabilidade'].invalid)"
+        formControlName="cnpjContabilidade" #inputCnpjContabilidade></app-custom-input>
+
+    <!-- SELECT GROUP REGIME TRIBUTÁRIO -->
+    <app-custom-select class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" formControlName="regimeTributario"
+        [informativoCampo]="'Este campo é obrigatório'" [tabIndex]="23" [titulo]="'Regime tributário'"
+        #inputRegimeTributario [disabledGroup]="dadosFiscais.controls['regimeTributario'].disabled"
+        [options]="geraOptionsRegimeTributario()" [errors]="dadosFiscais.controls['regimeTributario'].errors"
+        [id]="'regimeTributario'"
+        [valido]="!(dadosFiscais.controls['regimeTributario'].touched && dadosFiscais.controls['regimeTributario'].invalid)">
+    </app-custom-select>
+
+    <!-- DADOS DA NFE -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container_nfe">
+        <h2 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_bloco_formulario">
+            Dados da NFe
+            <hr>
+        </h2>
+
+        <!-- SLIDER - NFE HABILITADA -->
+        <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'check_nfe'"
+            [informativoCampo]="'Informa se empresa será habilitada para emissão de NFe – Nota Fiscal Eletrônica modelo 55'"
+            [titulo]="'NFe Habilitada'" [tabIndex]="24" [checked]="dadosFiscais.controls['habilitaNfe'].value"
+            [disabledGroup]="dadosFiscais.controls['habilitaNfe'].disabled" (change)="alteraStatusNfe()"
+            formControlName="habilitaNfe"></app-custom-slider>
+
+        <div *ngIf="dadosFiscais.controls['habilitaNfe'].value" [@slideUpDown]
+            class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container_dados_nfe">
+
+            <!-- SLIDER - EXIBE RECIBO NA DANFE -->
+            <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                [id]="'check_exibirReciboNaDanfeNfe'"
+                [informativoCampo]="'Informa se empresa será habilitada para exibir recibo na DANFe'"
+                [titulo]="'Exibe recibo na DANFe'" [tabIndex]="25"
+                [disabledGroup]="dadosFiscais.controls['exibirReciboNaDanfeNfe'].disabled"
+                [checked]="dadosFiscais.controls['exibirReciboNaDanfeNfe'].value"
+                formControlName="exibirReciboNaDanfeNfe"></app-custom-slider>
+
+            <!-- SLIDER - IMPRIMIR SEMPRE COLUNAS DO IPI -->
+            <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                [id]="'check_imprimirColunasDoIpi'"
+                [informativoCampo]="'Informa se empresa será habilitada para imprimir sempre colunas do IPI'"
+                [titulo]="'Imprimir sempre colunas do IPI'" [tabIndex]="26"
+                [disabledGroup]="dadosFiscais.controls['imprimirColunasDoIpi'].disabled"
+                [checked]="dadosFiscais.controls['imprimirColunasDoIpi'].value"
+                formControlName="imprimirColunasDoIpi"></app-custom-slider>
+
+            <!-- SLIDER - MOSTRA DADOS DO ISSQN -->
+            <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'check_mostraDadosDoIssqn'"
+                [informativoCampo]="'Informa se empresa será habilitada para exibir dados do ISSQN'"
+                [titulo]="'Mostra dados do ISSQN'" [tabIndex]="27"
+                [disabledGroup]="dadosFiscais.controls['mostraDadosDoIssqn'].disabled"
+                [checked]="dadosFiscais.controls['mostraDadosDoIssqn'].value"
+                formControlName="mostraDadosDoIssqn"></app-custom-slider>
+
+            <!-- SLIDER - IMPRIMIR IMPOSTOS ADICIONAIS NA DANFE -->
+            <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                [id]="'check_imprimirImpostosAdicionaisNaDanfe'"
+                [informativoCampo]="'Informa se empresa será habilitada para imprimir impostos adicionais na DANFe (II, PIS, COFINS, ICMS UF Destino, ICMS UF Remetente, valor total tributos)'"
+                [titulo]="'Imprimir impostos adicionais na DANFe'" [tabIndex]="28"
+                [disabledGroup]="dadosFiscais.controls['imprimirImpostosAdicionaisNaDanfe'].disabled"
+                [checked]="dadosFiscais.controls['imprimirImpostosAdicionaisNaDanfe'].value"
+                formControlName="imprimirImpostosAdicionaisNaDanfe"></app-custom-slider>
+
+            <!-- SLIDER - SEMPRE MOSTRAR VOLUMES NA DANFE -->
+            <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                [id]="'check_sempreMostrarVolumesNaDanfe'"
+                [informativoCampo]="'Informa se a empresa será habilitada para sempre mostrar volumes na DANFe'"
+                [titulo]="'Sempre mostrar volumes na DANFe'" [tabIndex]="29"
+                [disabledGroup]="dadosFiscais.controls['sempreMostrarVolumesNaDanfe'].disabled"
+                [checked]="dadosFiscais.controls['sempreMostrarVolumesNaDanfe'].value"
+                formControlName="sempreMostrarVolumesNaDanfe"></app-custom-slider>
+
+            <!-- SELECT GROUP ORIENTAÇÃO DANFE NFE -->
+            <app-custom-select class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
+                formControlName="orientacaoDanfeNfe" [informativoCampo]="'Este campo é obrigatório'" [tabIndex]="30"
+                [titulo]="'Orientação DANFE'" #inputOrientacaoDanfeNfe
+                [disabledGroup]="dadosFiscais.controls['orientacaoDanfeNfe'].disabled"
+                [options]="geraOptionsOrientacaoDanfe()" [errors]="dadosFiscais.controls['orientacaoDanfeNfe'].errors"
+                [id]="'orientacaoDanfeNfe'" style="margin-bottom: 0.3rem;"
+                [valido]="!(dadosFiscais.controls['orientacaoDanfeNfe'].touched && dadosFiscais.controls['orientacaoDanfeNfe'].invalid)">
+            </app-custom-select>
+
+            <!-- INPUT GROUP SÉRIE -->
+            <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputNumeroSerieNfe'"
+                [informativoCampo]="'Este campo deve conter um valor numérico entre 1 e 100. Se trata da série da NFe a ser emitida'"
+                [titulo]="'Série'" [tabIndex]="31" [maxLength]="3"
+                [touched]="dadosFiscais.controls['numeroSerieNfe'].touched" [todosCaracteresMaiusculos]="false"
+                [disabledGroup]="dadosFiscais.controls['numeroSerieNfe'].disabled"
+                [errors]="dadosFiscais.controls['numeroSerieNfe'].errors" [customIcon]="'pin'"
+                [valido]="!(dadosFiscais.controls['numeroSerieNfe'].touched && dadosFiscais.controls['numeroSerieNfe'].invalid)"
+                formControlName="numeroSerieNfe" #inputNumeroSerieNfe></app-custom-input>
+
+            <!-- INPUT GROUP PRÓXIMO NÚMERO -->
+            <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputProximoNumeroNfe'"
+                [informativoCampo]="'Este campo deve conter um valor numérico. Próximo número da NFe a ser emitida. Calculado automaticamente.'"
+                [titulo]="'Próximo número'" [tabIndex]="32" [maxLength]="15"
+                [touched]="dadosFiscais.controls['proximoNumeroNfe'].touched" [todosCaracteresMaiusculos]="false"
+                [disabledGroup]="dadosFiscais.controls['proximoNumeroNfe'].disabled"
+                [errors]="dadosFiscais.controls['proximoNumeroNfe'].errors" [customIcon]="'pin'"
+                [valido]="!(dadosFiscais.controls['proximoNumeroNfe'].touched && dadosFiscais.controls['proximoNumeroNfe'].invalid)"
+                formControlName="proximoNumeroNfe" #inputProximoNumeroNfe></app-custom-input>
+
+        </div>
+    </div>
+
+    <!-- DADOS DA NFCE -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container_nfce">
+        <h2 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_bloco_formulario">
+            Dados da NFCe
+            <hr>
+        </h2>
+
+        <!-- SLIDER - HABILITAR NFCE -->
+        <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'check_nfce'"
+            [informativoCampo]="'Informa se empresa será habilitada para emissão de NFCe – Nota Fiscal ao Consumidor Eletrônica modelo 65'"
+            [titulo]="'NFCe Habilitada'" [tabIndex]="33" [checked]="dadosFiscais.controls['habilitaNfce'].value"
+            [disabledGroup]="dadosFiscais.controls['habilitaNfce'].disabled" (change)="alteraStatusNfce()"
+            formControlName="habilitaNfce"></app-custom-slider>
+
+        <div *ngIf="dadosFiscais.controls['habilitaNfce'].value" [@slideUpDown]
+            class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container_dados_nfce">
+            <!-- INPUT GROUP SÉRIE -->
+            <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputNumeroSerieNfce'"
+                [informativoCampo]="'Este campo deve conter um valor numérico entre 1 e 100. Se trata da série da NFCe a ser emitida'"
+                [titulo]="'Série'" [tabIndex]="34" [maxLength]="3"
+                [touched]="dadosFiscais.controls['numeroSerieNfce'].touched" [todosCaracteresMaiusculos]="false"
+                [disabledGroup]="dadosFiscais.controls['numeroSerieNfce'].disabled"
+                [errors]="dadosFiscais.controls['numeroSerieNfce'].errors" [customIcon]="'pin'"
+                [valido]="!(dadosFiscais.controls['numeroSerieNfce'].touched && dadosFiscais.controls['numeroSerieNfce'].invalid)"
+                formControlName="numeroSerieNfce" #inputNumeroSerieNfce></app-custom-input>
+
+            <!-- INPUT GROUP PRÓXIMO NÚMERO -->
+            <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputProximoNumeroNfce'"
+                [informativoCampo]="'Este campo deve conter um valor numérico. Próximo número da NFCe a ser emitida. Calculado automaticamente.'"
+                [titulo]="'Próximo número'" [tabIndex]="35" [maxLength]="15"
+                [touched]="dadosFiscais.controls['proximoNumeroNfce'].touched" [todosCaracteresMaiusculos]="false"
+                [disabledGroup]="dadosFiscais.controls['proximoNumeroNfce'].disabled"
+                [errors]="dadosFiscais.controls['proximoNumeroNfce'].errors" [customIcon]="'pin'"
+                [valido]="!(dadosFiscais.controls['proximoNumeroNfce'].touched && dadosFiscais.controls['proximoNumeroNfce'].invalid)"
+                formControlName="proximoNumeroNfce" #inputProximoNumeroNfce></app-custom-input>
+
+            <!-- INPUT GROUP CSC NFCE-->
+            <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'cscNfce'"
+                [informativoCampo]="'CSC para emissão de NFCe em ambiente de produção. Sem este campo não será possível emitir NFCe. Veja com o SEFAZ do seu estado como gerar este código.'"
+                [titulo]="'CSC'" [tabIndex]="35" [maxLength]="30" [touched]="dadosFiscais.controls['cscNfce'].touched"
+                [todosCaracteresMaiusculos]="false" [disabledGroup]="dadosFiscais.controls['cscNfce'].disabled"
+                [errors]="dadosFiscais.controls['cscNfce'].errors" [customIcon]="'pin'"
+                [valido]="!(dadosFiscais.controls['cscNfce'].touched && dadosFiscais.controls['cscNfce'].invalid)"
+                formControlName="cscNfce" #inputCscNfce></app-custom-input>
+
+            <!-- INPUT GROUP ID TOKEN -->
+            <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputIdTokenNfce'"
+                [informativoCampo]="'Id do CSC para emissão de NFCe. Sem este campo não será possível emitir NFCe. Veja com o SEFAZ do seu estado como gerar este número.'"
+                [titulo]="'Id Token'" [tabIndex]="35" [maxLength]="15"
+                [touched]="dadosFiscais.controls['idTokenNfce'].touched" [todosCaracteresMaiusculos]="false"
+                [disabledGroup]="dadosFiscais.controls['idTokenNfce'].disabled"
+                [errors]="dadosFiscais.controls['idTokenNfce'].errors" [customIcon]="'corporate_fare'"
+                [valido]="!(dadosFiscais.controls['idTokenNfce'].touched && dadosFiscais.controls['idTokenNfce'].invalid)"
+                formControlName="idTokenNfce" #inputIdTokenNfce></app-custom-input>
+        </div>
+    </div>
+
+    <!-- DADOS DA NFSE -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container_nfse">
+        <h2 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_bloco_formulario">
+            Dados da NFSe
+            <hr>
+        </h2>
+
+        <!-- SLIDER - HABILITA NFSE -->
+        <app-custom-slider class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'check_nfse'"
+            [informativoCampo]="'Informa se empresa será habilitada para emissão de NFSe – Nota Fiscal de Serviço Eletrônica'"
+            [titulo]="'NFSe Habilitada'" [tabIndex]="36" [checked]="dadosFiscais.controls['habilitaNfse'].value"
+            [disabledGroup]="dadosFiscais.controls['habilitaNfse'].disabled" (change)="alteraStatusNfse()"
+            formControlName="habilitaNfse"></app-custom-slider>
+
+        <div *ngIf="dadosFiscais.controls['habilitaNfse'].value" [@slideUpDown]
+            class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container_dados_nfse">
+            <!-- INPUT GROUP SÉRIE -->
+            <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputNumeroSerieNfse'"
+                [informativoCampo]="'Este campo é obrigatório e deve conter um valor numérico entre 1 e 100. Se trata da série do RPS para envio de NFSe. Algumas prefeituras não utilizam.'"
+                [titulo]="'Série'" [tabIndex]="37" [maxLength]="3"
+                [touched]="dadosFiscais.controls['numeroSerieNfse'].touched" [todosCaracteresMaiusculos]="true"
+                [disabledGroup]="dadosFiscais.controls['numeroSerieNfse'].disabled"
+                [errors]="dadosFiscais.controls['numeroSerieNfse'].errors" [customIcon]="'pin'"
+                [valido]="!(dadosFiscais.controls['numeroSerieNfse'].touched && dadosFiscais.controls['numeroSerieNfse'].invalid)"
+                formControlName="numeroSerieNfse" #inputNumeroSerieNfse></app-custom-input>
+
+            <!-- INPUT GROUP PRÓXIMO NÚMERO -->
+            <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputProximoNumeroNfse'"
+                [informativoCampo]="'Este campo deve conter um valor numérico. Próximo número do RPS da NFSe a ser emitida. Calculado automaticamente.'"
+                [titulo]="'Próximo número'" [tabIndex]="38" [maxLength]="7"
+                [touched]="dadosFiscais.controls['proximoNumeroNfse'].touched" [todosCaracteresMaiusculos]="true"
+                [disabledGroup]="dadosFiscais.controls['proximoNumeroNfse'].disabled"
+                [errors]="dadosFiscais.controls['proximoNumeroNfse'].errors" [customIcon]="'pin'"
+                [valido]="!(dadosFiscais.controls['proximoNumeroNfse'].touched && dadosFiscais.controls['proximoNumeroNfse'].invalid)"
+                formControlName="proximoNumeroNfse" #inputProximoNumeroNfse></app-custom-input>
+        </div>
+    </div>
+
+    <!-- DADOS DO CERTIFICADO DIGITAL -->
+    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container_certificado">
+        <h2 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_bloco_formulario">
+            Certificado digital
+            <hr>
+        </h2>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 anexa_arquivo_container">
+            <div class="row col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 header_certificado_digital">
+                <h4 class="row status_certificado">
+                    <b>Status:</b>
+                    <p [ngClass]="{'status_certificado_presente': getFormValue('certificadoDigitalByteArray') != null}">
+                        {{ getFormValue('certificadoDigitalByteArray') != null
+                        ? 'Presente'
+                        : 'Ausente' }}
+                    </p>
+                </h4>
+                <button type="button" class="limpar_file" [@fadeInOut]
+                    *ngIf="getFormValue('certificadoDigitalByteArray') != null"
+                    (click)="limpaInputCertificadoDigital()">(Limpar)</button>
+            </div>
+            <button class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 anexa_arquivo_botao"
+                (click)="input_certificado.click()">
+                <p>
+                    {{ getFormValue('nomeCertificadoDigital') != null
+                    ? getFormValue('nomeCertificadoDigital')
+                    : 'Escolher arquivo (.pfx, .p12)' }}
+                </p>
+                <mat-icon [@fadeInOut] [fontIcon]="getFormValue('certificadoDigitalByteArray') != null
+                            ? 'file_download_done' 
+                            : 'add_box'" class="icone icone_ok"></mat-icon>
+            </button>
+            <input tabindex="39" [ngClass]="{'input_invalida': dadosFiscais.controls['certificadoDigitalByteArray'].touched 
+                && dadosFiscais.controls['certificadoDigitalByteArray'].invalid}" type="file" #input_certificado hidden
+                (change)="setaCertificadoDigital($event)" />
+        </div>
+
+        <!-- INPUT GROUP SENHA CERTIFICADO DIGITAL -->
+        <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputSenhaCertificado'"
+            [informativoCampo]="'Este campo é obrigatório'" [titulo]="'Senha'" [tabIndex]="30"
+            [touched]="dadosFiscais.controls['senhaCertificado'].touched" [todosCaracteresMaiusculos]="false"
+            [disabledGroup]="dadosFiscais.controls['senhaCertificado'].disabled"
+            [errors]="dadosFiscais.controls['senhaCertificado'].errors" [customIcon]="'lock'"
+            [valido]="!(dadosFiscais.controls['senhaCertificado'].touched && dadosFiscais.controls['senhaCertificado'].invalid)"
+            formControlName="senhaCertificado" #inputSenhaCertificado></app-custom-input>
+
+    </div>
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
+        <button tabindex="41" class="botao_menu botao_inscrever" matStepperPrevious>
+            <a class="link_botao link_botao_cadastro">
+                Voltar
+            </a>
+        </button>
+
+        <button tabindex="42" class="botao_menu botao_inscrever" [disabled]="!dadosFiscais.valid"
+            [ngClass]="{'botao_inscrever_desabilitado': !dadosFiscais.valid}" (click)="solicitarEnvioDeFormulario()">
+            <a class="link_botao link_botao_cadastro">
+                Criar conta
+            </a>
+        </button>
+    </div>
+
+</form>

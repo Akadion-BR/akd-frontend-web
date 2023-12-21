@@ -1,26 +1,5 @@
 @import '../../../../../../dist/variables.scss';
-
-h1,
-h2,
-h3,
-h4,
-h5, 
-h6
-p,
-div,
-header, 
-footer,
-app-custom-input,
-button,
-ul,
-li,
-i,
-h5,
-form,
-img {
-    margin: 0;
-    padding: 0;
-}
+@import '../../../../../../dist/reset.scss';
 
 .container {
     color: $dark-white;

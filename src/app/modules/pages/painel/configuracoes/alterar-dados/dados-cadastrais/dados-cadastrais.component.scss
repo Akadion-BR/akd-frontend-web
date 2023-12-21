@@ -1,23 +1,5 @@
 @import '../../../../../../../dist/variables.scss';
-
-h1,
-h2,
-h3,
-h4,
-p,
-div,
-footer,
-app-custom-input,
-app-custom-date-input,
-button,
-ul,
-li,
-i,
-h5,
-form {
-    margin: 0;
-    padding: 0;
-}
+@import '../../../../../../../dist/reset.scss';
 
 .form_button_container {
     padding: 0 0.5rem;
@@ -34,7 +16,6 @@ form {
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-top: 1rem;
     -webkit-user-select: none;
     /* Safari */
     -ms-user-select: none;
@@ -45,13 +26,10 @@ form {
 
 .botao_inscrever:focus {
     outline: none;
-}
-
-.botao_inscrever:hover {
     background-color: $primary-color-dark;
 }
 
-.botao_inscrever:focus {
+.botao_inscrever:hover {
     background-color: $primary-color-dark;
 }
 

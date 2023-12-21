@@ -100,7 +100,7 @@ export class ViewComponent {
     this.criaNovoClienteSubscription$ =
       this.clienteService.novoCliente(this.criacaoClienteRequest).subscribe({
         error: (error: any) => {
-          this._snackBar.open("Ocorreu um erro ao cadastrar o cadastro", "Fechar", {
+          this._snackBar.open("Ocorreu um erro ao realizar o cadastro", "Fechar", {
             duration: 3500
           })
         },

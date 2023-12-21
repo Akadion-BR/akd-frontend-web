@@ -1,25 +1,9 @@
 @import '../../../../../../dist/variables.scss';
+@import '../../../../../../dist/reset.scss';
 
-h1,
-h2,
-h3,
-h4,
-p,
-div,
-header,
-footer,
-app-custom-input,
-app-custom-select,
 painel-footer,
 painel-sidebar,
-painel-header,
-button,
-ul,
-li,
-i,
-h5,
-form,
-img {
+painel-header {
     margin: 0;
     padding: 0;
 }
@@ -59,7 +43,7 @@ img {
     background-color: $medium-black;
 }
 
-.block > h1 {
+.block>h1 {
     color: $medium-grey;
     font-size: 0.8rem;
     text-align: center;
@@ -71,7 +55,7 @@ img {
     animation: pulse 1.5s infinite;
 }
 
-.block:focus { 
+.block:focus {
     outline: none;
 }
 
@@ -80,7 +64,7 @@ img {
     background-color: $transparent-primary-color;
 }
 
-.block_active > h1 {
+.block_active>h1 {
     color: $light-grey;
 }
 
@@ -90,6 +74,31 @@ img {
     border-radius: 3px;
     padding: 0;
     border: none;
+    overflow-y: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: $dark-white;
+    border-radius: 100px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    box-shadow: inset 0 0 2px $dark-black;
+    border-radius: 100px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $primary-color-dark;
 }
 
 @keyframes pulse {

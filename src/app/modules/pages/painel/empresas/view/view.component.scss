@@ -1,0 +1,16 @@
+@import '../../../../../../dist/variables.scss';
+@import '../../../../../../dist/reset.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+::ng-deep listagem-empresas,
+::ng-deep cadastro-empresa {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

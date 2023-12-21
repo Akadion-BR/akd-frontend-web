@@ -1,0 +1,171 @@
+@import '../../../../../../dist/variables.scss';
+
+h1,
+h2,
+h3,
+h4,
+p,
+div,
+app-custom-input,
+button,
+ul,
+li,
+i,
+h5,
+form {
+    margin: 0;
+    padding: 0;
+}
+
+/* PLANOS */
+
+.container_planos {
+    display: flex;
+    justify-content: center;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+    cursor: pointer;
+    padding: 1.5rem 1rem;
+}
+
+.informativo_plano {
+    padding: 0 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.titulo_informativo_plano {
+    font-family: $font-poppins;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $primary-color;
+}
+
+.texto_informativo_plano {
+    font-family: $font-poppins;
+    font-size: 0.8rem;
+    color: $light-grey;
+    font-weight: 400;
+}
+
+.bloco_plano {
+    padding: 0 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.subbloco_plano {
+    background-color: $dark-black;
+    border: 1px solid $dark-grey;
+    border-radius: 3px;
+    padding: 0.5rem 1rem;
+}
+
+.subbloco_plano:hover {
+    background-color: $medium-dark-black;
+}
+
+.subbloco_plano:focus {
+    outline: none;
+}
+
+.subbloco_plano_ativo {
+    border: 1px solid $primary-color;
+}
+
+.titulo_plano {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: $medium-white;
+    font-family: $font-roboto;
+}
+
+.descricao_plano {
+    margin: 0.5rem 0;
+    font-size: 0.8rem;
+    color: $light-grey;
+}
+
+.preco_plano_valor {
+    color: $medium-white;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.periodicidade_plano {
+    color: $light-grey;
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.lista_vantagens_plano {
+    list-style-type: none;
+}
+
+.fa-check-square {
+    margin-right: 0.5rem;
+    color: $primary-color;
+}
+
+.fa-minus-square {
+    margin-right: 0.5rem;
+    color: $light-grey;
+}
+
+.lista_vantagens_plano {
+    margin-top: 0.5rem;
+}
+
+.item_lista_vantagens_plano {
+    display: flex;
+    align-items: baseline;
+    color: $medium-white;
+    padding: 0.2rem 0;
+}
+
+/* BOTAO SUBMIT */
+
+.form_button_container {
+    padding: 0 0.5rem;
+}
+
+.botao_menu {
+    border: 1px solid $primary-color;
+    border-radius: 3px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    background-color: $primary-color;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.botao_menu:focus {
+    outline: none;
+    background-color: $primary-color-dark;
+}
+
+.botao_menu:hover {
+    background-color: $primary-color-dark;
+}
+
+.link_botao {
+    text-align: center;
+    color: $medium-black;
+    text-decoration: none;
+}

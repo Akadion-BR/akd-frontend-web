@@ -13,6 +13,22 @@ export class Mask {
         return string.replace(/[&\/\\#,+@=!"_ªº¹²³£¢¬()$~%;':*?<>{}]/g, "").replace(/[^0-9.-]/g, '').trim();
     }
 
+    public static cnpjMask(string: string): string {
+        if (string.length >= 2 && string.charAt(2) != '.') {
+            string = [string.slice(0, 2), '.', string.slice(2)].join('')
+        }
+        if (string.length >= 6 && string.charAt(6) != '.') {
+            string = [string.slice(0, 6), '.', string.slice(6)].join('')
+        }
+        if (string.length >= 10 && string.charAt(10) != '/') {
+            string = [string.slice(0, 10), '/', string.slice(10)].join('')
+        }
+        if (string.length >= 15 && string.charAt(15) != '-') {
+            string = [string.slice(0, 15), '-', string.slice(15)].join('')
+        }
+        return string.replace(/[&\\\#,+@=!"_ªº¹²³£¢¬()$~%;':*?<>{}]/g, "").replace(/[^0-9./-]/g, '').trim();
+    }
+
     public static cepMask(string: string): string {
         if (string.length >= 5 && string.charAt(5) != '-') {
             string = [string.slice(0, 5), '-', string.slice(5)].join('')

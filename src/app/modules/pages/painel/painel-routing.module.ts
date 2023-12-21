@@ -5,11 +5,12 @@ import { ListagemComponent as ListagemEmpresas } from './empresas/listagem/lista
 import { ListagemComponent as ListagemFaturas } from './faturas/listagem/listagem.component';
 import { ViewComponent as ConfiguracoesViewComponent} from './configuracoes/view/view.component';
 import { ViewComponent as RelatoriosViewComponent } from './relatorios/view/view.component';
+import { ViewComponent } from './empresas/view/view.component';
 
 const routes: Routes = [
   {
     path: 'empresas',
-    component: ListagemEmpresas,
+    component: ViewComponent,
     loadChildren: () => import('./empresas/empresas-routing.module').then(m => m.EmpresasRoutingModule)
   },
   {

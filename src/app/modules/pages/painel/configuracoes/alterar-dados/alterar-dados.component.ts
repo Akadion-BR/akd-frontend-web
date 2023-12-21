@@ -6,11 +6,13 @@ import { ClienteService } from '../../../signup/services/cliente.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Util } from 'src/app/modules/utils/Util';
+import { fadeInOutAnimation } from 'src/app/shared/animations';
 
 @Component({
   selector: 'app-alterar-dados',
   templateUrl: './alterar-dados.component.html',
-  styleUrls: ['./alterar-dados.component.scss']
+  styleUrls: ['./alterar-dados.component.scss'], 
+  animations: [fadeInOutAnimation]
 })
 export class AlterarDadosComponent {
 

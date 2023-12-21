@@ -1,6 +1,6 @@
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container" [@fadeInOut]>
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block_container block_container_pesquisa">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block block_pesquisa">
+<div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container" [@fadeInOut]>
+    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block_container block_container_pesquisa">
+        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block block_pesquisa">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 cabecalho_block cabecalho_block_pesquisa">
                 <h4 class="titulo_bloco titulo_bloco_pesquisa">
                     Pesquisar empresas
@@ -19,7 +19,7 @@
                     #inputPesquisa></app-custom-input>
 
                 <app-custom-select class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" formControlName="status"
-                    [tabIndex]="5" [informativoCampo]="'Este campo é obrigatório'" [titulo]="'Status'" #inputStatus
+                    [tabIndex]="2" [informativoCampo]="'Este campo é obrigatório'" [titulo]="'Status'" #inputStatus
                     [disabledGroup]="dadosPesquisa.controls['status'].disabled" [options]="geraOptionsStatus()"
                     [errors]="dadosPesquisa.controls['status'].errors" [id]="'status'"
                     [valido]="!(dadosPesquisa.controls['status'].touched && dadosPesquisa.controls['status'].invalid)">
@@ -27,11 +27,11 @@
 
 
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 botao_pesquisa_container">
-                    <button class="botao_pesquisa">
+                    <button [tabIndex]="3" class="botao_pesquisa" (click)="limpaFormulariosEmpresa()" type="button">
                         LIMPAR FILTROS
                     </button>
 
-                    <button class="botao_pesquisa">
+                    <button [tabIndex]="4" class="botao_pesquisa" (click)="realizaPesquisaEmpresas()" type="submit">
                         PESQUISAR
                     </button>
                 </div>
@@ -40,9 +40,12 @@
 
         </div>
     </div>
-
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block_container block_container_listagem">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block block_listagem">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block block_listagem" *ngIf="empresaPageResponse != undefined 
+            && empresaPageResponse != null 
+            && empresaPageResponse.content != undefined 
+            && empresaPageResponse.content != null
+            && empresaPageResponse.content.length > 0; else semEmpresasEncontradas">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 cabecalho_block cabecalho_block_listagem">
                 <h4 class="titulo_bloco">
                     Minhas empresas
@@ -50,20 +53,35 @@
             </div>
 
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block_opcoes_tabela">
-                <button class="botao_cria_empresa">
+                <button class="botao_cria_empresa" [routerLink]="['/painel/empresas/criar']">
                     ADICIONAR EMPRESA
                 </button>
-                <ul class="lista_paginacao">
-                    <li class="item_paginacao item_paginacao_desabilitado">
+                <ul *ngIf="empresaPageResponse != undefined" class="lista_paginacao">
+                    <li (click)="voltarPagina()"
+                        [ngClass]="{'item_paginacao_desabilitado': empresaPageResponse.pageNumber == 0}"
+                        class="item_paginacao">
                         <p class="texto_paginacao">
                             < </p>
                     </li>
-                    <li class="item_paginacao item_paginacao_ativo">
-                        <p class="texto_paginacao">
-                            1
-                        </p>
-                    </li>
-                    <li class="item_paginacao item_paginacao_desabilitado">
+                    <ng-container
+                        *ngFor="let numero of geraNumerosParaNavegarNaPaginacao(empresaPageResponse.totalPages); let i = index">
+                        <li *ngIf="(empresaPageResponse.pageNumber - i) <= 3 && (empresaPageResponse.pageNumber - i) >= 0
+                            || (i - empresaPageResponse.pageNumber) <= 3 && (i - empresaPageResponse.pageNumber) >= 0
+                            || empresaPageResponse.pageNumber == 0 && (i - empresaPageResponse.pageNumber) <= 6 && (i - empresaPageResponse.pageNumber) >= 0
+                            || empresaPageResponse.pageNumber == 1 && (i - empresaPageResponse.pageNumber) <= 5 && (i - empresaPageResponse.pageNumber) >= 0
+                            || empresaPageResponse.pageNumber == 2 && (i - empresaPageResponse.pageNumber) <= 4 && (i - empresaPageResponse.pageNumber) >= 0
+                            || (empresaPageResponse.pageNumber == (empresaPageResponse.totalPages-1)) && (empresaPageResponse.pageNumber - i) <= 6
+                            || (empresaPageResponse.pageNumber == (empresaPageResponse.totalPages-2)) && (empresaPageResponse.pageNumber - i) <= 5
+                            || (empresaPageResponse.pageNumber == (empresaPageResponse.totalPages-3)) && (empresaPageResponse.pageNumber - i) <= 4"
+                            (click)="selecionarPagina(i)"
+                            [ngClass]="{'item_paginacao_ativo': empresaPageResponse.pageNumber == i}"
+                            class="item_paginacao">
+                            <p class="texto_paginacao">{{ i+1 }}</p>
+                        </li>
+                    </ng-container>
+                    <li (click)="avancarPagina()"
+                        [ngClass]="{'item_paginacao_desabilitado': empresaPageResponse.pageNumber == empresaPageResponse.totalPages-1}"
+                        class="item_paginacao">
                         <p class="texto_paginacao">
                             >
                         </p>
@@ -105,28 +123,28 @@
                 </thead>
 
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let empresa of empresaPageResponse?.content">
                         <td class="align-middle">
                             <span>
-                                G H A C Lagrotas Som e Acessórios
+                                {{ empresa.razaoSocial }}
                             </span>
                         </td>
 
                         <td class="align-middle">
                             <span>
-                                Lagrota's Som
+                                {{ empresa.nomeFantasia }}
                             </span>
                         </td>
 
                         <td class="align-middle">
                             <span>
-                                30.409.483/0001-94
+                                {{ empresa.cnpj }}
                             </span>
                         </td>
 
                         <td class="align-middle">
-                            <span>
-                                Ativo
+                            <span [ngClass]="{'empresa_ativa': empresa.ativa, else: 'empresa_inativa'}">
+                                {{ empresa.ativa ? 'Ativa' : 'Inativa' }}
                             </span>
                         </td>
 
@@ -142,23 +160,16 @@
                                     class="icone icone_tabela icone_tabela_remove dropdown dropleft float-right"
                                     data-toggle="dropdown"></mat-icon>
                                 <div class="dropdown-menu">
-                                    <a class="row dropdown-item">
+                                    <a class="row dropdown-item" [routerLink]="['/painel/empresas/' + empresa.id]">
                                         <mat-icon fontIcon="info" class="option_icon"></mat-icon>
                                         <div class="dropdown-item-text">
                                             Detalhes
                                         </div>
                                     </a>
-                                    <a class="dropdown-item">
+                                    <a class="dropdown-item" [routerLink]="['/painel/empresas/editar/' + empresa.id]">
                                         <mat-icon fontIcon="settings" class="option_icon"></mat-icon>
                                         <div class="dropdown-item-text">
                                             Editar
-                                        </div>
-                                    </a>
-
-                                    <a class="dropdown-item dropdown-item-excluir">
-                                        <mat-icon fontIcon="delete" class="option_icon option_icon-excluir"></mat-icon>
-                                        <div class="dropdown-item-text dropdown-item-text-excluir">
-                                            Excluir
                                         </div>
                                     </a>
                                 </div>
@@ -171,5 +182,17 @@
             </table>
 
         </div>
+        <ng-template #semEmpresasEncontradas>
+            <div
+                class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block block_listagem block_listagem_vazia">
+                <img src="../../../../../../assets/battery.png" class="imagem_listagem_vazia" [@fadeInOut]>
+                <h3 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_listagem_vazia">
+                    Nenhuma empresa foi encontrada! Deseja criar uma nova?
+                </h3>
+                <button class="botao_listagem_vazia" [routerLink]="['/painel/empresas/criar']">
+                    Criar nova empresa
+                </button>
+            </div>
+        </ng-template>
     </div>
 </div>

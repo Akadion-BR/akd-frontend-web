@@ -1,0 +1,104 @@
+@import '../dist/variables.scss';
+
+/* MAT STEPPER */
+mat-horizontal-stepper {
+    width: 100%;
+}
+
+mat-horizontal-stepper,
+mat-step {
+    background-color: transparent;
+}
+
+::ng-deep .mat-horizontal-content-container {
+    padding: 0 0.5rem !important;
+    margin-top: -0.5rem;
+}
+
+::ng-deep .mat-stepper-horizontal-line {
+    border-top-width: 2px !important;
+    border-top-color: $dark-grey;
+}
+
+.fa {
+    font-size: 1rem;
+    color: $light-black;
+}
+
+::ng-deep.mat-step-header {
+    flex-direction: column;
+}
+
+::ng-deep.mat-step-header .mat-step-icon {
+    margin: 0 !important;
+    margin-bottom: 0.2rem !important;
+    background-color: $dark-grey !important;
+}
+
+::ng-deep.mat-step-header .mat-step-icon-selected {
+    background-color: $primary-color !important;
+    color: $primary-color;
+}
+
+::ng-deep.mat-step-header .mat-step-icon-selected .mat-step-icon-content i {
+    animation: pulse 1.2s infinite;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-done,
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+    background-color: $primary-color !important;
+}
+
+::ng-deep .mat-step-header .mat-step-label {
+    padding-top: 0.2rem;
+}
+
+span {
+    color: $dark-grey !important;
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: $font-roboto;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+::ng-deep .mat-step-text-label {
+    display: flex;
+    justify-content: center;
+}
+
+::ng-deep span {
+    font-size: 0.9rem !important;
+}
+
+::ng-deep .mat-step-header .mat-step-label.mat-step-label-active .mat-step-text-label span {
+    color: $primary-color !important;
+    text-shadow: 1px 1px $dark-black;
+    font-weight: 500;
+}
+
+::ng-deep .mat-stepper-horizontal-line {
+    margin-top: 0.5rem !important;
+}
+
+/* FIM MAT STEPPER */
+
+@keyframes pulse {
+
+    0% {
+        transform: scale(0.95);
+    }
+
+    70% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0.95);
+    }
+
+}

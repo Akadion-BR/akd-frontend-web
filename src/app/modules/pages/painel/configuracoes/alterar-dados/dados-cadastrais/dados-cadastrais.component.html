@@ -1,7 +1,7 @@
 <form [formGroup]="dadosCadastrais" class="row form col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
     <!-- INPUT GROUP NOME -->
-    <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputNome'"
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputNome'"
         [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 70 caracteres'" [titulo]="'Nome completo'"
         [tabIndex]="1" [maxLength]="70" [touched]="dadosCadastrais.controls['nome'].touched"
         [todosCaracteresMaiusculos]="true" [disabledGroup]="dadosCadastrais.controls['nome'].disabled"
@@ -10,7 +10,7 @@
         formControlName="nome" #inputNome></app-custom-input>
 
     <!-- INPUT GROUP E-MAIL -->
-    <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputEmail'" [titulo]="'E-mail'"
+    <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputEmail'" [titulo]="'E-mail'"
         [informativoCampo]="'Este campo é obrigatório e deve conter no máximo 70 caracteres'" [tabIndex]="2"
         [maxLength]="70" [touched]="dadosCadastrais.controls['email'].touched" [todosCaracteresMaiusculos]="false"
         [customIcon]="'alternate_email'" [disabledGroup]="dadosCadastrais.controls['email'].disabled"

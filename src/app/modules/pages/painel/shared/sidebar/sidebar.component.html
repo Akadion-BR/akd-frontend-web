@@ -5,7 +5,7 @@
     </h4>
 
     <ul class="lista_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [routerLink]="['/painel/empresas']"
+        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [routerLink]="['/painel/empresas/']"
             #empresas="routerLinkActive" routerLinkActive [ngClass]="{'item_menu_ativo': empresas.isActive }">
             <mat-icon class="item_menu_icone">store</mat-icon>
             <p class="item_menu_texto">Empresas</p>
@@ -19,6 +19,11 @@
             #relatorios="routerLinkActive" routerLinkActive [ngClass]="{'item_menu_ativo': relatorios.isActive }">
             <mat-icon class="item_menu_icone">multiline_chart</mat-icon>
             <p class="item_menu_texto">Relatórios</p>
+        </li>
+        <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [routerLink]="['/painel/manuais']"
+            #manuais="routerLinkActive" routerLinkActive [ngClass]="{'item_menu_ativo': manuais.isActive }">
+            <mat-icon class="item_menu_icone">article</mat-icon>
+            <p class="item_menu_texto">Manuais</p>
         </li>
         <li class="row item_menu col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"
             [routerLink]="['/painel/configuracoes']" #configuracoes="routerLinkActive" routerLinkActive
