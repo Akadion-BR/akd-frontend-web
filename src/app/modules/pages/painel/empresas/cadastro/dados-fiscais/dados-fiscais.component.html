@@ -23,7 +23,7 @@
 
     <!-- INPUT GROUP CNPJ CONTABILIDADE -->
     <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputcnpjContabilidade'"
-        [informativoCampo]="'Este campo é obrigatório e deve seguir um padrão válido de CNPJ (xx.xxx.xxx/xxxx-xx)'"
+        [informativoCampo]="'Este campo deve seguir um padrão válido de CNPJ (xx.xxx.xxx/xxxx-xx)'"
         [titulo]="'Cnpj Contabilidade'" [tabIndex]="21" [maxLength]="18"
         [touched]="dadosFiscais.controls['cnpjContabilidade'].touched" [todosCaracteresMaiusculos]="false"
         [disabledGroup]="dadosFiscais.controls['cnpjContabilidade'].disabled" (input)="realizaTratamentoCnpj($event)"
@@ -240,31 +240,29 @@
             <div class="row col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 header_certificado_digital">
                 <h4 class="row status_certificado">
                     <b>Status:</b>
-                    <p
-                        [ngClass]="{'status_certificado_presente': getFormValue('certificadoDigital') != null && arquivoCertificadoDigital != null}">
-                        {{ getFormValue('certificadoDigital') != null && arquivoCertificadoDigital != null
+                    <p [ngClass]="{'status_certificado_presente': getFormValue('certificadoDigitalByteArray') != null}">
+                        {{ getFormValue('certificadoDigitalByteArray') != null
                         ? 'Presente'
                         : 'Ausente' }}
                     </p>
                 </h4>
                 <button type="button" class="limpar_file" [@fadeInOut]
-                    *ngIf="getFormValue('certificadoDigital') != null && arquivoCertificadoDigital != null"
+                    *ngIf="getFormValue('certificadoDigitalByteArray') != null"
                     (click)="limpaInputCertificadoDigital()">(Limpar)</button>
             </div>
             <button class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 anexa_arquivo_botao"
                 (click)="input_certificado.click()">
                 <p>
-                    {{ getFormValue('certificadoDigital') != null && arquivoCertificadoDigital != null
-                    ? arquivoCertificadoDigital.name
-                    : 'Escolher arquivo (.docx, .pdf, .png, .jpeg)' }}
+                    {{ getFormValue('nomeCertificadoDigital') != null
+                    ? getFormValue('nomeCertificadoDigital')
+                    : 'Escolher arquivo (.pfx, .p12)' }}
                 </p>
-                <mat-icon [@fadeInOut] [fontIcon]="getFormValue('certificadoDigital') != null && arquivoCertificadoDigital != null 
+                <mat-icon [@fadeInOut] [fontIcon]="getFormValue('certificadoDigitalByteArray') != null
                             ? 'file_download_done' 
                             : 'add_box'" class="icone icone_ok"></mat-icon>
             </button>
-            <input tabindex="39"
-                [ngClass]="{'input_invalida': dadosFiscais.controls['certificadoDigital'].touched && dadosFiscais.controls['certificadoDigital'].invalid}"
-                formControlName="certificadoDigital" type="file" #input_certificado hidden
+            <input tabindex="39" [ngClass]="{'input_invalida': dadosFiscais.controls['certificadoDigitalByteArray'].touched 
+                && dadosFiscais.controls['certificadoDigitalByteArray'].invalid}" type="file" #input_certificado hidden
                 (change)="setaCertificadoDigital($event)" />
         </div>
 

@@ -48,44 +48,73 @@ export class CadastroComponent {
   }
 
   private constroiObjetoEmpresaRequest() {
+    console.log(this.dadosEmpresa);
+    console.log(this.dadosFiscais);
     this.empresaRequest = {
       razaoSocial: this.getValueAtributoDadosEmpresa('razaoSocial'),
-      cnpj: this.getValueAtributoDadosEmpresa(''),
-      endpoint: this.getValueAtributoDadosEmpresa(''),
-      email: this.getValueAtributoDadosEmpresa(''),
-      nomeFantasia: this.getValueAtributoDadosEmpresa(''),
-      inscricaoEstadual: this.getValueAtributoDadosEmpresa(''),
-      inscricaoMunicipal: this.getValueAtributoDadosEmpresa(''),
-      segmentoEmpresa: this.getValueAtributoDadosEmpresa(''),
+      cnpj: this.getValueAtributoDadosEmpresa('cnpj'),
+      endpoint: this.getValueAtributoDadosEmpresa('endpoint'),
+      email: this.getValueAtributoDadosEmpresa('email'),
+      nomeFantasia: this.getValueAtributoDadosEmpresa('nomeFantasia'),
+      inscricaoEstadual: this.getValueAtributoDadosEmpresa('inscricaoEstadual'),
+      inscricaoMunicipal: this.getValueAtributoDadosEmpresa('inscricaoMunicipal'),
       configFiscal: {
-        discriminaImpostos: this.getValueAtributoDadosFiscais(''),
-        habilitaNfe: this.getValueAtributoDadosFiscais(''),
-        habilitaNfce: this.getValueAtributoDadosFiscais(''),
-        habilitaNfse: this.getValueAtributoDadosFiscais(''),
-        habilitaEnvioEmailDestinatario: this.getValueAtributoDadosFiscais(''),
-        cnpjContabilidade: this.getValueAtributoDadosFiscais(''),
-        senhaCertificadoDigital: this.getValueAtributoDadosFiscais(''),
-        certificadoDigital: this.getValueAtributoDadosFiscais(''),
-        regimeTributario: this.getValueAtributoDadosFiscais(''),
-        nfeConfig: {
-          proximoNumeroProducao: this.getValueAtributoDadosFiscais(''),
-          serieProducao: this.getValueAtributoDadosFiscais(''),
-          exibirReciboNaDanfe: this.getValueAtributoDadosFiscais(''),
-          imprimirColunasDoIpi: this.getValueAtributoDadosFiscais(''),
-          mostraDadosDoIssqn: this.getValueAtributoDadosFiscais(''),
-          imprimirImpostosAdicionaisNaDanfe: this.getValueAtributoDadosFiscais(''),
-          sempreMostrarVolumesNaDanfe: this.getValueAtributoDadosFiscais(''),
-        },
-        nfceConfig: {
-          proximoNumeroProducao: this.getValueAtributoDadosFiscais(''),
-          serieProducao: this.getValueAtributoDadosFiscais(''),
-          cscProducao: this.getValueAtributoDadosFiscais(''),
-          idTokenProducao: this.getValueAtributoDadosFiscais(''),
-        },
-        nfseConfig: {
-          proximoNumeroProducao: this.getValueAtributoDadosFiscais(''),
-          serieProducao: this.getValueAtributoDadosFiscais(''),
-        },
+        discriminaImpostos: this.getValueAtributoDadosFiscais('discriminaImpostos'),
+        habilitaNfe: this.getValueAtributoDadosFiscais('habilitaNfe'),
+        habilitaNfce: this.getValueAtributoDadosFiscais('habilitaNfce'),
+        habilitaNfse: this.getValueAtributoDadosFiscais('habilitaNfse'),
+        habilitaEnvioEmailDestinatario: this.getValueAtributoDadosFiscais('habilitaEnvioEmailsDestinatario'),
+        cnpjContabilidade: this.getValueAtributoDadosFiscais('cnpjContabilidade'),
+        senhaCertificadoDigital: this.getValueAtributoDadosFiscais('senhaCertificado'),
+        regimeTributario: this.getValueAtributoDadosFiscais('regimeTributario'),
+        nfeConfig:
+          this.getValueAtributoDadosFiscais('habilitaNfe')
+            ? {
+              proximoNumeroProducao: this.getValueAtributoDadosFiscais('proximoNumeroNfe'),
+              serieProducao: this.getValueAtributoDadosFiscais('numeroSerieNfe'),
+              exibirReciboNaDanfe: this.getValueAtributoDadosFiscais('exibirReciboNaDanfeNfe'),
+              imprimirColunasDoIpi: this.getValueAtributoDadosFiscais('imprimirColunasDoIpi'),
+              mostraDadosDoIssqn: this.getValueAtributoDadosFiscais('mostraDadosDoIssqn'),
+              imprimirImpostosAdicionaisNaDanfe: this.getValueAtributoDadosFiscais('imprimirImpostosAdicionaisNaDanfe'),
+              sempreMostrarVolumesNaDanfe: this.getValueAtributoDadosFiscais('sempreMostrarVolumesNaDanfe'),
+              orientacaoDanfe: this.getValueAtributoDadosFiscais('orientacaoDanfeNfe'),
+            }
+            : null,
+        nfceConfig:
+          this.getValueAtributoDadosFiscais('habilitaNfce')
+            ? {
+              proximoNumeroProducao: this.getValueAtributoDadosFiscais('proximoNumeroNfce'),
+              serieProducao: this.getValueAtributoDadosFiscais('numeroSerieNfce'),
+              cscProducao: this.getValueAtributoDadosFiscais('cscNfce'),
+              idTokenProducao: this.getValueAtributoDadosFiscais('idTokenNfce'),
+            }
+            : null,
+        nfseConfig:
+          this.getValueAtributoDadosFiscais('habilitaNfse')
+            ? {
+              proximoNumeroProducao: this.getValueAtributoDadosFiscais('proximoNumeroNfse'),
+              serieProducao: this.getValueAtributoDadosFiscais('numeroSerieNfse'),
+            }
+            : null,
+        certificadoDigital: this.getValueAtributoDadosFiscais('nomeCertificadoDigital') != null
+          && this.getValueAtributoDadosFiscais('tipoArquivoCertificadoDigital') != null
+          && this.getValueAtributoDadosFiscais('certificadoDigitalByteArray') != null
+          && this.getValueAtributoDadosFiscais('tamanhoArquivoCertificadoDigital') != null
+          ? {
+            nomeArquivo: this.getValueAtributoDadosFiscais('nomeCertificadoDigital') != null
+              ? this.getValueAtributoDadosFiscais('nomeCertificadoDigital')[0]
+              : null,
+            tipoArquivo: this.getValueAtributoDadosFiscais('tipoArquivoCertificadoDigital')
+              ? this.getValueAtributoDadosFiscais('tipoArquivoCertificadoDigital')[0]
+              : null,
+            base64: this.getValueAtributoDadosFiscais('certificadoDigitalByteArray') != null
+              ? this.getValueAtributoDadosFiscais('certificadoDigitalByteArray')
+              : null,
+            tamanhoArquivo: this.getValueAtributoDadosFiscais('tamanhoArquivoCertificadoDigital') != null
+              ? this.getValueAtributoDadosFiscais('tamanhoArquivoCertificadoDigital')[0]
+              : null,
+          }
+          : null
       },
       telefone: {
         tipoTelefone: this.getValueAtributoDadosEmpresa('numeroTelefone').length == 9

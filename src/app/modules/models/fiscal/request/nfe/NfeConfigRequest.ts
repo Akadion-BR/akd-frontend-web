@@ -7,6 +7,7 @@ export class NfeConfigRequest {
     mostraDadosDoIssqn: boolean;
     imprimirImpostosAdicionaisNaDanfe: boolean;
     sempreMostrarVolumesNaDanfe: boolean;
+    orientacaoDanfe: string;
 
     constructor(item: any) {
         this.proximoNumeroProducao = item?.proximoNumeroProducao;
@@ -16,5 +17,6 @@ export class NfeConfigRequest {
         this.mostraDadosDoIssqn = item?.mostraDadosDoIssqn;
         this.imprimirImpostosAdicionaisNaDanfe = item?.imprimirImpostosAdicionaisNaDanfe;
         this.sempreMostrarVolumesNaDanfe = item?.sempreMostrarVolumesNaDanfe;
+        this.orientacaoDanfe = item?.orientacaoDanfe;
     }
 }

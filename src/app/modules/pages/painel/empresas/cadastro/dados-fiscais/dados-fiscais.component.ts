@@ -1,11 +1,13 @@
-import { Component, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectorRef, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription, debounceTime } from 'rxjs';
+import { Observable, Subscription, debounceTime } from 'rxjs';
 import { SelectOption } from 'src/app/modules/shared/inputs/models/select-option';
 import { Mask } from 'src/app/modules/utils/Mask';
 import { Util } from 'src/app/modules/utils/Util';
 import { fadeInOutAnimation, slideUpDownAnimation } from 'src/app/shared/animations';
+import { encode } from 'base64-arraybuffer';
+import { Converter } from 'src/app/modules/utils/Converter';
 
 @Component({
   selector: 'dados-fiscais-empresa',
@@ -21,10 +23,11 @@ export class DadosFiscaisComponent {
     private _snackBar: MatSnackBar) { }
 
   dadosFiscais: FormGroup = this.inicializaFormulario();
-  arquivoCertificadoDigital: File | null;
 
   @Output() emissorDeDadosFiscais = new EventEmitter<FormGroup>();
   @Output() emissorDeSolicitacaoDeEnvioDeFormulario = new EventEmitter();
+
+  @ViewChild('input_certificado') inputCertificadoDigital: ElementRef;
 
   dadosFiscaisSubscribe$: Subscription = this.dadosFiscais.valueChanges.pipe(
     debounceTime(500)
@@ -33,6 +36,15 @@ export class DadosFiscaisComponent {
       this.emissorDeDadosFiscais.emit(this.dadosFiscais);
     }
   })
+
+  ngOnInit(): void {
+    this.emissorDeDadosFiscais.emit(this.dadosFiscais);
+  }
+
+  ngAfterViewInit(): void {
+    this.ref.detectChanges();
+    this.emissorDeDadosFiscais.emit(this.dadosFiscais);
+  }
 
   ngOnDestroy(): void {
     if (this.dadosFiscaisSubscribe$ != undefined) this.dadosFiscaisSubscribe$.unsubscribe();
@@ -52,7 +64,6 @@ export class DadosFiscaisComponent {
       ],
       cnpjContabilidade: ['',
         [
-          Validators.required,
           Validators.pattern(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/),
           Validators.maxLength(18)
         ]
@@ -221,8 +232,11 @@ export class DadosFiscaisComponent {
           Validators.pattern(/[^a-zA-Z ]/g)
         ]
       ],
-      certificadoDigital: [null],
-      senhaCertificado: ['']
+      nomeCertificadoDigital: [null],
+      tipoArquivoCertificadoDigital: [null],
+      tamanhoArquivoCertificadoDigital: [null],
+      certificadoDigitalByteArray: [null],
+      senhaCertificado: [null]
     });
   }
 
@@ -330,11 +344,16 @@ export class DadosFiscaisComponent {
   }
 
   protected limpaInputCertificadoDigital() {
-    this.dadosFiscais.controls['certificadoDigital'].setValue(null);
-    this.arquivoCertificadoDigital = null;
+    this.dadosFiscais.controls["nomeCertificadoDigital"].reset();
+    this.dadosFiscais.controls["tipoArquivoCertificadoDigital"].reset();
+    this.dadosFiscais.controls["tamanhoArquivoCertificadoDigital"].reset();
+    this.dadosFiscais.controls['certificadoDigitalByteArray'].reset();
+
     this.dadosFiscais.controls['senhaCertificado'].reset();
     this.dadosFiscais.controls['senhaCertificado'].clearValidators();
     this.dadosFiscais.controls['senhaCertificado'].updateValueAndValidity();
+
+    this.inputCertificadoDigital.nativeElement.value = "";
   }
 
   protected setaCertificadoDigital(event: any) {
@@ -351,12 +370,28 @@ export class DadosFiscaisComponent {
         return;
       }
       else {
-        this.arquivoCertificadoDigital = event.target.files[0];
-        this.dadosFiscais.controls["senhaCertificado"].addValidators([Validators.required]);
-      }
-      this.dadosFiscais.controls['senhaCertificado'].markAsTouched();
-      this.dadosFiscais.controls['senhaCertificado'].updateValueAndValidity();
+        let arquivoCertificadoDigital: File | null = event.target.files[0];
 
+        this.dadosFiscais.controls["nomeCertificadoDigital"].setValue([arquivoCertificadoDigital?.name]);
+        this.dadosFiscais.controls['nomeCertificadoDigital'].updateValueAndValidity();
+
+        this.dadosFiscais.controls["tipoArquivoCertificadoDigital"].setValue([arquivoCertificadoDigital?.type]);
+        this.dadosFiscais.controls['tipoArquivoCertificadoDigital'].updateValueAndValidity();
+
+        this.dadosFiscais.controls["tamanhoArquivoCertificadoDigital"].setValue([arquivoCertificadoDigital?.size]);
+        this.dadosFiscais.controls['tamanhoArquivoCertificadoDigital'].updateValueAndValidity();
+
+        this.dadosFiscais.controls["senhaCertificado"].addValidators([Validators.required]);
+        this.dadosFiscais.controls['senhaCertificado'].markAsTouched();
+        this.dadosFiscais.controls['senhaCertificado'].updateValueAndValidity();
+
+        Converter.getBase64EncodedFileData(arquivoCertificadoDigital).subscribe({
+          next: (response: any) => {
+            this.dadosFiscais.controls['certificadoDigitalByteArray'].setValue(response);
+            this.dadosFiscais.controls['certificadoDigitalByteArray'].updateValueAndValidity();
+          }
+        })
+      }
     }
   }
 

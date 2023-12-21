@@ -10,7 +10,6 @@ export class EmpresaRequest {
     nomeFantasia: string;
     inscricaoEstadual: string;
     inscricaoMunicipal: string;
-    segmentoEmpresa: string;
     configFiscal: ConfigFiscalEmpresaRequest;
     telefone: TelefoneRequest;
     endereco: EnderecoRequest;
@@ -23,7 +22,6 @@ export class EmpresaRequest {
         this.nomeFantasia = item?.nomeFantasia;
         this.inscricaoEstadual = item?.inscricaoEstadual;
         this.inscricaoMunicipal = item?.inscricaoMunicipal;
-        this.segmentoEmpresa = item?.segmentoEmpresa;
         this.configFiscal = item?.configFiscal;
         this.telefone = item?.telefone;
         this.endereco = item?.endereco;

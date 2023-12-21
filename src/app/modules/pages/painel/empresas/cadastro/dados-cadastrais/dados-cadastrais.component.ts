@@ -55,6 +55,7 @@ export class DadosCadastraisComponent {
 
   ngAfterViewInit(): void {
     this.ref.detectChanges();
+    this.emissorDeDadosEmpresa.emit(this.dadosEmpresa);
     this.obtemTodosEstadosBrasileiros();
   }
 

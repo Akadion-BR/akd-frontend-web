@@ -32,7 +32,7 @@ export class EmpresasService {
   public novaEmpresa(empresaRequest: EmpresaRequest): Observable<EmpresaResponse> {
     this.httpOptions.params = new HttpParams();
     this.httpOptions.body = null;
-    return this.http.post<EmpresaResponse>(`${API_CONFIG.baseUrl}/api/site/v1/empresa`, empresaRequest, this.httpOptions).pipe(
+    return this.http.post<EmpresaResponse>(`${API_CONFIG.baseUrl}/empresa`, empresaRequest, this.httpOptions).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log(error);
         return throwError(() => new HttpErrorResponse(error.error));
