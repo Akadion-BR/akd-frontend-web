@@ -57,3 +57,58 @@ dados-cadastrais-empresa {
     transition: 0.3s;
     color: $primary-color-dark !important;
 }
+
+.form_button_container {
+    padding: 0 0.5rem;
+}
+
+.botao_inscrever {
+    border: 1px solid $primary-color;
+    border-radius: 3px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    background-color: $primary-color;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.botao_inscrever:focus {
+    outline: none;
+    background-color: $primary-color;
+}
+
+.botao_inscrever:hover {
+    background-color: $primary-color-dark;
+}
+
+.botao_inscrever_desabilitado {
+    background-color: $medium-grey;
+    border: 1px solid $medium-grey;
+    color: $medium-black;
+    cursor: default;
+}
+
+.botao_inscrever_desabilitado:hover {
+    background-color: $medium-grey;
+    border: 1px solid $medium-grey;
+    color: $medium-black;
+}
+
+::ng-deep mat-spinner {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+::ng-deep .mdc-circular-progress__indeterminate-circle-graphic {
+    stroke: $medium-black !important;
+}

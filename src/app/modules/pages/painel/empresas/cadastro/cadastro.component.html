@@ -10,7 +10,7 @@
         </h4>
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block">
 
-            <mat-horizontal-stepper [linear]="false" #stepper>
+            <mat-horizontal-stepper [linear]="true" #stepper>
 
                 <ng-template matStepperIcon="edit">
                     <i class="fa fa-check"></i>
@@ -42,8 +42,28 @@
                         (emissorDeSolicitacaoDeEnvioDeFormulario)="enviaFormularioCriacao()"
                         (emissorDeDadosFiscais)="recebeFormGroupDadosFiscais($event)"></dados-fiscais-empresa>
 
-                </mat-step>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
+                        <button tabindex="41" class="botao_menu botao_inscrever" matStepperPrevious>
+                            <a class="link_botao link_botao_cadastro">
+                                Voltar
+                            </a>
+                        </button>
 
+                        <button tabindex="42" class="botao_menu botao_inscrever"
+                            [disabled]="!validaSeFormulariosSaoValidos() || formStatus == 2"
+                            [ngClass]="{'botao_inscrever_desabilitado': !validaSeFormulariosSaoValidos()}"
+                            (click)="solicitarEnvioDeFormulario()">
+                            <a *ngIf="formStatus == 1, else spinner" class="link_botao link_botao_cadastro"
+                                (click)="acionaBotaoSubmit">
+                                Criar conta
+                            </a>
+                            <ng-template #spinner>
+                                <mat-spinner [color]="'#3333'"></mat-spinner>
+                            </ng-template>
+                        </button>
+                    </div>
+
+                </mat-step>
             </mat-horizontal-stepper>
         </div>
     </div>

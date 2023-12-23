@@ -1,7 +1,7 @@
 export class NfeConfigRequest {
 
-    proximoNumeroProducao: number;
-    serieProducao: number;
+    proximoNumeroProducao: number | null;
+    serieProducao: number | null;
     exibirReciboNaDanfe: boolean;
     imprimirColunasDoIpi: boolean;
     mostraDadosDoIssqn: boolean;

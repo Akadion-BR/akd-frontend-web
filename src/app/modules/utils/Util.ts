@@ -6,6 +6,14 @@ export class Util {
         else throw new Error('Erro interno no front end da aplicação: A string não pôde ser convertida para um valor numérico');
     }
 
+    public static isEmpty(item: any): boolean {
+        if (typeof item == 'boolean') {
+            return true;
+        }
+        if (item != null && item != undefined && item != '') return false;
+        return true;
+    }
+
     public static isListEmpty(list: any[]): boolean {
         if (list == null || list == undefined) return true;
         else {

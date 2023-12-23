@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Util } from './../../../../utils/Util';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { fadeInOutAnimation } from 'src/app/shared/animations';
 import { EmpresasService } from '../services/empresas.service';
-import { Subscription } from 'rxjs';
+import { Subscription, delay } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EmpresaRequest } from 'src/app/modules/models/empresa/request/EmpresaRequest';
 import { Router } from '@angular/router';
+import { FormStatus } from 'src/app/modules/models/globals/FormStatus';
 
 @Component({
   selector: 'cadastro-empresa',
@@ -17,6 +19,7 @@ export class CadastroComponent {
 
   constructor(
     private empresaService: EmpresasService,
+    private ref: ChangeDetectorRef,
     private _snackBar: MatSnackBar,
     private router: Router) { }
 
@@ -25,7 +28,13 @@ export class CadastroComponent {
 
   empresaRequest: EmpresaRequest;
 
+  formStatus: FormStatus = FormStatus.ABERTO;
+
   private criaNovaEmpresaSubscription$: Subscription;
+
+  ngAfterViewInit(): void {
+    this.ref.detectChanges();
+  }
 
   ngOnDestroy(): void {
     if (this.criaNovaEmpresaSubscription$ != undefined) this.criaNovaEmpresaSubscription$.unsubscribe();
@@ -40,11 +49,53 @@ export class CadastroComponent {
   }
 
   protected getValueAtributoDadosEmpresa(atributo: string): any {
-    return this.dadosEmpresa.controls[atributo].value;
+    if (this.dadosEmpresa.controls[atributo].value == false || this.dadosEmpresa.controls[atributo].value == true)
+      return this.dadosEmpresa.controls[atributo].value;
+    else
+      return Util.isEmpty(this.dadosEmpresa.controls[atributo].value)
+        ? null
+        : this.dadosEmpresa.controls[atributo].value;
   }
 
   protected getValueAtributoDadosFiscais(atributo: string): any {
-    return this.dadosFiscais.controls[atributo].value;
+    if (this.dadosFiscais.controls[atributo].value == false || this.dadosFiscais.controls[atributo].value == true)
+      return this.dadosFiscais.controls[atributo].value;
+    else
+      return Util.isEmpty(this.dadosFiscais.controls[atributo].value)
+        ? null
+        : this.dadosFiscais.controls[atributo].value;
+  }
+
+  protected solicitarEnvioDeFormulario() {
+    if (this.dadosFiscais.valid) {
+      this.formStatus = FormStatus.PROCESSANDO;
+      this.enviaFormularioCriacao();
+    }
+    else {
+      this.dadosFiscais.markAllAsTouched();
+      this._snackBar.open('Ops! Algum campo está incorreto. Revise o formulário e tente novamente.', "Fechar", {
+        duration: 3500
+      })
+    }
+  }
+
+  protected validaSeFormulariosSaoValidos(): boolean {
+    if (Util.isObjectEmpty(this.dadosEmpresa) || Util.isObjectEmpty(this.dadosFiscais))
+      return false;
+
+    else {
+      if (this.dadosEmpresa.valid && this.dadosFiscais.valid) return true
+      else return false
+    }
+  }
+
+  protected acionaBotaoSubmit() {
+    if (this.validaSeFormulariosSaoValidos())
+      this.enviaFormularioCriacao()
+    else {
+      this.dadosEmpresa.markAllAsTouched();
+      this.dadosFiscais.markAllAsTouched();
+    }
   }
 
   private constroiObjetoEmpresaRequest() {
@@ -64,14 +115,22 @@ export class CadastroComponent {
         habilitaNfce: this.getValueAtributoDadosFiscais('habilitaNfce'),
         habilitaNfse: this.getValueAtributoDadosFiscais('habilitaNfse'),
         habilitaEnvioEmailDestinatario: this.getValueAtributoDadosFiscais('habilitaEnvioEmailsDestinatario'),
-        cnpjContabilidade: this.getValueAtributoDadosFiscais('cnpjContabilidade'),
-        senhaCertificadoDigital: this.getValueAtributoDadosFiscais('senhaCertificado'),
+        cnpjContabilidade: Util.isNotEmptyString(this.getValueAtributoDadosFiscais('cnpjContabilidade'))
+          ? this.getValueAtributoDadosFiscais('cnpjContabilidade')
+          : null,
+        senhaCertificadoDigital: Util.isNotEmptyString(this.getValueAtributoDadosFiscais('senhaCertificado'))
+          ? this.getValueAtributoDadosFiscais('senhaCertificado')
+          : null,
         regimeTributario: this.getValueAtributoDadosFiscais('regimeTributario'),
         nfeConfig:
           this.getValueAtributoDadosFiscais('habilitaNfe')
             ? {
-              proximoNumeroProducao: this.getValueAtributoDadosFiscais('proximoNumeroNfe'),
-              serieProducao: this.getValueAtributoDadosFiscais('numeroSerieNfe'),
+              proximoNumeroProducao: Util.isNotEmptyString(this.getValueAtributoDadosFiscais('proximoNumeroNfe'))
+                ? this.getValueAtributoDadosFiscais('proximoNumeroNfe')
+                : null,
+              serieProducao: Util.isNotEmptyString(this.getValueAtributoDadosFiscais('numeroSerieNfe'))
+                ? this.getValueAtributoDadosFiscais('numeroSerieNfe')
+                : null,
               exibirReciboNaDanfe: this.getValueAtributoDadosFiscais('exibirReciboNaDanfeNfe'),
               imprimirColunasDoIpi: this.getValueAtributoDadosFiscais('imprimirColunasDoIpi'),
               mostraDadosDoIssqn: this.getValueAtributoDadosFiscais('mostraDadosDoIssqn'),
@@ -83,17 +142,29 @@ export class CadastroComponent {
         nfceConfig:
           this.getValueAtributoDadosFiscais('habilitaNfce')
             ? {
-              proximoNumeroProducao: this.getValueAtributoDadosFiscais('proximoNumeroNfce'),
-              serieProducao: this.getValueAtributoDadosFiscais('numeroSerieNfce'),
-              cscProducao: this.getValueAtributoDadosFiscais('cscNfce'),
-              idTokenProducao: this.getValueAtributoDadosFiscais('idTokenNfce'),
+              proximoNumeroProducao: Util.isNotEmptyString(this.getValueAtributoDadosFiscais('proximoNumeroNfce'))
+                ? this.getValueAtributoDadosFiscais('proximoNumeroNfce')
+                : null,
+              serieProducao: Util.isNotEmptyString(this.getValueAtributoDadosFiscais('numeroSerieNfce'))
+                ? this.getValueAtributoDadosFiscais('numeroSerieNfce')
+                : null,
+              cscProducao: Util.isNotEmptyString(this.getValueAtributoDadosFiscais('cscNfce'))
+                ? this.getValueAtributoDadosFiscais('cscNfce')
+                : null,
+              idTokenProducao: Util.isNotEmptyString(this.getValueAtributoDadosFiscais('idTokenNfce'))
+                ? this.getValueAtributoDadosFiscais('idTokenNfce')
+                : null,
             }
             : null,
         nfseConfig:
           this.getValueAtributoDadosFiscais('habilitaNfse')
             ? {
-              proximoNumeroProducao: this.getValueAtributoDadosFiscais('proximoNumeroNfse'),
-              serieProducao: this.getValueAtributoDadosFiscais('numeroSerieNfse'),
+              proximoNumeroProducao: Util.isNotEmptyString(this.getValueAtributoDadosFiscais('proximoNumeroNfse'))
+                ? this.getValueAtributoDadosFiscais('proximoNumeroNfse')
+                : null,
+              serieProducao: Util.isNotEmptyString(this.getValueAtributoDadosFiscais('numeroSerieNfse'))
+                ? this.getValueAtributoDadosFiscais('numeroSerieNfse')
+                : null,
             }
             : null,
         certificadoDigital: this.getValueAtributoDadosFiscais('nomeCertificadoDigital') != null
@@ -117,9 +188,11 @@ export class CadastroComponent {
           : null
       },
       telefone: {
-        tipoTelefone: this.getValueAtributoDadosEmpresa('numeroTelefone').length == 9
-          ? 'MOVEL'
-          : 'FIXO',
+        tipoTelefone: this.getValueAtributoDadosEmpresa('numeroTelefone') != null
+          ? this.getValueAtributoDadosEmpresa('numeroTelefone').length == 9
+            ? 'MOVEL'
+            : 'FIXO'
+          : null,
         prefixo: this.getValueAtributoDadosEmpresa('prefixo'),
         numero: this.getValueAtributoDadosEmpresa('numeroTelefone'),
       },
@@ -133,25 +206,30 @@ export class CadastroComponent {
         complemento: this.getValueAtributoDadosEmpresa('complemento')
       }
     }
+    console.log(this.empresaRequest);
   }
 
   public enviaFormularioCriacao() {
+    this.formStatus = FormStatus.PROCESSANDO;
+    console.log(this.formStatus);
     this.constroiObjetoEmpresaRequest();
-    console.log(this.empresaRequest);
     this.criaNovaEmpresaSubscription$ =
-      this.empresaService.novaEmpresa(this.empresaRequest).subscribe({
-        error: (error: any) => {
-          this._snackBar.open("Ocorreu um erro ao realizar o cadastro", "Fechar", {
-            duration: 3500
-          })
-        },
-        complete: () => {
-          this.router.navigate(['/painel/empresas']);
-          this._snackBar.open("Cadastro realizado com sucesso", "Fechar", {
-            duration: 3500
-          });
+      this.empresaService.novaEmpresa(this.empresaRequest).subscribe(
+        {
+          error: (error: any) => {
+            this.formStatus = FormStatus.ABERTO;
+            this._snackBar.open(error.error, "Fechar", {})
+          },
+          complete: () => {
+            this.formStatus = FormStatus.ABERTO;
+            this.router.navigate(['/painel/empresas']);
+            this._snackBar.open("Cadastro realizado com sucesso", "Fechar", {
+              duration: 3500
+            });
+          }
         }
-      });
+      );
+
   }
 
 }

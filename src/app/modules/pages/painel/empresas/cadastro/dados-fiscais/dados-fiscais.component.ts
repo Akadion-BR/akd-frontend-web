@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, Output, EventEmitter, ElementRef, ViewChild, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subscription, debounceTime } from 'rxjs';
@@ -6,8 +6,8 @@ import { SelectOption } from 'src/app/modules/shared/inputs/models/select-option
 import { Mask } from 'src/app/modules/utils/Mask';
 import { Util } from 'src/app/modules/utils/Util';
 import { fadeInOutAnimation, slideUpDownAnimation } from 'src/app/shared/animations';
-import { encode } from 'base64-arraybuffer';
 import { Converter } from 'src/app/modules/utils/Converter';
+import { FormStatus } from 'src/app/modules/models/globals/FormStatus';
 
 @Component({
   selector: 'dados-fiscais-empresa',
@@ -62,7 +62,7 @@ export class DadosFiscaisComponent {
           Validators.required,
         ]
       ],
-      cnpjContabilidade: ['',
+      cnpjContabilidade: [null,
         [
           Validators.pattern(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/),
           Validators.maxLength(18)
@@ -395,13 +395,5 @@ export class DadosFiscaisComponent {
     }
   }
 
-  protected solicitarEnvioDeFormulario() {
-    if (this.dadosFiscais.valid) this.emissorDeSolicitacaoDeEnvioDeFormulario.emit();
-    else {
-      this.dadosFiscais.markAllAsTouched();
-      this._snackBar.open('Ops! Algum campo está incorreto. Revise o formulário e tente novamente.', "Fechar", {
-        duration: 3500
-      })
-    }
-  }
+
 }

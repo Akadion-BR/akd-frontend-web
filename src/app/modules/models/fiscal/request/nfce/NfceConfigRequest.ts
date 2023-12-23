@@ -1,9 +1,9 @@
 export class NfceConfigRequest {
 
-    proximoNumeroProducao: number;
-    serieProducao: number;
-    cscProducao: string;
-    idTokenProducao: number;
+    proximoNumeroProducao: number | null;
+    serieProducao: number | null;
+    cscProducao: string | null;
+    idTokenProducao: number | null;
 
     constructor(item: any) {
         this.proximoNumeroProducao = item?.proximoNumeroProducao;

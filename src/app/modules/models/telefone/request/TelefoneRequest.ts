@@ -1,7 +1,7 @@
 export class TelefoneRequest {
     prefixo: number;
     numero: number;
-    tipoTelefone: string;
+    tipoTelefone: string | null;
 
     constructor(item: any) {
         this.prefixo = item?.prefixo;

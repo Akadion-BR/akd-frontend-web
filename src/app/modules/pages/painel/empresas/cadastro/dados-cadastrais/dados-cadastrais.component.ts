@@ -69,47 +69,47 @@ export class DadosCadastraisComponent {
 
   inicializaFormulario(): FormGroup {
     return this.formBuilder.group({
-      razaoSocial: ['',
+      razaoSocial: [null,
         [
           Validators.required,
           Validators.maxLength(70)
         ]
       ],
-      cnpj: ['',
+      cnpj: [null,
         [
           Validators.required,
           Validators.pattern(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/),
           Validators.maxLength(18)
         ]
       ],
-      endpoint: ['',
+      endpoint: [null,
         [
           Validators.required,
           Validators.pattern(/^[a-z]+$/),
           Validators.maxLength(30)
         ]
       ],
-      email: ['',
+      email: [null,
         [
           Validators.required,
           Validators.email,
           Validators.maxLength(70)
         ]
       ],
-      nomeFantasia: ['',
+      nomeFantasia: [null,
         [
           Validators.required,
           Validators.maxLength(70)
         ]
       ],
-      inscricaoEstadual: ['',
+      inscricaoEstadual: [null,
         [
           Validators.required,
           Validators.pattern(/^\d{12}$/),
           Validators.maxLength(12),
         ]
       ],
-      inscricaoMunicipal: ['',
+      inscricaoMunicipal: [null,
         [
           Validators.required,
           Validators.pattern(/^\d{12}$/),
@@ -118,7 +118,7 @@ export class DadosCadastraisComponent {
       ],
       prefixo: [
         {
-          value: '',
+          value: null,
           disabled: false
         },
         [
@@ -128,7 +128,7 @@ export class DadosCadastraisComponent {
       ],
       numeroTelefone: [
         {
-          value: '',
+          value: null,
           disabled: false
         },
         [
@@ -138,7 +138,7 @@ export class DadosCadastraisComponent {
       ],
       codigoPostal: [
         {
-          value: '',
+          value: null,
           disabled: false
         },
         [
@@ -149,7 +149,7 @@ export class DadosCadastraisComponent {
       ],
       estado: [
         {
-          value: '',
+          value: null,
           disabled: false
         },
         [
@@ -158,7 +158,7 @@ export class DadosCadastraisComponent {
       ],
       cidade: [
         {
-          value: '',
+          value: null,
           disabled: true
         },
         [
@@ -168,7 +168,7 @@ export class DadosCadastraisComponent {
       ],
       logradouro: [
         {
-          value: '',
+          value: null,
           disabled: false
         },
         [
@@ -178,7 +178,7 @@ export class DadosCadastraisComponent {
       ],
       numeroEndereco: [
         {
-          value: '',
+          value: null,
           disabled: false
         },
         [
@@ -188,7 +188,7 @@ export class DadosCadastraisComponent {
       ],
       bairro: [
         {
-          value: '',
+          value: null,
           disabled: false
         },
         [
@@ -198,7 +198,7 @@ export class DadosCadastraisComponent {
       ],
       complemento: [
         {
-          value: '',
+          value: null,
           disabled: false
         },
         [

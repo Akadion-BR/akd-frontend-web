@@ -10,8 +10,8 @@ export class ConfigFiscalEmpresaRequest {
     habilitaNfce: boolean;
     habilitaNfse: boolean;
     habilitaEnvioEmailDestinatario: boolean;
-    cnpjContabilidade: string;
-    senhaCertificadoDigital: string;
+    cnpjContabilidade: string | null;
+    senhaCertificadoDigital: string | null;
     regimeTributario: string;
     nfeConfig: NfeConfigRequest | null;
     nfceConfig: NfceConfigRequest | null;

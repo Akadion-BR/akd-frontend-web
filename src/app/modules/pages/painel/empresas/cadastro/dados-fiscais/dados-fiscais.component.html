@@ -277,19 +277,4 @@
 
     </div>
 
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
-        <button tabindex="41" class="botao_menu botao_inscrever" matStepperPrevious>
-            <a class="link_botao link_botao_cadastro">
-                Voltar
-            </a>
-        </button>
-
-        <button tabindex="42" class="botao_menu botao_inscrever" [disabled]="!dadosFiscais.valid"
-            [ngClass]="{'botao_inscrever_desabilitado': !dadosFiscais.valid}" (click)="solicitarEnvioDeFormulario()">
-            <a class="link_botao link_botao_cadastro">
-                Criar conta
-            </a>
-        </button>
-    </div>
-
 </form>
