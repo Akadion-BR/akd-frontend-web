@@ -90,8 +90,16 @@ export class CadastroComponent {
   }
 
   protected acionaBotaoSubmit() {
-    if (this.validaSeFormulariosSaoValidos())
-      this.enviaFormularioCriacao()
+    if (this.validaSeFormulariosSaoValidos()) {
+      if (Util.isEmpty(this.getValueAtributoDadosFiscais('certificadoDigitalByteArray'))) {
+        if (confirm("Nenhum certificado digital foi adicionado. Você não poderá realizar nenhum tipo de emissão fiscal até adicionar um certificado digital. Deseja continuar mesmo assim?")) {
+          this.enviaFormularioCriacao();
+        }
+      }
+      else {
+        this.enviaFormularioCriacao();
+      }
+    }
     else {
       this.dadosEmpresa.markAllAsTouched();
       this.dadosFiscais.markAllAsTouched();
@@ -99,8 +107,6 @@ export class CadastroComponent {
   }
 
   private constroiObjetoEmpresaRequest() {
-    console.log(this.dadosEmpresa);
-    console.log(this.dadosFiscais);
     this.empresaRequest = {
       razaoSocial: this.getValueAtributoDadosEmpresa('razaoSocial'),
       cnpj: this.getValueAtributoDadosEmpresa('cnpj'),

@@ -52,9 +52,8 @@
                         <button tabindex="42" class="botao_menu botao_inscrever"
                             [disabled]="!validaSeFormulariosSaoValidos() || formStatus == 2"
                             [ngClass]="{'botao_inscrever_desabilitado': !validaSeFormulariosSaoValidos()}"
-                            (click)="solicitarEnvioDeFormulario()">
-                            <a *ngIf="formStatus == 1, else spinner" class="link_botao link_botao_cadastro"
-                                (click)="acionaBotaoSubmit">
+                            (click)="acionaBotaoSubmit()">
+                            <a *ngIf="formStatus == 1, else spinner" class="link_botao link_botao_cadastro">
                                 Criar conta
                             </a>
                             <ng-template #spinner>
