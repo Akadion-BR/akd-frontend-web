@@ -15,7 +15,7 @@
 
         <!-- INPUT GROUP SENHA -->
         <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputSenha'" [titulo]="'Senha'"
-            [informativoCampo]="'Este campo é obrigatório e deve conter 14 caracteres'" [tabIndex]="1" [maxLength]="70"
+            [informativoCampo]="'Este campo é obrigatório'" [tabIndex]="1" [maxLength]="25"
             [touched]="autenticacaoService.formLogin.controls['senha'].touched" [todosCaracteresMaiusculos]="false"
             [customIcon]="'lock'" [disabledGroup]="autenticacaoService.formLogin.controls['senha'].disabled"
             [errors]="autenticacaoService.formLogin.controls['senha'].errors" [type]="'password'"
@@ -28,7 +28,6 @@
                     Voltar
                 </a>
             </button>
-
             <button [disabled]="!autenticacaoService.formLogin.valid"
                 [ngClass]="{'botao_inscrever_desabilitado': !autenticacaoService.formLogin.valid}"
                 class="botao_menu botao_inscrever" (click)="realizaLogin()" [tabIndex]="4" mat-button>

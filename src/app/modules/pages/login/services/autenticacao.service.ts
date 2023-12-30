@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -24,13 +24,22 @@ export class AutenticacaoService {
 
   formLogin: FormGroup;
 
-  constructor(private httpClient: HttpClient, private router: Router, private snackBar: MatSnackBar) {
-    this.formLogin = new FormGroup(
-      {
-        cpf: new FormControl(['122.188.264-37']),
-        senha: new FormControl(['123'])
-      }
-    )
+  constructor(
+    private formBuilder: FormBuilder,
+    private httpClient: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar) {
+    this.formLogin = this.formBuilder.group({
+      cpf: ['', [
+        Validators.required,
+        Validators.pattern(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/),
+        Validators.maxLength(14)
+      ]],
+      senha: ['', [
+        Validators.required,
+        Validators.maxLength(25),
+      ]],
+    })
   }
 
   public realizaLogin(cpf: string, senha: string): Observable<any> {

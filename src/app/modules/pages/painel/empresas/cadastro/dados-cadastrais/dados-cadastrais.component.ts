@@ -268,9 +268,6 @@ export class DadosCadastraisComponent {
           error: (error: any) => {
             this.setFormValue('cnpj', '');
             this.dadosEmpresa.controls['cnpj'].reset();
-            this._snackBar.open(error.toString().replace("Error:", ""), "Fechar", {
-              duration: 3500
-            });
           },
           complete: () => {
             console.log('Validação de duplicidade de Cnpj finalizada com sucesso')

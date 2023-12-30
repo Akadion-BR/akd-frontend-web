@@ -24,7 +24,7 @@ export class DadosCadastraisComponent {
 
   // Subscriptions
   validaDuplicidadeCpfSubscription$: Subscription;
-  
+
   protected dadosCadastrais: FormGroup = this.createFormDadosCadastrais();
 
   @Output() emissorDeDadosCadastrais = new EventEmitter<FormGroup>();
@@ -108,9 +108,6 @@ export class DadosCadastraisComponent {
           error: (error: any) => {
             this.setValueParaAtributoDadosCadastrais('cpf', '');
             this.dadosCadastrais.controls['cpf'].reset();
-            this.snackBar.open(error, "Fechar", {
-              duration: 3500
-            });
           },
           complete: () => {
             console.log('Validação de duplicidade de Cpf finalizada com sucesso')
