@@ -224,7 +224,6 @@ export class CadastroComponent {
         {
           error: (error: any) => {
             this.formStatus = FormStatus.ABERTO;
-            this._snackBar.open(error.error, "Fechar", {})
           },
           complete: () => {
             this.formStatus = FormStatus.ABERTO;

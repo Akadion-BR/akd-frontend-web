@@ -34,11 +34,7 @@ export class AutenticacaoService {
   }
 
   public realizaLogin(cpf: string, senha: string): Observable<any> {
-    return this.httpClient.post<LoginRequest>(`${this.apiUrl}/login`, { cpf, senha }, this.httpOptionsLogin).pipe(
-      catchError((error: any) => {
-        return throwError(() => new HttpErrorResponse(error));
-      }),
-    )
+    return this.httpClient.post<LoginRequest>(`${this.apiUrl}/login`, { cpf, senha }, this.httpOptionsLogin);
   }
 
   successfullLogin(authToken: string) {

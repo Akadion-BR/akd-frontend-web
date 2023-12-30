@@ -15,6 +15,7 @@ import { SignupModule } from './modules/pages/signup/signup.module';
 import { PainelModule } from './modules/pages/painel/painel.module';
 import { LoginModule } from './modules/pages/login/login.module';
 import { AutenticacaoInterceptor } from './interceptors/autenticacao.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,11 @@ import { AutenticacaoInterceptor } from './interceptors/autenticacao.interceptor
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AutenticacaoInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     }
   ],

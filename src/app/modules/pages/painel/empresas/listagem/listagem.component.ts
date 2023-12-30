@@ -104,7 +104,6 @@ export class ListagemComponent {
             this.empresaPageResponse = response;
           },
           error: () => {
-            // TODO REALIZAR TRATAMENTO DE ERROS
           },
           complete: () => {
             console.log('Requisição de listagem de empresas realizada com sucesso')

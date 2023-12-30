@@ -11,7 +11,9 @@ import { CriacaoClienteRequest } from 'src/app/modules/models/cliente/request/cr
 })
 export class ClienteService {
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
+  constructor(
+    private http: HttpClient, 
+    private _snackBar: MatSnackBar) { }
 
   private httpOptions = {
     params: new HttpParams({

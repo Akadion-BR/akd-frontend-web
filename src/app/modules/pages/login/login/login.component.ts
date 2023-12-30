@@ -3,6 +3,7 @@ import { AutenticacaoService } from '../services/autenticacao.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LoginRequest } from 'src/app/modules/models/globals/LoginRequest';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -31,10 +32,6 @@ export class LoginComponent implements OnInit {
             this.autenticacaoService.successfullLogin(JSON.stringify(response.headers.get('Authorization')));
           },
           error: () => {
-            this.autenticacaoService.formLogin.reset();
-            this._snackBar.open('Ocorreu um erro durante a sua tentativa de login. Tente novamente!', 'Fechar', {
-              duration: 3500
-            })
           },
           complete: () => {
             this.router.navigate(['/painel']);
