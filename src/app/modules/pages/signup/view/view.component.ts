@@ -6,6 +6,7 @@ import { Util } from 'src/app/modules/utils/Util';
 import { Subscription } from 'rxjs';
 import { ClienteService } from '../services/cliente.service';
 import { Router } from '@angular/router';
+import { AutenticacaoService } from '../../login/services/autenticacao.service';
 
 @Component({
   selector: 'app-view',
@@ -18,7 +19,8 @@ export class ViewComponent {
     private ref: ChangeDetectorRef,
     private router: Router,
     private _snackBar: MatSnackBar,
-    private clienteService: ClienteService) { };
+    private clienteService: ClienteService,
+    private autenticacaoService: AutenticacaoService) { };
 
   protected mouseAcimaDoLogo: boolean = false;
 
@@ -29,6 +31,7 @@ export class ViewComponent {
   criacaoClienteRequest: CriacaoClienteRequest;
 
   private criaNovoClienteSubscription$: Subscription;
+  private realizaLoginClienteSubscription$: Subscription;
 
   ngAfterViewInit(): void {
     this.ref.detectChanges();
@@ -36,6 +39,7 @@ export class ViewComponent {
 
   ngOnDestroy(): void {
     if (this.criaNovoClienteSubscription$ != undefined) this.criaNovoClienteSubscription$.unsubscribe();
+    if (this.realizaLoginClienteSubscription$ != undefined) this.realizaLoginClienteSubscription$.unsubscribe();
   }
 
   protected recebeFormGroupDadosCadastrais(event: any) {
@@ -96,13 +100,23 @@ export class ViewComponent {
 
   public enviaFormularioCriacao() {
     this.constroiObjetoCriacaoClienteRequest();
-    console.log(this.criacaoClienteRequest);
     this.criaNovoClienteSubscription$ =
       this.clienteService.novoCliente(this.criacaoClienteRequest).subscribe({
-        error: (error: any) => {
-          this._snackBar.open("Ocorreu um erro ao realizar o cadastro", "Fechar", {
-            duration: 3500
-          })
+        error: () => {
+        },
+        complete: () => {
+          this.realizaLoginAposCriacaoDeNovoCliente(this.criacaoClienteRequest.cpf, this.criacaoClienteRequest.senha);
+        }
+      });
+  }
+
+  public realizaLoginAposCriacaoDeNovoCliente(cpf: string, senha: string) {
+    this.realizaLoginClienteSubscription$ = this.autenticacaoService.realizaLogin(cpf, senha).subscribe(
+      {
+        next: (response: any) => {
+          this.autenticacaoService.successfullLogin(JSON.stringify(response.headers.get('Authorization')));
+        },
+        error: () => {
         },
         complete: () => {
           this.router.navigate(['/painel/empresas']);
@@ -110,7 +124,8 @@ export class ViewComponent {
             duration: 3500
           });
         }
-      });
+      }
+    )
   }
 
 

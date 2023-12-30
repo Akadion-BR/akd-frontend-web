@@ -1,4 +1,4 @@
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable, catchError, map, shareReplay, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ConsultaCepResponse } from '../models/consulta-cep-response';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +13,7 @@ export class BrasilApiService {
   constructor(private http: HttpClient) { }
 
   urlBrasilApi: string = 'https://brasilapi.com.br/api';
+  private cacheEstados$?: Observable<EstadosResponse[]>;
 
   public getEnderecoPeloCep(cep: string): Observable<ConsultaCepResponse> {
     return this.http.get<ConsultaCepResponse>(`${this.urlBrasilApi}/cep/v1/${cep}`).pipe(
@@ -24,12 +25,16 @@ export class BrasilApiService {
   }
 
   public getTodosEstados(): Observable<EstadosResponse[]> {
-    return this.http.get<EstadosResponse[]>(`${this.urlBrasilApi}/ibge/uf/v1`).pipe(
-      map(estados => this.abstraiResponseApiEmObjetoEstadosResponse(estados)),
-      catchError(erro => {
-        return throwError(() => new Error("Ocorreu um erro de conexão com o servidor. Favor entrar em contato com o suporte").toString().replace("Error:", ""))
-      })
-    )
+    if (!this.cacheEstados$) {
+      this.cacheEstados$ = this.http.get<EstadosResponse[]>(`${this.urlBrasilApi}/ibge/uf/v1`).pipe(
+        shareReplay(1),
+        map(estados => this.abstraiResponseApiEmObjetoEstadosResponse(estados)),
+        catchError(erro => {
+          return throwError(() => new Error("Ocorreu um erro de conexão com o servidor. Favor entrar em contato com o suporte").toString().replace("Error:", ""))
+        })
+      )
+    }
+    return this.cacheEstados$;
   }
 
   private abstraiResponseApiEmObjetoEstadosResponse(estados: any[]) {
@@ -48,7 +53,7 @@ export class BrasilApiService {
       })
     )
   }
-  
+
   private abstraiResponseApiEmObjetoMunicipiosResponse(municipios: any[]) {
     let municipiosConvertidos: MunicipiosResponse[] = [];
     municipios.forEach(municipio => {

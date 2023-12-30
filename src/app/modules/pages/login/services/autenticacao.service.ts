@@ -1,11 +1,11 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { jwtDecode } from 'jwt-decode';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LoginRequest } from 'src/app/modules/models/globals/LoginRequest';
-import { Util } from 'src/app/modules/utils/Util';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class AutenticacaoService {
 
   formLogin: FormGroup;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router, private snackBar: MatSnackBar) {
     this.formLogin = new FormGroup(
       {
         cpf: new FormControl(['122.188.264-37']),
@@ -59,5 +59,9 @@ export class AutenticacaoService {
 
   encerrarSessao() {
     localStorage.clear();
+    this.router.navigateByUrl('/login');
+    this.snackBar.open('Logout realizado com sucesso', "Fechar", {
+      duration: 3500
+    });
   }
 }

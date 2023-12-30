@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LoginRequest } from 'src/app/modules/models/globals/LoginRequest';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
+  realizaLoginSubscription$: Subscription;
+
   constructor(
     public autenticacaoService: AutenticacaoService,
     private router: Router,
@@ -19,12 +22,15 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.autenticacaoService.isAuthenticated()) this.autenticacaoService.encerrarSessao();
+    if (this.autenticacaoService.isAuthenticated()) localStorage.clear();;
+  }
+
+  ngOnDestroy(): void {
+    if (this.realizaLoginSubscription$ != undefined) this.realizaLoginSubscription$.unsubscribe();
   }
 
   realizaLogin() {
-
-    this.autenticacaoService.realizaLogin(
+    this.realizaLoginSubscription$ = this.autenticacaoService.realizaLogin(
       this.autenticacaoService.formLogin.get('cpf')?.value,
       this.autenticacaoService.formLogin.get('senha')?.value).subscribe(
         {
