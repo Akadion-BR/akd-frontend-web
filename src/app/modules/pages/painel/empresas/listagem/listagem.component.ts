@@ -123,7 +123,6 @@ export class ListagemComponent {
       if (params.has('ativas')) {
         let ativasQueryParam: any = params.get('ativas');
         if (Util.isNotEmptyString(ativasQueryParam)) {
-          console.log(ativasQueryParam);
           if (ativasQueryParam == 'true') this.dadosPesquisa.controls['status'].setValue('true');
           else if (ativasQueryParam == 'false') this.dadosPesquisa.controls['status'].setValue('false');
           else this.dadosPesquisa.controls['status'].setValue(null);

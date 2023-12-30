@@ -23,9 +23,6 @@ export class EmpresasService {
   private httpOptions = {
     params: new HttpParams({
     }),
-    headers: new HttpHeaders({
-      'Authorization': API_CONFIG.authorization
-    }),
     body: null
   }
 

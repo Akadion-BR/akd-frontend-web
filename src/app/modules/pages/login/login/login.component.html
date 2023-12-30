@@ -1,0 +1,41 @@
+<div class="row container mat-elevation-z8">
+    <h1 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo-container">
+        Acesse sua conta
+    </h1>
+
+    <form class="formulario col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [formGroup]="autenticacaoService.formLogin">
+        <!-- INPUT GROUP CPF -->
+        <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputCpf'" [titulo]="'CPF'"
+            [informativoCampo]="'Este campo é obrigatório e deve conter 14 caracteres'" [tabIndex]="1" [maxLength]="70"
+            [touched]="autenticacaoService.formLogin.controls['cpf'].touched" [todosCaracteresMaiusculos]="false"
+            [customIcon]="'badge'" [disabledGroup]="autenticacaoService.formLogin.controls['cpf'].disabled"
+            [errors]="autenticacaoService.formLogin.controls['cpf'].errors"
+            [valido]="!(autenticacaoService.formLogin.controls['cpf'].touched && autenticacaoService.formLogin.controls['cpf'].invalid)"
+            formControlName="cpf" #inputCpf></app-custom-input>
+
+        <!-- INPUT GROUP SENHA -->
+        <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputSenha'" [titulo]="'Senha'"
+            [informativoCampo]="'Este campo é obrigatório e deve conter 14 caracteres'" [tabIndex]="1" [maxLength]="70"
+            [touched]="autenticacaoService.formLogin.controls['senha'].touched" [todosCaracteresMaiusculos]="false"
+            [customIcon]="'lock'" [disabledGroup]="autenticacaoService.formLogin.controls['senha'].disabled"
+            [errors]="autenticacaoService.formLogin.controls['senha'].errors" [type]="'password'"
+            [valido]="!(autenticacaoService.formLogin.controls['senha'].touched && autenticacaoService.formLogin.controls['senha'].invalid)"
+            formControlName="senha" #inputSenha></app-custom-input>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
+            <button [routerLink]="['/']" class="botao_menu botao_inscrever" [tabIndex]="3">
+                <a class="link_botao link_botao_cadastro">
+                    Voltar
+                </a>
+            </button>
+
+            <button [disabled]="!autenticacaoService.formLogin.valid"
+                [ngClass]="{'botao_inscrever_desabilitado': !autenticacaoService.formLogin.valid}"
+                class="botao_menu botao_inscrever" (click)="realizaLogin()" [tabIndex]="4" mat-button>
+                <a class="link_botao link_botao_cadastro">
+                    Avançar
+                </a>
+            </button>
+        </div>
+    </form>
+</div>

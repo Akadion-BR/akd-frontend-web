@@ -124,7 +124,7 @@
             <!-- INPUT GROUP PRÓXIMO NÚMERO -->
             <app-custom-input class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" [id]="'inputProximoNumeroNfe'"
                 [informativoCampo]="'Este campo deve conter um valor numérico. Próximo número da NFe a ser emitida. Calculado automaticamente.'"
-                [titulo]="'Próximo número'" [tabIndex]="32" [maxLength]="15"
+                [titulo]="'Próximo número'" [tabIndex]="32" [maxLength]="7"
                 [touched]="dadosFiscais.controls['proximoNumeroNfe'].touched" [todosCaracteresMaiusculos]="false"
                 [disabledGroup]="dadosFiscais.controls['proximoNumeroNfe'].disabled"
                 [errors]="dadosFiscais.controls['proximoNumeroNfe'].errors" [customIcon]="'pin'"
@@ -163,7 +163,7 @@
             <!-- INPUT GROUP PRÓXIMO NÚMERO -->
             <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputProximoNumeroNfce'"
                 [informativoCampo]="'Este campo deve conter um valor numérico. Próximo número da NFCe a ser emitida. Calculado automaticamente.'"
-                [titulo]="'Próximo número'" [tabIndex]="35" [maxLength]="15"
+                [titulo]="'Próximo número'" [tabIndex]="35" [maxLength]="7"
                 [touched]="dadosFiscais.controls['proximoNumeroNfce'].touched" [todosCaracteresMaiusculos]="false"
                 [disabledGroup]="dadosFiscais.controls['proximoNumeroNfce'].disabled"
                 [errors]="dadosFiscais.controls['proximoNumeroNfce'].errors" [customIcon]="'pin'"
@@ -173,21 +173,20 @@
             <!-- INPUT GROUP CSC NFCE-->
             <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'cscNfce'"
                 [informativoCampo]="'CSC para emissão de NFCe em ambiente de produção. Sem este campo não será possível emitir NFCe. Veja com o SEFAZ do seu estado como gerar este código.'"
-                [titulo]="'CSC'" [tabIndex]="35" [maxLength]="30" [touched]="dadosFiscais.controls['cscNfce'].touched"
-                [todosCaracteresMaiusculos]="false" [disabledGroup]="dadosFiscais.controls['cscNfce'].disabled"
+                [titulo]="'CSC'" [tabIndex]="35" [maxLength]="30" [touched]="true" [todosCaracteresMaiusculos]="false"
+                [disabledGroup]="dadosFiscais.controls['cscNfce'].disabled"
                 [errors]="dadosFiscais.controls['cscNfce'].errors" [customIcon]="'pin'"
-                [valido]="!(dadosFiscais.controls['cscNfce'].touched && dadosFiscais.controls['cscNfce'].invalid)"
-                formControlName="cscNfce" #inputCscNfce></app-custom-input>
+                [valido]="!(dadosFiscais.controls['cscNfce'].invalid)" formControlName="cscNfce"
+                #inputCscNfce></app-custom-input>
 
             <!-- INPUT GROUP ID TOKEN -->
             <app-custom-input class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" [id]="'inputIdTokenNfce'"
                 [informativoCampo]="'Id do CSC para emissão de NFCe. Sem este campo não será possível emitir NFCe. Veja com o SEFAZ do seu estado como gerar este número.'"
-                [titulo]="'Id Token'" [tabIndex]="35" [maxLength]="15"
-                [touched]="dadosFiscais.controls['idTokenNfce'].touched" [todosCaracteresMaiusculos]="false"
-                [disabledGroup]="dadosFiscais.controls['idTokenNfce'].disabled"
+                [titulo]="'Id Token'" [tabIndex]="35" [maxLength]="15" [touched]="true"
+                [todosCaracteresMaiusculos]="false" [disabledGroup]="dadosFiscais.controls['idTokenNfce'].disabled"
                 [errors]="dadosFiscais.controls['idTokenNfce'].errors" [customIcon]="'corporate_fare'"
-                [valido]="!(dadosFiscais.controls['idTokenNfce'].touched && dadosFiscais.controls['idTokenNfce'].invalid)"
-                formControlName="idTokenNfce" #inputIdTokenNfce></app-custom-input>
+                [valido]="!(dadosFiscais.controls['idTokenNfce'].invalid)" formControlName="idTokenNfce"
+                #inputIdTokenNfce></app-custom-input>
         </div>
     </div>
 

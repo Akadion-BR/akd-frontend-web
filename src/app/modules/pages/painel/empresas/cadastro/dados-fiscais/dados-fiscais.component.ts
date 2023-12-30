@@ -88,8 +88,6 @@ export class DadosFiscaisComponent {
           disabled: true
         },
         [
-          Validators.min(1),
-          Validators.max(100),
           Validators.pattern(/[^a-zA-Z ]/g),
         ]
       ],
@@ -171,8 +169,6 @@ export class DadosFiscaisComponent {
           disabled: true
         },
         [
-          Validators.min(1),
-          Validators.max(100),
           Validators.pattern(/[^a-zA-Z ]/g),
         ]
       ],
@@ -218,8 +214,6 @@ export class DadosFiscaisComponent {
           disabled: true
         },
         [
-          Validators.min(1),
-          Validators.max(100),
           Validators.pattern(/[^a-zA-Z ]/g),
         ]
       ],
