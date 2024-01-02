@@ -1,171 +1,102 @@
-@import '../../../../../../dist/variables.scss';
+@use '../../../../../../dist/variables';
+@use '../../../../../../dist/mixins';
+@use '../../../../../../dist/reset';
 
-h1,
-h2,
-h3,
-h4,
-p,
-div,
-app-custom-input,
-button,
-ul,
-li,
-i,
-h5,
-form {
-    margin: 0;
-    padding: 0;
-}
 
-/* PLANOS */
-
-.container_planos {
-    display: flex;
-    justify-content: center;
-    -webkit-user-select: none;
-    /* Safari */
-    -ms-user-select: none;
-    /* IE 10 and IE 11 */
-    user-select: none;
-    /* Standard syntax */
+.container {
+    @include mixins.centerContent();
+    @include mixins.notSelectableContent();
     cursor: pointer;
     padding: 1.5rem 1rem;
-}
 
-.informativo_plano {
-    padding: 0 0.5rem;
-    margin-bottom: 1rem;
-}
+    .informativo {
+        padding: 0 0.5rem;
+        margin-bottom: 1rem;
 
-.titulo_informativo_plano {
-    font-family: $font-poppins;
-    font-size: 1rem;
-    font-weight: 500;
-    color: $primary-color;
-}
+        &-titulo {
+            @include mixins.textConfiguration(0, 0, 1rem, variables.$font-poppins, variables.$primary-color, 500);
+        }
 
-.texto_informativo_plano {
-    font-family: $font-poppins;
-    font-size: 0.8rem;
-    color: $light-grey;
-    font-weight: 400;
-}
+        &-texto {
+            @include mixins.textConfiguration(0, 0, 0.8rem, variables.$font-poppins, variables.$light-grey, 400);
+        }
+    }
 
-.bloco_plano {
-    padding: 0 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-}
+    .card-plano {
+        @include mixins.centerContent();
+        padding: 0 0.5rem;
+        margin-bottom: 1rem;
 
-.subbloco_plano {
-    background-color: $dark-black;
-    border: 1px solid $dark-grey;
-    border-radius: 3px;
-    padding: 0.5rem 1rem;
-}
+        .subcard-plano {
+            background-color: variables.$dark-black;
+            border: 1px solid variables.$dark-grey;
+            border-radius: 3px;
+            padding: 0.5rem 1rem;
 
-.subbloco_plano:hover {
-    background-color: $medium-dark-black;
-}
+            &:hover {
+                background-color: variables.$medium-dark-black;
+            }
 
-.subbloco_plano:focus {
-    outline: none;
-}
+            &:focus {
+                outline: none;
+            }
 
-.subbloco_plano_ativo {
-    border: 1px solid $primary-color;
-}
+            &-ativo {
+                border: 1px solid variables.$primary-color;
+            }
 
-.titulo_plano {
-    font-size: 1rem;
-    margin-top: 0.5rem;
-    color: $medium-white;
-    font-family: $font-roboto;
-}
+            .titulo-plano {
+                @include mixins.textConfiguration(0.5rem 0 0 0, 0, 1rem, variables.$font-roboto, variables.$medium-white, 400);
+            }
 
-.descricao_plano {
-    margin: 0.5rem 0;
-    font-size: 0.8rem;
-    color: $light-grey;
-}
+            .descricao-plano {
+                @include mixins.textConfiguration(0.5rem 0 0.5rem 0, 0, 0.8rem, variables.$font-roboto, variables.$light-grey, 400);
+            }
 
-.preco_plano_valor {
-    color: $medium-white;
-    font-size: 0.9rem;
-    font-weight: 400;
-}
+            .preco-plano {
+                &-valor {
+                    @include mixins.textConfiguration(0, 0, 0.9rem, variables.$font-roboto, variables.$medium-white, 400);
+                    color: variables.$medium-white;
+                    font-size: 0.9rem;
+                    font-weight: 400;
+                }
 
-.periodicidade_plano {
-    color: $light-grey;
-    font-size: 0.8rem;
-    margin-left: 0.3rem;
-    display: flex;
-    align-items: center;
-}
+                &-periodicidade {
+                    @include mixins.textConfiguration(0 0 0 0.3rem, 0, 0.8rem, variables.$font-roboto, variables.$light-grey, 400);
+                    display: flex;
+                    align-items: center;
+                }
+            }
 
-.lista_vantagens_plano {
-    list-style-type: none;
-}
+            .lista-vantagens-plano {
+                list-style-type: none;
+                margin-top: 0.5rem;
 
-.fa-check-square {
-    margin-right: 0.5rem;
-    color: $primary-color;
-}
+                &-item {
+                    display: flex;
+                    align-items: baseline;
+                    color: variables.$medium-white;
+                    padding: 0.2rem 0;
 
-.fa-minus-square {
-    margin-right: 0.5rem;
-    color: $light-grey;
-}
+                    .fa-check-square {
+                        margin-right: 0.5rem;
+                        color: variables.$primary-color;
+                    }
 
-.lista_vantagens_plano {
-    margin-top: 0.5rem;
-}
+                    .fa-minus-square {
+                        margin-right: 0.5rem;
+                        color: variables.$light-grey;
+                    }
+                }
+            }
+        }
+    }
 
-.item_lista_vantagens_plano {
-    display: flex;
-    align-items: baseline;
-    color: $medium-white;
-    padding: 0.2rem 0;
-}
+    .form-button-container {
+        padding: 0 0.5rem;
 
-/* BOTAO SUBMIT */
-
-.form_button_container {
-    padding: 0 0.5rem;
-}
-
-.botao_menu {
-    border: 1px solid $primary-color;
-    border-radius: 3px;
-    padding: 0.4rem 1rem;
-    font-size: 0.8rem;
-    background-color: $primary-color;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    -webkit-user-select: none;
-    /* Safari */
-    -ms-user-select: none;
-    /* IE 10 and IE 11 */
-    user-select: none;
-    /* Standard syntax */
-}
-
-.botao_menu:focus {
-    outline: none;
-    background-color: $primary-color-dark;
-}
-
-.botao_menu:hover {
-    background-color: $primary-color-dark;
-}
-
-.link_botao {
-    text-align: center;
-    color: $medium-black;
-    text-decoration: none;
+        .botao {
+            @include mixins.standartButton(0);
+        }
+    }
 }

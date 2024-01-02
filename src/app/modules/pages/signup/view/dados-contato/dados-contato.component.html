@@ -80,16 +80,15 @@
         #inputBairro></app-custom-input>
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
-        <button tabindex="10" class="botao_menu botao_inscrever" matStepperPrevious>
-            <a class="link_botao link_botao_cadastro">
+        <button tabindex="10" class="botao" matStepperPrevious>
+            <a>
                 Voltar
             </a>
         </button>
 
-        <button tabindex="11" [disabled]="!dadosContato.valid"
-            [ngClass]="{'botao_inscrever_desabilitado': !dadosContato.valid}" (click)="verificaSePodeAvancar()"
-            class="botao_menu botao_inscrever" matStepperNext>
-            <a class="link_botao link_botao_cadastro">
+        <button tabindex="11" [disabled]="!dadosContato.valid" [ngClass]="{'botao-desabilitado': !dadosContato.valid}"
+            (click)="verificaSePodeAvancar()" class="botao" matStepperNext>
+            <a>
                 Avançar
             </a>
         </button>

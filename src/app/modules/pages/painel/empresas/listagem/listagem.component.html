@@ -1,8 +1,8 @@
 <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container" [@fadeInOut]>
-    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block_container block_container_pesquisa">
-        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block block_pesquisa">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 cabecalho_block cabecalho_block_pesquisa">
-                <h4 class="titulo_bloco titulo_bloco_pesquisa">
+    <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block-container-pesquisa">
+        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block-pesquisa">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 cabecalho-block-pesquisa">
+                <h4 class="titulo-bloco-pesquisa">
                     Pesquisar empresas
                 </h4>
             </div>
@@ -41,18 +41,18 @@
         </div>
     </div>
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block_container block_container_listagem">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block block_listagem" *ngIf="empresaPageResponse != undefined 
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 listagem" *ngIf="empresaPageResponse != undefined 
             && empresaPageResponse != null 
             && empresaPageResponse.content != undefined 
             && empresaPageResponse.content != null
             && empresaPageResponse.content.length > 0; else semEmpresasEncontradas">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 cabecalho_block cabecalho_block_listagem">
-                <h4 class="titulo_bloco">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 listagem-cabecalho">
+                <h4 class="listagem-cabecalho-titulo">
                     Minhas empresas
                 </h4>
             </div>
 
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 block_opcoes_tabela">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 opcoes-listagem">
                 <button class="botao_cria_empresa" [routerLink]="['/painel/empresas/criar']">
                     ADICIONAR EMPRESA
                 </button>
@@ -60,7 +60,7 @@
                     <li (click)="voltarPagina()"
                         [ngClass]="{'item_paginacao_desabilitado': empresaPageResponse.pageNumber == 0}"
                         class="item_paginacao">
-                        <p class="texto_paginacao">
+                        <p>
                             < </p>
                     </li>
                     <ng-container
@@ -183,13 +183,12 @@
 
         </div>
         <ng-template #semEmpresasEncontradas>
-            <div
-                class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 block block_listagem block_listagem_vazia">
-                <img src="../../../../../../assets/battery.png" class="imagem_listagem_vazia" [@fadeInOut]>
-                <h3 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 titulo_listagem_vazia">
+            <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mat-elevation-z8 listagem-vazia">
+                <img src="../../../../../../assets/battery.png" class="listagem-vazia-imagem" [@fadeInOut]>
+                <h3 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 listagem-vazia-titulo">
                     Nenhuma empresa foi encontrada! Deseja criar uma nova?
                 </h3>
-                <button class="botao_listagem_vazia" [routerLink]="['/painel/empresas/criar']">
+                <button class="listagem-vazia-botao" [routerLink]="['/painel/empresas/criar']">
                     Criar nova empresa
                 </button>
             </div>

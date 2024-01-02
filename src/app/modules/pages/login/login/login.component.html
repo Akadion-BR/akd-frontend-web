@@ -9,7 +9,7 @@
             [informativoCampo]="'Este campo é obrigatório e deve conter 14 caracteres'" [tabIndex]="1" [maxLength]="70"
             [touched]="autenticacaoService.formLogin.controls['cpf'].touched" [todosCaracteresMaiusculos]="false"
             [customIcon]="'badge'" [disabledGroup]="autenticacaoService.formLogin.controls['cpf'].disabled"
-            [errors]="autenticacaoService.formLogin.controls['cpf'].errors"
+            [errors]="autenticacaoService.formLogin.controls['cpf'].errors" (input)="realizaTratamentoCpf($event)"
             [valido]="!(autenticacaoService.formLogin.controls['cpf'].touched && autenticacaoService.formLogin.controls['cpf'].invalid)"
             formControlName="cpf" #inputCpf></app-custom-input>
 
@@ -23,17 +23,21 @@
             formControlName="senha" #inputSenha></app-custom-input>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
-            <button [routerLink]="['/']" class="botao_menu botao_inscrever" [tabIndex]="3">
-                <a class="link_botao link_botao_cadastro">
+            <button [ngClass]="{'botao-desabilitado': formStatus != 1}" [disabled]="formStatus != 1"
+                [routerLink]="['/']" class="botao" [tabIndex]="3">
+                <a>
                     Voltar
                 </a>
             </button>
             <button [disabled]="!autenticacaoService.formLogin.valid"
-                [ngClass]="{'botao_inscrever_desabilitado': !autenticacaoService.formLogin.valid}"
-                class="botao_menu botao_inscrever" (click)="realizaLogin()" [tabIndex]="4" mat-button>
-                <a class="link_botao link_botao_cadastro">
-                    Avançar
+                [ngClass]="{'botao-desabilitado': !autenticacaoService.formLogin.valid}" class="botao"
+                (click)="realizaLogin()" [tabIndex]="4" mat-button>
+                <a *ngIf="formStatus == 1, else spinner">
+                    Acessar
                 </a>
+                <ng-template #spinner>
+                    <mat-spinner [color]="'#3333'"></mat-spinner>
+                </ng-template>
             </button>
         </div>
     </form>

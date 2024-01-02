@@ -1,26 +1,22 @@
-@import '../../../../../dist/variables.scss';
-@import '../../../../../dist/reset.scss';
-@import '../styles/custom-inputs.scss';
+@use '../../../../../dist/variables.scss';
+@use '../../../../../dist/reset.scss';
+@use '../../../../../dist/mixins.scss';
+@use '../styles/custom-inputs.scss';
 
 option,
 select {
-    background: $dark-black !important;
-    color: $primary-color !important;
-    border: 1px solid $dark-grey !important;
-    font-family: $font-poppins !important;
-    font-size: 1rem;
-    font-weight: 400;
-    padding: 0.5rem 1rem;
-    padding-right: 2rem;
+    background: variables.$dark-black !important;
+    border: 1px solid variables.$dark-grey !important;
+    @include mixins.textConfiguration(0, 0.5rem 2rem 0.5rem 1rem, 1rem, variables.$font-poppins !important, variables.$primary-color !important, 400);
 }
 
 option:focus,
 select:focus {
-    border: 1px solid $primary-color !important;
+    border: 1px solid variables.$primary-color !important;
     outline: none;
 }
 
 .input_invalida:focus {
-    border: 1px solid $strong-red !important;
+    border: 1px solid variables.$strong-red !important;
     outline: none;
 }

@@ -1,0 +1,28 @@
+@use '../mixins';
+@use '../variables.scss';
+@use '../reset.scss';
+
+.lista_paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    list-style-type: none;
+
+    .item_paginacao {
+        cursor: pointer;
+        border: 1px solid variables.$primary-color;
+        border-radius: 5px;
+        @include mixins.notSelectableContent();
+        @include mixins.textConfiguration(0 0 0 0.5rem, 0 0.5rem, 0.8rem, variables.$font-poppins, variables.$primary-color, 400);
+
+        &_ativo {
+            background-color: variables.$primary-color;
+            color: variables.$medium-black;
+        }
+
+        &_desabilitado {
+            border: 1px solid variables.$dark-grey;
+            color: variables.$dark-grey
+        }
+    }
+}

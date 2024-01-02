@@ -24,8 +24,12 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
           if (error.error instanceof ErrorEvent) {
-            console.log('Error event');
-          } else {
+            this._snackBar.open('Ocorreu um erro interno na aplicação. Favor entrar em contato com o suporte', "Fechar", {
+              duration: 15000
+            });
+            return throwError(() => new Error(error.error));
+          }
+          else {
             switch (error.status) {
               case 401 | 403:
                 if (this.router.url == '/login') {
@@ -57,12 +61,22 @@ export class ErrorInterceptor implements HttpInterceptor {
                   duration: 15000
                 });
                 break;
+              default:
+                this._snackBar.open('Ocorreu um erro interno na aplicação. Favor entrar em contato com o suporte', "Fechar", {
+                  duration: 15000
+                });
+                break;
             }
+            return throwError(() => new Error(error.error.error));
           }
-        } else {
-          console.log('Ocorreu um erro: ', error);
         }
-        return throwError(() => new Error(error));
+        else {
+          console.log('Ocorreu um erro: ', error);
+          this._snackBar.open('Ocorreu um erro interno na aplicação. Favor entrar em contato com o suporte', "Fechar", {
+            duration: 15000
+          });
+          return throwError(() => new Error(error.error));
+        }
       })
     );
   }

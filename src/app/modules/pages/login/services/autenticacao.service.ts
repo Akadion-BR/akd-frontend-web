@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { LoginRequest } from 'src/app/modules/models/globals/LoginRequest';
+import { Util } from 'src/app/modules/utils/Util';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -40,6 +41,15 @@ export class AutenticacaoService {
         Validators.maxLength(25),
       ]],
     })
+  }
+
+  public getFormValue(atributo: string): any {
+    if (Util.isObjectEmpty(this.formLogin)) return null;
+    return this.formLogin.controls[atributo].value;
+  }
+
+  public setFormValue(atributo: string, valor: any) {
+    this.formLogin.controls[atributo].setValue(valor);
   }
 
   public realizaLogin(cpf: string, senha: string): Observable<any> {

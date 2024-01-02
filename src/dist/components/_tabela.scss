@@ -1,0 +1,81 @@
+@use '../mixins';
+@use '../variables';
+
+table {
+    margin-top: 0.5rem;
+    border: 1px solid variables.$medium-black;
+
+    thead {
+        background-color: variables.$medium-black;
+    }
+
+    th {
+        padding: 0.6rem;
+        font-weight: 500;
+        font-size: 0.8rem;
+
+        .icone_tabela {
+            color: variables.$primary-color;
+            cursor: pointer;
+        }
+
+        .dropdown-menu,
+        .dropdown-item {
+            background-color: variables.$light-black !important;
+        }
+
+        .dropdown-menu {
+            padding: 0.5rem 0;
+
+            .dropdown-item {
+                margin: 0;
+                display: flex;
+                padding: 0.2rem 1rem;
+                cursor: pointer;
+
+                .mat-icon {
+                    @include mixins.centerContent();
+                    font-size: 1.3rem;
+                    margin-right: 0.5rem;
+                    color: variables.$dark-white;
+                }
+
+                .dropdown-item-text {
+                    @include mixins.textConfiguration(0, 0, 0.9rem, variables.$font-poppins, variables.$dark-white, 400);
+                    display: flex;
+                    align-items: center;
+                }
+
+                &:hover>.option_icon,
+                &:hover>.dropdown-item-text {
+                    color: variables.$primary-color !important;
+                    transition: 0.2s;
+                }
+            }
+        }
+    }
+
+    td {
+        padding: 0.6rem;
+        font-weight: 400;
+        font-size: 0.7rem;
+
+        .empresa_ativa {
+            padding: 0.2rem 1rem;
+            border: 1px solid variables.$success;
+            color: variables.$success;
+        }
+
+        .empresa_inativa {
+            padding: 0.2rem 1rem;
+            border: 1px solid variables.$error;
+            color: variables.$error;
+        }
+
+        span {
+            font-family: variables.$font-poppins;
+            border-radius: 3px;
+            @include mixins.notSelectableContent();
+        }
+    }
+}

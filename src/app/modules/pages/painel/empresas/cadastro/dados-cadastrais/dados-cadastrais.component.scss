@@ -1,61 +1,19 @@
-@import '../../../../../../../dist/variables.scss';
-@import '../../../../../../../dist/reset.scss';
+@use '../../../../../../../dist/mixins';
+@use '../../../../../../../dist/variables.scss';
+@use '../../../../../../../dist/reset.scss';
 
 .titulo_bloco_formulario {
-    padding: 0 0.5rem;
-    font-size: 0.9rem;
-    font-family: $font-poppins;
-    color: $medium-white;
-    margin-top: 0.5rem;
-    font-weight: 400;
-}
+    @include mixins.textConfiguration(0.5rem 0 0 0, 0 0.5rem, 0.9rem, variables.$font-poppins, variables.$medium-white, 400);
 
-hr {
-    margin-bottom: 0.5rem;
+    hr {
+        margin-bottom: 0.5rem;
+    }
 }
 
 .form_button_container {
     padding: 0 0.5rem;
-}
 
-.botao_inscrever {
-    border: 1px solid $primary-color;
-    border-radius: 3px;
-    padding: 0.4rem 1rem;
-    font-size: 0.8rem;
-    background-color: $primary-color;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin-top: 1rem;
-    -webkit-user-select: none;
-    /* Safari */
-    -ms-user-select: none;
-    /* IE 10 and IE 11 */
-    user-select: none;
-    /* Standard syntax */
-}
-
-.botao_inscrever:focus {
-    outline: none;
-    background-color: $primary-color;
-}
-
-.botao_inscrever:hover {
-    background-color: $primary-color-dark;
-}
-
-.botao_inscrever_desabilitado {
-    background-color: $medium-grey;
-    border: 1px solid $medium-grey;
-    color: $medium-black;
-    cursor: default;
-}
-
-.botao_inscrever_desabilitado:hover {
-    background-color: $medium-grey;
-    border: 1px solid $medium-grey;
-    color: $medium-black;
+    .botao {
+        @include mixins.standartButton();
+    }
 }

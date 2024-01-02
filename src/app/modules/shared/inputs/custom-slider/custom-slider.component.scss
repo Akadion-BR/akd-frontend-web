@@ -1,5 +1,6 @@
-@import '../../../../../dist/variables.scss';
-@import '../../../../../dist/reset.scss';
+@use '../../../../../dist/variables';
+@use '../../../../../dist/mixins';
+@use '../../../../../dist/reset';
 
 .slider_container {
     display: flex;
@@ -43,30 +44,21 @@
 }
 
 .slider_desabilitado {
-    background-color: $dark-grey;
-    border: 1px solid $dark-white;
+    background-color: variables.$dark-grey;
+    border: 1px solid variables.$dark-white;
 }
 
 .slider_title {
-    color: $dark-white;
-    font-size: 0.9rem;
-    font-weight: 400;
-    font-family: $font-roboto;
-    margin-left: 0.5rem;
-    -webkit-user-select: none;
-    /* Safari */
-    -ms-user-select: none;
-    /* IE 10 and IE 11 */
-    user-select: none;
-    /* Standard syntax */
+    @include mixins.textConfiguration(0 0 0 0.5rem, 0, 0.9rem, variables.$font-roboto, variables.$dark-white, 400);
+    @include mixins.notSelectableContent();
 }
 
 .label_desabilitada {
-    color: $dark-grey;
+    color: variables.$dark-grey;
 }
 
 .checked~.switch {
-    background-color: $primary-color;
+    background-color: variables.$primary-color;
 }
 
 .checked~.switch .slider {
@@ -74,10 +66,5 @@
 }
 
 .titulo_bloco_formulario {
-    padding: 0 0.5rem;
-    font-size: 0.9rem;
-    font-family: $font-poppins;
-    color: $medium-white;
-    margin-top: 0.5rem;
-    font-weight: 400;
+    @include mixins.textConfiguration(0.5rem 0 0 0, 0 0.5rem, 0.9rem, variables.$font-poppins, variables.$medium-white, 400);
 }

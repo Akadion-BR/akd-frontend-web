@@ -1,114 +1,68 @@
-@import '../../../../../../dist/variables.scss';
-@import '../../../../../../dist/reset.scss';
-@import '../../../../../../dist/custom-stepper.scss';
+@use '../../../../../../dist/mixins';
+@use '../../../../../../dist/variables.scss';
+@use '../../../../../../dist/reset.scss';
+@use '../../../../../../dist/components/custom-stepper.scss';
 
-dados-cadastrais-empresa {
-    margin: 0;
-    padding: 0;
+:host {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
     height: 100%;
-    color: $dark-white;
-}
+    color: variables.$dark-white;
 
-.block_container {
-    border-radius: 3px;
-    height: 100%;
-}
+    .block_container {
+        border-radius: 3px;
+        height: 100%;
 
-.block {
-    height: auto;
-    background-color: $light-black;
-    border-radius: 3px;
-    padding: 1rem;
-}
+        .titulo_nova_empresa {
+            @include mixins.textConfiguration(0 0 0.5rem 0, 0, 1.3rem, variables.$font-poppins, variables.$medium-white, 500);
+        }
 
-::ng-deep .mat-horizontal-stepper-header-container {
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 1.5rem;
-}
+        .voltar_clicavel {
+            cursor: pointer;
+            @include mixins.textConfiguration(0, 0, 0.8rem, variables.$font-poppins, variables.$primary-color !important, 500);
 
-.titulo_nova_empresa {
-    font-size: 1.3rem;
-    font-weight: 500;
-    font-family: $font-poppins;
-    color: $medium-white;
-    margin-bottom: 0.5rem;
-    -webkit-user-select: none;
-    /* Safari */
-    -ms-user-select: none;
-    /* IE 10 and IE 11 */
-    user-select: none;
-    /* Standard syntax */
-}
+            &:hover {
+                transition: 0.3s;
+                color: variables.$primary-color-dark !important;
+            }
+        }
 
-.voltar_clicavel {
-    font-size: 0.8rem;
-    color: $primary-color !important;
-    font-weight: 500;
-    cursor: pointer;
-    letter-spacing: 0.5px;
-    font-family: $font-poppins;
-}
+        .block {
+            height: auto;
+            background-color: variables.$light-black;
+            border-radius: 3px;
+            padding: 1rem;
 
-.voltar_clicavel:hover {
-    transition: 0.3s;
-    color: $primary-color-dark !important;
-}
+            ::ng-deep .mat-horizontal-stepper-header-container {
+                width: 50%;
+                margin: 0 auto;
+                margin-top: 1.5rem;
+            }
 
-.form_button_container {
-    padding: 0 0.5rem;
-}
+            .form_button_container {
+                padding: 0 0.5rem;
+            }
 
-.botao_inscrever {
-    border: 1px solid $primary-color;
-    border-radius: 3px;
-    padding: 0.4rem 1rem;
-    font-size: 0.8rem;
-    background-color: $primary-color;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin-top: 1rem;
-    -webkit-user-select: none;
-    /* Safari */
-    -ms-user-select: none;
-    /* IE 10 and IE 11 */
-    user-select: none;
-    /* Standard syntax */
-}
+            .botao {
+                @include mixins.standartButton();
+            }
 
-.botao_inscrever:focus {
-    outline: none;
-    background-color: $primary-color;
-}
+            ::ng-deep mat-spinner {
+                width: 20px !important;
+                height: 20px !important;
+            }
 
-.botao_inscrever:hover {
-    background-color: $primary-color-dark;
-}
+            ::ng-deep .mdc-circular-progress__indeterminate-circle-graphic {
+                stroke: variables.$medium-black !important;
+            }
+        }
 
-.botao_inscrever_desabilitado {
-    background-color: $medium-grey;
-    border: 1px solid $medium-grey;
-    color: $medium-black;
-    cursor: default;
-}
+    }
 
-.botao_inscrever_desabilitado:hover {
-    background-color: $medium-grey;
-    border: 1px solid $medium-grey;
-    color: $medium-black;
-}
-
-::ng-deep mat-spinner {
-    width: 20px !important;
-    height: 20px !important;
-}
-
-::ng-deep .mdc-circular-progress__indeterminate-circle-graphic {
-    stroke: $medium-black !important;
 }

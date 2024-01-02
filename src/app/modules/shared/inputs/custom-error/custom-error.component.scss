@@ -1,5 +1,6 @@
-@import '../../../../../dist/variables.scss';
-@import '../../../../../dist/reset.scss';
+@use '../../../../../dist/variables';
+@use '../../../../../dist/mixins';
+@use '../../../../../dist/reset';
 
 .error_message_container,
 .error_message {
@@ -8,14 +9,12 @@
 }
 
 .error_message {
-    color: $strong-red;
+    color: variables.$strong-red;
     font-weight: 400;
     font-size: 0.6rem;
     position: absolute;
     right: 0;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    @include mixins.notSelectableContent();
 }
 
 @media (max-width: 576px) {

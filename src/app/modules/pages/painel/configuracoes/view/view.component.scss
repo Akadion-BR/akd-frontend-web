@@ -1,118 +1,66 @@
-@import '../../../../../../dist/variables.scss';
-@import '../../../../../../dist/reset.scss';
+@use '../../../../../../dist/variables';
+@use '../../../../../../dist/mixins';
+@use '../../../../../../dist/reset';
+@use '../../../../../../dist/components/custom-scrollbar';
 
-painel-footer,
-painel-sidebar,
-painel-header {
-    margin: 0;
-    padding: 0;
-}
+@include mixins.pulseAnimation(0.98, 1);
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $dark-white;
+    @include mixins.centerContent();
+    color: variables.$dark-white;
     height: 100%;
+
+    .block-container {
+        @include mixins.centerContent();
+        border-radius: 3px;
+        margin-bottom: 1rem;
+        padding: 0 0.5rem;
+        height: 5rem;
+    }
 }
 
-.block_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
-    margin-bottom: 1rem;
-    padding: 0 0.5rem;
-    height: 5rem;
-}
-
-.block_container_content {
+.block-container-content {
     padding: 0 0.5rem;
     height: calc(100% - 6rem);
 }
 
 .block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include mixins.centerContent();
     border-radius: 3px;
     padding: 1.5rem;
     height: 100%;
     cursor: pointer;
     border: none;
-    background-color: $medium-black;
-}
+    background-color: variables.$medium-black;
 
-.block>h1 {
-    color: $medium-grey;
-    font-size: 0.8rem;
-    text-align: center;
-    font-weight: 500;
-    font-family: $font-poppins;
-}
-
-.block:hover {
-    animation: pulse 1.5s infinite;
-}
-
-.block:focus {
-    outline: none;
-}
-
-.block_active {
-    border: 1px solid $primary-color;
-    background-color: $transparent-primary-color;
-}
-
-.block_active>h1 {
-    color: $light-grey;
-}
-
-.block_content {
-    height: 100%;
-    background-color: $light-black;
-    border-radius: 3px;
-    padding: 0;
-    border: none;
-    overflow-y: auto;
-}
-
-/* width */
-::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: $dark-white;
-    border-radius: 100px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: $primary-color;
-    box-shadow: inset 0 0 2px $dark-black;
-    border-radius: 100px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: $primary-color-dark;
-}
-
-@keyframes pulse {
-
-    0% {
-        transform: scale(0.98);
+    &:hover {
+        animation: pulse 1.5s infinite;
     }
 
-    70% {
-        transform: scale(1);
+    &:focus {
+        outline: none;
     }
 
-    100% {
-        transform: scale(0.98);
+    h1 {
+        @include mixins.textConfiguration(0, 0, 0.8rem, variables.$font-poppins, variables.$medium-grey, 500);
+        text-align: center;
     }
 
+    &-active {
+        border: 1px solid variables.$primary-color;
+        background-color: variables.$transparent-primary-color;
+
+        h1 {
+            color: variables.$light-grey;
+        }
+    }
+
+    &-content {
+        height: 100%;
+        background-color: variables.$light-black;
+        border-radius: 3px;
+        padding: 0;
+        border: none;
+        overflow-y: auto;
+    }
 }

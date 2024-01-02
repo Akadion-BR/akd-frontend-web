@@ -1,0 +1,22 @@
+@use '../../dist/variables.scss';
+@import '../../dist/reset.scss';
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: variables.$dark-white;
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: variables.$primary-color;
+    box-shadow: inset 0 0 2px variables.$dark-black;
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: variables.$primary-color-dark;
+}

@@ -1,86 +1,38 @@
-@import '../../../../../dist/variables.scss';
-@import '../../../../../dist/custom-stepper.scss';
-@import '../../../../../dist/reset.scss';
+@use '../../../../../dist/mixins';
+@use '../../../../../dist/variables.scss';
+@use '../../../../../dist/components/custom-stepper.scss';
+@use '../../../../../dist/reset.scss';
+
+@include mixins.rotationAnimation();
 
 .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid $dark-grey;
+    @include mixins.centerContent();
+    border-bottom: 1px solid variables.$dark-grey;
     padding: 0.5rem 0;
-}
 
-.header_logo_img {
-    width: 3rem;
-    animation: rotation 0.5s linear;
-}
+    .header_logo_img {
+        width: 3rem;
+        animation: rotation 0.5s linear;
+    }
 
-.header_logo_img_in {
-    animation: rotation 1s linear;
+    .header_logo_img_in {
+        animation: rotation 1s linear;
+    }
 }
 
 .container {
     padding: 2rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    @include mixins.centerContent();
 
-.block {
-    display: flex;
-    justify-content: center;
-}
+    .block {
+        @include mixins.centerContent();
 
-.titulo {
-    font-family: $font-poppins;
-    color: $dark-white;
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 0 0.5rem;
-    -webkit-user-select: none;
-    /* Safari */
-    -ms-user-select: none;
-    /* IE 10 and IE 11 */
-    user-select: none;
-    /* Standard syntax */
-}
+        .titulo {
+            @include mixins.textConfiguration(0, 0 0.5rem, 1rem, variables.$font-poppins, variables.$dark-white, 500);
+        }
 
-.texto {
-    color: $light-grey;
-    font-size: 0.7rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    padding: 0 0.5rem;
-    -webkit-user-select: none;
-    /* Safari */
-    -ms-user-select: none;
-    /* IE 10 and IE 11 */
-    user-select: none;
-    /* Standard syntax */
-}
-
-@keyframes pulse {
-
-    0% {
-        transform: scale(0.95);
-    }
-
-    70% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(0.95);
-    }
-
-}
-
-@keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
+        .texto {
+            @include mixins.textConfiguration(0.5rem 0 1rem 0, 0 0.5rem, 0.7rem, variables.$font-roboto, variables.$light-grey, 400);
+        }
     }
 }

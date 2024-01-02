@@ -1,6 +1,6 @@
-@import '../../../../../dist/variables.scss';
-@import '../../../../../dist/reset.scss';
-@import '../styles/custom-inputs.scss';
+@use '../../../../../dist/variables.scss';
+@use '../../../../../dist/reset.scss';
+@use '../styles/custom-inputs.scss';
 
 input[type=text],
 input[type=password] {
@@ -8,6 +8,6 @@ input[type=password] {
 }
 
 .input_invalida:focus {
-    border: 1px solid $strong-red !important;
+    border: 1px solid variables.$strong-red !important;
     outline: none;
 }

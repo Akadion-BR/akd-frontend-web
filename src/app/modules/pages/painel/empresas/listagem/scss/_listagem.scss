@@ -1,0 +1,63 @@
+@use '../../../../../../../dist/mixins';
+@use '../../../../../../../dist/variables';
+@use '../../../../../../../dist/components/indice-paginacao';
+@use '../../../../../../../dist/components/tabela';
+
+.listagem {
+    height: auto;
+    background-color: variables.$light-black;
+    border-radius: 3px;
+    padding: 1rem 1.5rem 0.5rem 1.5rem;
+
+    &-cabecalho {
+        display: flex;
+        justify-content: space-between;
+
+        &-titulo {
+            font-weight: 500;
+            color: variables.$dark-white;
+            font-size: 1rem;
+        }
+    }
+
+    .opcoes-listagem {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+
+        .botao_cria_empresa {
+            @include mixins.buttonConfiguration(0, 0.2rem 1rem, 1px solid variables.$primary-color, 2px, transparent, variables.$primary-color,
+                1px solid variables.$primary-color-dark, variables.$primary-color-dark, transparent, 1px solid variables.$primary-color-dark,
+                variables.$primary-color-dark, transparent, 0.7rem, variables.$font-roboto, 500);
+            display: flex;
+            align-items: center;
+        }
+
+    }
+
+    &-vazia {
+        height: auto;
+        background-color: variables.$light-black;
+        border-radius: 3px;
+        @include mixins.centerContent();
+        padding: 2rem 2rem;
+
+        &-imagem {
+            width: 7rem;
+            height: 7rem;
+        }
+
+        &-titulo {
+            text-align: center;
+            @include mixins.textConfiguration(0.5rem 0, 0, 1rem, variables.$font-poppins, variables.$dark-white, 500);
+        }
+
+        &-botao {
+            @include mixins.buttonConfiguration(0, 0.5rem 1rem, 1px solid variables.$primary-color, 3px, transparent,
+                variables.$primary-color, 1px solid variables.$primary-color-dark, variables.$primary-color-dark,
+                transparent, 1px solid variables.$primary-color, variables.$medium-black, variables.$primary-color,
+                0.7rem, variables.$font-roboto, 500);
+        }
+
+    }
+}

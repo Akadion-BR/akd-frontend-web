@@ -56,10 +56,9 @@
         formControlName="confirmaSenha" [type]="'password'" #inputConfirmaSenha></app-custom-input>
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_button_container">
-        <button [disabled]="!dadosCadastrais.valid" [ngClass]="{'botao_inscrever_desabilitado': !dadosCadastrais.valid}"
-            class="botao_menu botao_inscrever" (click)="verificaSePodeAvancar()" [tabIndex]="8" mat-button
-            matStepperNext>
-            <a class="link_botao link_botao_cadastro">
+        <button [disabled]="!dadosCadastrais.valid" [ngClass]="{'botao-desabilitado': !dadosCadastrais.valid}"
+            class="botao" (click)="verificaSePodeAvancar()" [tabIndex]="8" mat-button matStepperNext>
+            <a>
                 Avançar
             </a>
         </button>

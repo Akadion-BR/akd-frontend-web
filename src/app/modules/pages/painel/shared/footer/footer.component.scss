@@ -1,50 +1,45 @@
-@import '../../../../../../dist/variables.scss';
-@import '../../../../../../dist/reset.scss';
+@use '../../../../../../dist/variables';
+@use '../../../../../../dist/reset';
+@use '../../../../../../dist/mixins';
 
 .container {
-    color: $dark-white;
-    background-color: $light-black;
+    color: variables.$dark-white;
+    background-color: variables.$light-black;
     width: 100%;
     height: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top: 1px solid $dark-grey;
-}
+    @include mixins.centerContent();
+    border-top: 1px solid variables.$dark-grey;
 
-.lista_itens_footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-}
+    .lista-footer {
+        @include mixins.centerContent();
+        list-style: none;
 
-.item_footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 0.3rem;
-}
+        &-item {
+            @include mixins.centerContent();
+            margin: 0 0.3rem;
 
-.descricao_footer {
-    text-align: center;
-    color: $primary-color;
-    margin-top: -1rem;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-}
+            ::ng-deep .footer_icon {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                height: 100% !important;
+                width: 100% !important;
+                font-size: 1.3rem !important;
+                color: variables.$primary-color !important;
+                cursor: pointer;
+            }
 
-::ng-deep .footer_icon {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    height: 100% !important;
-    width: 100% !important;
-    font-size: 1.3rem !important;
-    color: $primary-color !important;
-    cursor: pointer;
-}
+            ::ng-deep .footer_icon:hover {
+                color: variables.$primary-color-dark !important;
+            }
+        }
+    }
 
-::ng-deep .footer_icon:hover {
-    color: $primary-color-dark !important;
+    .descricao_footer {
+        text-align: center;
+        color: variables.$primary-color;
+        margin-top: -1rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+    }
 }

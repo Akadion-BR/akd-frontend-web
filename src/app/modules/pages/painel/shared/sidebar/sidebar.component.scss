@@ -1,65 +1,58 @@
-@import '../../../../../../dist/variables.scss';
-@import '../../../../../../dist/reset.scss';
-
-painel-footer,
-painel-sidebar,
-painel-header {
-    margin: 0;
-    padding: 0;
-}
+@use '../../../../../../dist/variables';
+@use '../../../../../../dist/mixins';
+@use '../../../../../../dist/reset';
 
 .container {
     width: 15rem;
     height: 100%;
-    color: $dark-white;
-    background-color: $light-black;
-    border-right: 1px solid $dark-grey;
+    color: variables.$dark-white;
+    background-color: variables.$light-black;
+    border-right: 1px solid variables.$dark-grey;
     padding: 1rem 0;
-}
 
-.titulo {
-    font-size: 1rem;
-    font-weight: 500;
-    padding: 0 1rem;
-}
+    .titulo {
+        @include mixins.textConfiguration(0, 0 1rem, 1rem, variables.$font-poppins, variables.$dark-white, 500);
+    }
 
-.lista_menu {
-    margin-top: 2rem;
-    list-style: none;
-}
+    .lista_menu {
+        margin-top: 2rem;
+        list-style: none;
 
-.item_menu {
-    color: $medium-grey;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: flex-end;
-    border-right: 1px solid $medium-grey;
-    border-width: 3px;
-    cursor: pointer;
-    padding: 0.3rem 1rem;
-    margin-bottom: 0.2rem;
-}
+        .item_menu {
+            color: variables.$medium-grey;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-end;
+            border-right: 1px solid variables.$medium-grey;
+            border-width: 3px;
+            cursor: pointer;
+            padding: 0.3rem 1rem;
+            margin-bottom: 0.2rem;
 
-.item_menu:hover {
-    transition: 0.2s;
-    color: $light-grey;
-    border-right: 1px solid $light-grey;
-    border-width: 3px;
-    background-color: $medium-black;
-}
+            &:hover {
+                transition: 0.2s;
+                color: variables.$light-grey;
+                border-right: 1px solid variables.$light-grey;
+                border-width: 3px;
+                background-color: variables.$medium-black;
+            }
 
-.item_menu:focus {
-    outline: none;
-}
+            &:focus {
+                outline: none;
+            }
 
-.item_menu_ativo,
-.item_menu_ativo:hover {
-    font-weight: 500;
-    color: $primary-color;
-    border-right: 1px solid $primary-color;
-    border-width: 3px;
-}
+            &_ativo,
+            &_ativo:hover {
+                font-weight: 500;
+                color: variables.$primary-color;
+                border-right: 1px solid variables.$primary-color;
+                border-width: 3px;
+            }
 
-.item_menu_texto {
-    margin-left: 0.5rem;
+            .item_menu_texto {
+                margin-left: 0.5rem;
+            }
+
+        }
+    }
 }

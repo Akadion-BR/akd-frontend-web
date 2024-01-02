@@ -1,0 +1,47 @@
+@use '../../../../../../../dist/mixins';
+@use '../../../../../../../dist/variables';
+
+.block-container-pesquisa {
+    margin-bottom: 1rem;
+
+    .block-pesquisa {
+        height: auto;
+        background-color: variables.$light-black;
+        border-radius: 3px;
+        padding: 1.5rem 1rem 1.5rem 1rem;
+
+        .cabecalho-block-pesquisa {
+            display: flex;
+            justify-content: space-between;
+
+            .titulo-bloco-pesquisa {
+                font-weight: 500;
+                color: variables.$dark-white;
+                font-size: 1rem;
+            }
+        }
+
+        .form {
+            margin-top: 0.5rem;
+
+            .botao_pesquisa {
+                @include mixins.buttonConfiguration(0 0 0 0.5rem, 0.2rem 1rem, 1px solid variables.$primary-color, 2px, transparent,
+                    variables.$primary-color, 1px solid variables.$primary-color-dark, variables.$primary-color-dark, transparent,
+                    1px solid variables.$primary-color, variables.$medium-black, variables.$primary-color, 0.7rem, variables.$font-roboto, 400);
+            }
+        }
+    }
+
+}
+
+.titulo_bloco_pesquisa {
+    padding-left: 0.5rem;
+}
+
+.botao_pesquisa_container {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: right;
+    padding-right: 0.5rem;
+}
